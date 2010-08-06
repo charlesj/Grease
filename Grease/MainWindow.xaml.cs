@@ -11,6 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms;
+using Grease.Utils;
+
 
 namespace Grease
 {
@@ -19,9 +22,35 @@ namespace Grease
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MusicLibrary library;
+        private Mp3Info currSong;
+
         public MainWindow()
         {
             InitializeComponent();
+            library = new MusicLibrary();
+
+        }
+
+        private void btnChooseDirectory_Click(object sender, RoutedEventArgs e)
+        {
+            var pathFinder = new FolderBrowserDialog();
+            pathFinder.RootFolder = Environment.SpecialFolder.MyDocuments;
+            var path = pathFinder.ShowDialog();
+            lblDirectory.Content = pathFinder.SelectedPath;
+            library.Songs = FolderHelper.GetSongs(pathFinder.SelectedPath);
+            lblSongCount.Content = "Found " + library.Songs.Count.ToString() + " mp3's";
+        }
+
+        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            if (currSong == null)
+            {
+                currSong = library.GetRandomMp3();
+                lblCurrentlyPlaying.Content = currSong.Name;
+               
+            }
+            
         }
     }
 }
