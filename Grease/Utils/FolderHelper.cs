@@ -15,11 +15,7 @@ namespace Grease.Utils
             string[] files = Directory.GetFiles(path, "*.mp3");
             foreach (var file in files)
             {
-                rtn.Add(new Mp3Info {
-                    Name = file,
-                    FileName = file,
-                    FullPath = Path.Combine( path, file )
-                });
+                rtn.Add(GetInfo(file));
             }
             foreach( var folder in directories )
             {
@@ -28,6 +24,15 @@ namespace Grease.Utils
                     ).ToList();
             }
             return rtn;
+        }
+
+        private static Mp3Info GetInfo(string file)
+        {
+            var mp3 = new Mp3Info();
+            mp3.FullPath = file;
+            mp3.FileName = file.Substring(file.LastIndexOf("\\") + 1, file.Length - file.LastIndexOf("\\")-1);
+            mp3.Name = mp3.FileName.Replace(".mp3", string.Empty);
+            return mp3;
         }
     }
 }

@@ -5,11 +5,11 @@
     <Grid>
         <Label Content="Grease" Height="39" HorizontalAlignment="Left" x:Name="GreaseTitle" VerticalAlignment="Top" FontFamily="SketchFlow Print" FontSize="25" FontWeight="Bold" Width="105" />
         <Button Content="Play" Height="23" HorizontalAlignment="Left" Margin="26,100,0,0" Name="btnPlay" VerticalAlignment="Top" Width="75" Click="btnPlay_Click" />
-        <Button Content="Pause" Height="23" HorizontalAlignment="Left" Margin="107,100,0,0" Name="btnPause" VerticalAlignment="Top" Width="75" />
-        <Button Content="Next" Height="23" HorizontalAlignment="Left" Margin="188,100,0,0" Name="btnNext" VerticalAlignment="Top" Width="75" />
+        <Button Content="Pause" Height="23" HorizontalAlignment="Left" Margin="107,100,0,0" Name="btnPause" VerticalAlignment="Top" Width="75" Click="btnPause_Click" />
+        <Button Content="Next" Height="23" HorizontalAlignment="Left" Margin="188,100,0,0" Name="btnNext" VerticalAlignment="Top" Width="75" Click="btnNext_Click" />
         <Label Content="No Songs Playing" Height="28" HorizontalAlignment="Left" Margin="12,66,0,0" Name="lblCurrentlyPlaying" VerticalAlignment="Top" />
         <Button Content="..." Height="23" HorizontalAlignment="Left" Margin="107,10,0,0" Name="btnChooseDirectory" VerticalAlignment="Top" Width="15" Click="btnChooseDirectory_Click" />
-        <Label Content="Choose Directory to Begin" Height="28" HorizontalAlignment="Left" Margin="128,10,0,0" Name="lblDirectory" VerticalAlignment="Top" />
-        <Label Content="No Mp3's to Play" HorizontalAlignment="Left" Margin="12,39,0,120" Name="lblSongCount" />
+        <Label Content="No Mp3's to Play" HorizontalAlignment="Left" Margin="128,9,0,150" Name="lblSongCount" />
+        <MediaElement Height="10" HorizontalAlignment="Left" Margin="277,57,0,0" Name="Player" VerticalAlignment="Top" Width="10" LoadedBehavior="Manual" MediaEnded="CompletedSong" />
     </Grid>
 </Window>

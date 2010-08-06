@@ -37,7 +37,6 @@ namespace Grease
             var pathFinder = new FolderBrowserDialog();
             pathFinder.RootFolder = Environment.SpecialFolder.MyDocuments;
             var path = pathFinder.ShowDialog();
-            lblDirectory.Content = pathFinder.SelectedPath;
             library.Songs = FolderHelper.GetSongs(pathFinder.SelectedPath);
             lblSongCount.Content = "Found " + library.Songs.Count.ToString() + " mp3's";
         }
@@ -46,11 +45,30 @@ namespace Grease
         {
             if (currSong == null)
             {
+                Player.Source = new Uri(library.GetRandomMp3().FullPath);
                 currSong = library.GetRandomMp3();
                 lblCurrentlyPlaying.Content = currSong.Name;
-               
             }
-            
+            Player.Play();
+        }
+
+        private void btnPause_Click(object sender, RoutedEventArgs e)
+        {
+            Player.Pause();
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            Player.Pause();
+            currSong = library.GetRandomMp3();
+            Player.Source = new Uri(currSong.FullPath);
+            lblCurrentlyPlaying.Content = currSong.Name;
+            Player.Play();
+        }
+
+        private void CompletedSong(object sender, RoutedEventArgs e)
+        {
+            btnNext_Click(sender, e);
         }
     }
 }
