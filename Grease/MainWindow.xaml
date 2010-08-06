@@ -1,0 +1,8 @@
+﻿<Window x:Class="Grease.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Grease" Height="226" Width="321">
+    <Grid>
+        <Label Content="Grease" Height="39" HorizontalAlignment="Left" x:Name="GreaseTitle" VerticalAlignment="Top" FontFamily="SketchFlow Print" FontSize="25" FontWeight="Bold" Width="105" />
+    </Grid>
+</Window>

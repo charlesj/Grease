@@ -1,0 +1,8 @@
+Grease/[Bb]in/*
+Grease/[Dd]ebug/*
+Grease/[Oo]bj/*
+*.log
+*.suo
+*.cache
+*.user
+*.xap

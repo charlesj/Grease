@@ -1,0 +1,1 @@
+﻿Grease is a simple mp3 player.  You give it a directory, it recursively searches for MP3's, and then plays any that it finds in a random order.
