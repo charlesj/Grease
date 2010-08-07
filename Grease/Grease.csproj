@@ -76,9 +76,6 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="taglib-sharp">
-      <HintPath>..\Libraries\taglib-sharp.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -170,6 +167,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Grease.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\control_fastforward.png" />
+    <Resource Include="Images\control_pause.png" />
+    <Resource Include="Images\control_play.png" />
+    <Resource Include="Images\control_start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\folder.png" />
+    <Resource Include="Images\folder_error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\document-open.png" />
+    <Resource Include="Images\document-open-folder.png" />
+    <Resource Include="Images\Pause.png" />
+    <Resource Include="Images\Play.png" />
+    <Resource Include="Images\Back.png" />
+    <Resource Include="Images\Next.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

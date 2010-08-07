@@ -34,8 +34,6 @@ namespace Grease.Utils
             mp3.FullPath = file;
             mp3.FileName = file.Substring(file.LastIndexOf("\\") + 1, file.Length - file.LastIndexOf("\\")-1);
             mp3.Name = mp3.FileName.Replace(".mp3", string.Empty);
-            //TagLib.File reader = TagLib.File.Create(file);
-            //mp3.Name = reader.Tag.Title;
             return mp3;
         }
     }
