@@ -25,10 +25,16 @@ namespace Grease
     {
         private MusicLibrary library;
         private Mp3Info currSong;
-        private UserSettingsGroup settings;
+        private bool isPlaying = false;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            //keyboard shortcuts
+            KeyCommands.PlayPauseCommand.InputGestures.Add(new KeyGesture ( Key.Space ));
+            KeyCommands.NextTrackCommand.InputGestures.Add(new KeyGesture(Key.Right));
+            
             library = new MusicLibrary();
 
             var md = Settings.Default.MusicDirectory;
@@ -41,7 +47,7 @@ namespace Grease
         private void LoadSongs(string folder)
         {
             library.Songs = FolderHelper.GetSongs(folder);
-            lblSongCount.Content = "Found " + library.Songs.Count.ToString() + " mp3's";
+            lblSongCount.Content = "Found " + library.Songs.Count.ToString() + " files";
         }
 
         private void btnChooseDirectory_Click(object sender, RoutedEventArgs e)
@@ -59,38 +65,57 @@ namespace Grease
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
-            if (library.Songs != null && library.Songs.Count > 0)
-            {
-                if (currSong == null)
-                {
-                    Player.Source = new Uri(library.GetRandomMp3().FullPath);
-                    currSong = library.GetRandomMp3();
-                    lblCurrentlyPlaying.Content = currSong.Name;
-                }
-                Player.Play();
-            }
+            Play();
         }
 
         private void btnPause_Click(object sender, RoutedEventArgs e)
         {
-            Player.Pause();
+            Pause();
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            Player.Pause();
-            if (library.Songs.Count > 0)
-            {
-                currSong = library.GetRandomMp3();
-                Player.Source = new Uri(currSong.FullPath);
-                lblCurrentlyPlaying.Content = currSong.Name;
-                Player.Play();
-            }
+            Play(true);
         }
 
         private void CompletedSong(object sender, RoutedEventArgs e)
         {
-            btnNext_Click(sender, e);
+            Play(true);
+        }
+
+        private void PlayPause_Executed(object sender, ExecutedRoutedEventArgs e)
+        {  
+            if (isPlaying)
+                Pause();
+            else
+                Play();
+        }
+
+        private void NextTrack_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Play(true);
+        }
+
+        private void Play(bool next = false)
+        {
+            Pause();
+            if (library.Songs != null && library.Songs.Count > 0)
+            {
+                if (currSong == null || next)
+                {
+                    currSong = library.GetRandomMp3();
+                    Player.Source = new Uri(currSong.FullPath);
+                    lblCurrentlyPlaying.Content = currSong.Name;
+                }
+                Player.Play();
+                isPlaying = true;
+            }
+        }
+
+        private void Pause()
+        {
+            Player.Pause();
+            isPlaying = false;
         }
     }
 }

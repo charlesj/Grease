@@ -13,7 +13,9 @@ namespace Grease.Utils
             var rtn = new List<Mp3Info>();
             string[] directories = Directory.GetDirectories(path);
             string[] files = Directory.GetFiles(path, "*.mp3");
-            foreach (var file in files)
+            string[] m4a = Directory.GetFiles(path, "*.m4a");
+            var all = files.Concat(m4a);
+            foreach (var file in all)
             {
                 rtn.Add(GetInfo(file));
             }
