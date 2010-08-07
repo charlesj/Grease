@@ -6,3 +6,5 @@ Grease/[Oo]bj/*
 *.cache
 *.user
 *.xap
+*.pfx
+Grease/[Pp]ublish
