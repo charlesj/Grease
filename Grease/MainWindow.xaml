@@ -5,23 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:g="clr-namespace:Grease"
         mc:Ignorable="d" x:Class="Grease.MainWindow"
-        Title="Grease" Height="93" Width="283" Icon="/Grease;component/Images/Grease.ico">
+        Title="Grease" Height="138" Width="283" Icon="/Grease;component/Images/Grease.ico">
     <Grid>
         <Button HorizontalAlignment="Left" Focusable="False" x:Name="btnChooseDirectory" Width="25" Click="btnChooseDirectory_Click" BorderThickness="0" Background="{x:Null}" Margin="5,5,0,0" BorderBrush="{x:Null}" Height="23" VerticalAlignment="Top">
             <Image Focusable="False" Source="/Grease;component/Images/document-open-folder.png"></Image>
         </Button>
-        <Label Content="No Songs Playing" Focusable="False" Height="28" Margin="0,29,15,0" x:Name="lblCurrentlyPlaying" VerticalAlignment="Top" />
+        <Label Content="No Songs Playing" Focusable="False" Margin="6,28,9,45" x:Name="lblCurrentlyPlaying" />
         <Label Content="No files to Play" Focusable="False"  x:Name="lblSongCount" Background="{x:Null}" Margin="24,5,0,0" HorizontalAlignment="Left" Width="127.656" Height="25" VerticalAlignment="Top" />
-        <MediaElement Height="10" Visibility="Hidden" Focusable="False" HorizontalAlignment="Left" Margin="245,11,0,0" x:Name="Player" VerticalAlignment="Top" Width="10" LoadedBehavior="Manual" MediaEnded="CompletedSong" />
+        <MediaElement Height="10" Visibility="Hidden" Focusable="False" HorizontalAlignment="Left" Margin="231,12,0,0" x:Name="Player" VerticalAlignment="Top" Width="10" LoadedBehavior="Manual" MediaEnded="CompletedSong" />
         <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="125,5,0,0" x:Name="btnPlay"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnPlay_Click" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
             <Image Focusable="False" Source="/Grease;component/Images/Play.png"></Image>
+        </Button>
+        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="175,5,0,0" x:Name="btnBack"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnPlay_Click" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
+            <Image Focusable="False" Source="/Grease;component/Images/Back.png"></Image>
         </Button>
         <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="150,5,0,0" x:Name="btnPause"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnPause_Click" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" BorderThickness="0" Background="{x:Null}">
             <Image Focusable="False" Source="/Grease;component/Images/Pause.png"></Image>
         </Button>
-        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="175,5,0,0" x:Name="btnNext"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnNext_Click" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Background="{x:Null}" BorderThickness="0">
+        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="200,5,0,0" x:Name="btnNext"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnNext_Click" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Background="{x:Null}" BorderThickness="0">
             <Image Focusable="False" Source="/Grease;component/Images/Next.png"></Image>
         </Button>
+        <Slider Height="32" HorizontalAlignment="Left" Margin="8,54,0,0" Name="timelineSlider" VerticalAlignment="Top" Width="247" />
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static g:KeyCommands.PlayPauseCommand }" Executed="PlayPause_Executed"></CommandBinding>
