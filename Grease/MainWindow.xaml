@@ -5,18 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:g="clr-namespace:Grease"
         mc:Ignorable="d" x:Class="Grease.MainWindow"
-        Title="Grease" Height="138" Width="283" Icon="/Grease;component/Images/Grease.ico">
+        Title="Grease" Height="118" Width="283" Icon="/Grease;component/Images/Grease.ico">
     <Grid>
         <Button HorizontalAlignment="Left" Focusable="False" x:Name="btnChooseDirectory" Width="25" Click="btnChooseDirectory_Click" BorderThickness="0" Background="{x:Null}" Margin="5,5,0,0" BorderBrush="{x:Null}" Height="23" VerticalAlignment="Top">
             <Image Focusable="False" Source="/Grease;component/Images/document-open-folder.png"></Image>
         </Button>
-        <Label Content="No Songs Playing" Focusable="False" Margin="6,28,9,45" x:Name="lblCurrentlyPlaying" />
+        <Label Content="No Songs Playing" Focusable="False" Margin="6,28,9,25" x:Name="lblCurrentlyPlaying" />
         <Label Content="No files to Play" Focusable="False"  x:Name="lblSongCount" Background="{x:Null}" Margin="24,5,0,0" HorizontalAlignment="Left" Width="127.656" Height="25" VerticalAlignment="Top" />
         <MediaElement Height="10" Visibility="Hidden" Focusable="False" HorizontalAlignment="Left" Margin="231,12,0,0" x:Name="Player" VerticalAlignment="Top" Width="10" LoadedBehavior="Manual" MediaEnded="CompletedSong" />
         <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="125,5,0,0" x:Name="btnPlay"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnPlay_Click" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
             <Image Focusable="False" Source="/Grease;component/Images/Play.png"></Image>
         </Button>
-        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="175,5,0,0" x:Name="btnBack"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnPlay_Click" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
+        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="175,5,0,0" x:Name="btnBack"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnPrevious_Click" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
             <Image Focusable="False" Source="/Grease;component/Images/Back.png"></Image>
         </Button>
         <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="150,5,0,0" x:Name="btnPause"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnPause_Click" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" BorderThickness="0" Background="{x:Null}">
@@ -25,10 +25,15 @@
         <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="200,5,0,0" x:Name="btnNext"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnNext_Click" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Background="{x:Null}" BorderThickness="0">
             <Image Focusable="False" Source="/Grease;component/Images/Next.png"></Image>
         </Button>
-        <Slider Height="32" HorizontalAlignment="Left" Margin="8,54,0,0" Name="timelineSlider" VerticalAlignment="Top" Width="247" />
+        <Slider Height="32" HorizontalAlignment="Right" Focusable="False" Margin="0,51,24,0" Name="volumeSlider" ValueChanged="ChangeMediaVolume" Value="1" Maximum="1" VerticalAlignment="Top" Width="153" />
+        <Label Content="Volume:" Height="28" HorizontalAlignment="Left" Margin="7,47,0,0" Name="label1" VerticalAlignment="Top" />
+        <Label Content=" " Height="28" HorizontalAlignment="Left" Margin="57,48,0,0" Name="lblVolumeLevel" VerticalAlignment="Top" />
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static g:KeyCommands.PlayPauseCommand }" Executed="PlayPause_Executed"></CommandBinding>
         <CommandBinding Command="{x:Static g:KeyCommands.NextTrackCommand }" Executed="NextTrack_Executed"></CommandBinding>
+        <CommandBinding Command="{x:Static g:KeyCommands.PreviousTrackCommand }" Executed="PreviousTrack_Executed"></CommandBinding>
+        <CommandBinding Command="{x:Static g:KeyCommands.VolumeDownCommand }" Executed="VolumeDown_Executed" ></CommandBinding> 
+        <CommandBinding Command="{x:Static g:KeyCommands.VolumeUpCommand }" Executed="VolumeUp_Executed"></CommandBinding>
     </Window.CommandBindings>
 </Window>

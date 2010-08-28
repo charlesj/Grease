@@ -34,9 +34,13 @@ namespace Grease
             //keyboard shortcuts
             KeyCommands.PlayPauseCommand.InputGestures.Add(new KeyGesture ( Key.Space ));
             KeyCommands.NextTrackCommand.InputGestures.Add(new KeyGesture(Key.Right));
+            KeyCommands.PreviousTrackCommand.InputGestures.Add(new KeyGesture(Key.Left));
+            KeyCommands.VolumeDownCommand.InputGestures.Add(new KeyGesture(Key.Down));
+            KeyCommands.VolumeUpCommand.InputGestures.Add(new KeyGesture(Key.Up));
             
             library = new MusicLibrary();
-
+            volumeSlider.Value = (double)1.00;
+            RefreshVolumeValueDisplay();
             var md = Settings.Default.MusicDirectory;
             if (!string.IsNullOrEmpty(md) && md != "None")
             {
@@ -68,6 +72,11 @@ namespace Grease
             Play();
         }
 
+        private void btnPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            Previous();
+        }
+
         private void btnPause_Click(object sender, RoutedEventArgs e)
         {
             Pause();
@@ -96,6 +105,34 @@ namespace Grease
             Play(true);
         }
 
+        private void PreviousTrack_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Previous();
+        }
+
+        private void VolumeDown_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (volumeSlider.Value != 0 && volumeSlider.Value > .1)
+                volumeSlider.Value = volumeSlider.Value - .1;
+            else
+                volumeSlider.Value = 0;
+        }
+
+        private void VolumeUp_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (volumeSlider.Value != 1 && volumeSlider.Value < .9)
+                volumeSlider.Value = volumeSlider.Value + .1;
+            else
+                volumeSlider.Value = 1;
+        }
+
+        private void ChangeMediaVolume(object sender, RoutedPropertyChangedEventArgs<double> args)
+        {
+            Player.Volume = (double)volumeSlider.Value;
+            RefreshVolumeValueDisplay();
+        }
+
+
         private void Play(bool next = false)
         {
             Pause();
@@ -103,7 +140,7 @@ namespace Grease
             {
                 if (currSong == null || next)
                 {
-                    currSong = library.GetRandomMp3();
+                    currSong = library.Next();
                     Player.Source = new Uri(currSong.FullPath);
                     lblCurrentlyPlaying.Content = currSong.Name;
                 }
@@ -116,6 +153,27 @@ namespace Grease
         {
             Player.Pause();
             isPlaying = false;
+        }
+
+        private void Previous()
+        {
+            if (library.PlayedSongs.Count > 0)
+            {
+                Pause();
+                currSong = library.Previous();
+                Player.Source = new Uri(currSong.FullPath);
+                lblCurrentlyPlaying.Content = currSong.Name;
+                Player.Play();
+                isPlaying = true;
+            }
+        }
+
+        private void RefreshVolumeValueDisplay()
+        {
+            var vol = volumeSlider.Value;
+            if (lblVolumeLevel == null)
+                lblVolumeLevel = new System.Windows.Controls.Label();
+            lblVolumeLevel.Content = (Math.Round(vol, 2) * 100).ToString() + "%";
         }
     }
 }

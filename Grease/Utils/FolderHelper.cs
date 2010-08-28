@@ -33,7 +33,7 @@ namespace Grease.Utils
             var mp3 = new Mp3Info();
             mp3.FullPath = file;
             mp3.FileName = file.Substring(file.LastIndexOf("\\") + 1, file.Length - file.LastIndexOf("\\")-1);
-            mp3.Name = mp3.FileName.Replace(".mp3", string.Empty);
+            mp3.Name = mp3.FileName.Replace(".mp3", string.Empty).Replace(".m4a", string.Empty);
             return mp3;
         }
     }
