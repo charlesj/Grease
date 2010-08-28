@@ -57,7 +57,7 @@ namespace Grease
         private void btnChooseDirectory_Click(object sender, RoutedEventArgs e)
         {
             var pathFinder = new FolderBrowserDialog();
-            pathFinder.RootFolder = Environment.SpecialFolder.MyDocuments;
+            //pathFinder.RootFolder = Environment.SpecialFolder.MyDocuments;
             var path = pathFinder.ShowDialog();
             if (!string.IsNullOrEmpty(pathFinder.SelectedPath))
             {
