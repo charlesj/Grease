@@ -20,7 +20,24 @@ namespace Grease.Utils
         private Mp3Info GetRandomMp3()
         {
             var rand = new Random(DateTime.Now.Millisecond);
-            return Songs[rand.Next(Songs.Count - 1)];
+            var test = Songs[rand.Next(Songs.Count - 1)];
+            var numPlayedToCheck = 40;
+            var min = Math.Min(numPlayedToCheck, PlayedSongs.Count);
+            var hasPlayedRecently = true;
+            while (hasPlayedRecently)
+            {
+                bool found = false;
+                for (int i = 0; i < min; i++)
+                {
+                    if (test.FullPath == PlayedSongs[i].FullPath)
+                        found = true;
+                }
+                if (!found)
+                    hasPlayedRecently = false;
+                else
+                    test = Songs[rand.Next(Songs.Count - 1)];
+            }
+            return test;
         }
 
         
