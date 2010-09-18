@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
+using System.Threading;
 using Grease.Utils;
 
 
@@ -50,8 +51,16 @@ namespace Grease
 
         private void LoadSongs(string folder)
         {
-            library.Songs = FolderHelper.GetSongs(folder);
-            lblSongCount.Content = "Found " + library.Songs.Count.ToString() + " files";
+            Thread songLoader = new Thread(LoadSongsInBG);
+            songLoader.Name = "Background Song Loader";
+            songLoader.Start(folder);
+            lblSongCount.Content = "Loading Music...";
+        }
+
+        private void LoadSongsInBG(object folder_path)
+        {
+            library.Songs = FolderHelper.GetSongs((string)folder_path);
+            lblSongCount.Dispatcher.Invoke(new Action(delegate() { lblSongCount.Content = library.Songs.Count + " files found"; }));
         }
 
         private void btnChooseDirectory_Click(object sender, RoutedEventArgs e)

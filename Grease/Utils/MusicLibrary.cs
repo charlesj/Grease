@@ -27,7 +27,7 @@ namespace Grease.Utils
             while (hasPlayedRecently)
             {
                 bool found = false;
-                for (int i = 0; i < min; i++)
+                for (int i = PlayedSongs.Count - min; i < min; i++)
                 {
                     if (test.FullPath == PlayedSongs[i].FullPath)
                         found = true;
