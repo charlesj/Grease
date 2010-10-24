@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:g="clr-namespace:Grease"
         mc:Ignorable="d" x:Class="Grease.MainWindow"
-        Title="Grease" Height="118" Width="283" Icon="/Grease;component/Images/Grease.ico">
+        Title="Grease2" Height="118" Width="283" Icon="/Grease;component/Images/Grease.ico">
     <Grid>
         <Button HorizontalAlignment="Left" Focusable="False" x:Name="btnChooseDirectory" Width="25" Click="btnChooseDirectory_Click" BorderThickness="0" Background="{x:Null}" Margin="5,5,0,0" BorderBrush="{x:Null}" Height="23" VerticalAlignment="Top">
             <Image Focusable="False" Source="/Grease;component/Images/document-open-folder.png"></Image>

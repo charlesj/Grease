@@ -10,6 +10,8 @@ namespace Grease.Utils
         public List<Mp3Info> Songs { get; set; }
         public List<Mp3Info> PlayedSongs { get; set; }
         private int CurrentSongIndex = -1;
+        private Random rand = new Random(Convert.ToInt32(DateTime.Now.Second+DateTime.Now.Year+DateTime.Now.DayOfYear));
+
 
         public MusicLibrary()
         {
@@ -19,15 +21,14 @@ namespace Grease.Utils
 
         private Mp3Info GetRandomMp3()
         {
-            var rand = new Random(DateTime.Now.Millisecond);
             var test = Songs[rand.Next(Songs.Count - 1)];
-            var numPlayedToCheck = 40;
+            var numPlayedToCheck = 500;
             var min = Math.Min(numPlayedToCheck, PlayedSongs.Count);
             var hasPlayedRecently = true;
             while (hasPlayedRecently)
             {
                 bool found = false;
-                for (int i = PlayedSongs.Count - min; i < min; i++)
+                for (int i = PlayedSongs.Count - min; i < PlayedSongs.Count; i++)
                 {
                     if (test.FullPath == PlayedSongs[i].FullPath)
                         found = true;
