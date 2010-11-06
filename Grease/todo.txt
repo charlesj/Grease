@@ -1,0 +1,2 @@
+1)After playing all the songs in a folder, the application hangs.
+2)To implement playing of songs in serial order instead of only random.
