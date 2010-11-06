@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:g="clr-namespace:Grease"
         mc:Ignorable="d" x:Class="Grease.MainWindow"
-        Title="Grease2" Height="118" Width="283" Icon="/Grease;component/Images/Grease.ico">
+        Title="Grease2" Height="224" Width="399" Icon="/Grease;component/Images/Grease.ico">
     <Grid>
         <Button HorizontalAlignment="Left" Focusable="False" x:Name="btnChooseDirectory" Width="25" Click="btnChooseDirectory_Click" BorderThickness="0" Background="{x:Null}" Margin="5,5,0,0" BorderBrush="{x:Null}" Height="23" VerticalAlignment="Top">
             <Image Focusable="False" Source="/Grease;component/Images/document-open-folder.png"></Image>
@@ -26,8 +26,10 @@
             <Image Focusable="False" Source="/Grease;component/Images/Next.png"></Image>
         </Button>
         <Slider Height="32" HorizontalAlignment="Right" Focusable="False" Margin="0,51,24,0" Name="volumeSlider" ValueChanged="ChangeMediaVolume" Value="1" Maximum="1" VerticalAlignment="Top" Width="153" />
-        <Label Content="Volume:" Height="28" HorizontalAlignment="Left" Margin="7,47,0,0" Name="label1" VerticalAlignment="Top" />
+        <Label Content="Volume:" Height="28" HorizontalAlignment="Left" Margin="7,0,0,110" Name="label1" VerticalAlignment="Bottom" />
         <Label Content=" " Height="28" HorizontalAlignment="Left" Margin="57,48,0,0" Name="lblVolumeLevel" VerticalAlignment="Top" />
+        <Button Content="Click!" Height="23" HorizontalAlignment="Left" Margin="150,137,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+        <Label Content="" Height="28" HorizontalAlignment="Left" Margin="22,82,0,0" Name="lblCount" VerticalAlignment="Top" />
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static g:KeyCommands.PlayPauseCommand }" Executed="PlayPause_Executed"></CommandBinding>
