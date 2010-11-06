@@ -152,6 +152,10 @@ namespace Grease
                     currSong = library.Next();
                     Player.Source = new Uri(currSong.FullPath);
                     lblCurrentlyPlaying.Content = currSong.Name;
+                    //vrd
+                    lblCount.Content = library.songcount;
+                    //vrd
+
                 }
                 Player.Play();
                 isPlaying = true;
@@ -172,6 +176,9 @@ namespace Grease
                 currSong = library.Previous();
                 Player.Source = new Uri(currSong.FullPath);
                 lblCurrentlyPlaying.Content = currSong.Name;
+                //vrd
+                lblCount.Content = library.songcount;
+                //
                 Player.Play();
                 isPlaying = true;
             }
@@ -184,5 +191,11 @@ namespace Grease
                 lblVolumeLevel = new System.Windows.Controls.Label();
             lblVolumeLevel.Content = (Math.Round(vol, 2) * 100).ToString() + "%";
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.MessageBox.Show("Hello!");
+        }
+
     }
 }
