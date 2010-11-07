@@ -28,8 +28,9 @@
         <Slider Height="32" HorizontalAlignment="Right" Focusable="False" Margin="0,51,24,0" Name="volumeSlider" ValueChanged="ChangeMediaVolume" Value="1" Maximum="1" VerticalAlignment="Top" Width="153" />
         <Label Content="Volume:" Height="28" HorizontalAlignment="Left" Margin="7,0,0,110" Name="label1" VerticalAlignment="Bottom" />
         <Label Content=" " Height="28" HorizontalAlignment="Left" Margin="57,48,0,0" Name="lblVolumeLevel" VerticalAlignment="Top" />
-        <Button Content="Click!" Height="23" HorizontalAlignment="Left" Margin="150,137,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
         <Label Content="" Height="28" HorizontalAlignment="Left" Margin="22,82,0,0" Name="lblCount" VerticalAlignment="Top" />
+        <CheckBox Content="Shuffle" Height="16" HorizontalAlignment="Left" Margin="285,10,0,0" Name="chkShuffle" VerticalAlignment="Top" Checked="chkShuffle_Checked" />
+        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="264,128,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click_1" />
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static g:KeyCommands.PlayPauseCommand }" Executed="PlayPause_Executed"></CommandBinding>

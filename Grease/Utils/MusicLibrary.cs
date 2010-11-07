@@ -17,12 +17,12 @@ namespace Grease.Utils
         {
             Songs = new List<Mp3Info>();
             PlayedSongs = new List<Mp3Info>();
+            
+           
         }
 
-        private Mp3Info GetRandomMp3()
+        private Mp3Info GetSerialMp3()
         {
-            //-------------//vrd
-            //var test = Songs[rand.Next(Songs.Count - 1)];
             
             Grease.Utils.Mp3Info test;
             if (PlayedSongs.Count == Songs.Count || PlayedSongs.Count == 0)
@@ -38,40 +38,51 @@ namespace Grease.Utils
                 else
                 {
                     test = Songs[PlayedSongs.Count];
-                    //test = Songs[PlayedSongs.Count + 1];
                 }
                 
             }
-            //-----------------//vrd
 
-
-            //var numPlayedToCheck = 500;
-            //var min = Math.Min(numPlayedToCheck, PlayedSongs.Count);
-            //var hasPlayedRecently = true;
-            //while (hasPlayedRecently)
-            //{
-            //    bool found = false;
-            //    for (int i = PlayedSongs.Count - min; i < PlayedSongs.Count; i++)
-            //    {
-            //        if (test.FullPath == PlayedSongs[i].FullPath)
-            //            found = true;
-            //    }
-            //    if (!found)
-            //        hasPlayedRecently = false;
-            //    else
-            //        test = Songs[rand.Next(Songs.Count - 1)];
-            //}
             return test;
         }
 
-        
-        public Mp3Info Next()
+        private Mp3Info GetRandomMp3()
         {
+            var test = Songs[rand.Next(Songs.Count - 1)];
+            var numPlayedToCheck = 500;
+            var min = Math.Min(numPlayedToCheck, PlayedSongs.Count);
+            var hasPlayedRecently = true;
+            while (hasPlayedRecently)
+            {
+                bool found = false;
+                for (int i = PlayedSongs.Count - min; i < PlayedSongs.Count; i++)
+                {
+                    if (test.FullPath == PlayedSongs[i].FullPath)
+                        found = true;
+                }
+                if (!found)
+                    hasPlayedRecently = false;
+                else
+                    test = Songs[rand.Next(Songs.Count - 1)];
+            }
+            return test;
+        }
+        
+        public Mp3Info Next(bool isshuffle)
+        {
+           
+
             if (CurrentSongIndex < PlayedSongs.Count)
             {
                 if (CurrentSongIndex + 1 == PlayedSongs.Count)
                 {
-                    PlayedSongs.Add(GetRandomMp3());
+                    if (isshuffle)
+                    {
+                        PlayedSongs.Add(GetRandomMp3());
+                    }
+                    else
+                    {
+                        PlayedSongs.Add(GetSerialMp3());
+                    }
                 }
             }
             //vrd
