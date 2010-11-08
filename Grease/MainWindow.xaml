@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:g="clr-namespace:Grease"
         mc:Ignorable="d" x:Class="Grease.MainWindow"
-        Title="Grease2" Height="224" Width="399" Icon="/Grease;component/Images/Grease.ico">
+        Title="Grease2" Height="225" Width="451" Icon="/Grease;component/Images/Grease.ico">
     <Grid>
         <Button HorizontalAlignment="Left" Focusable="False" x:Name="btnChooseDirectory" Width="25" Click="btnChooseDirectory_Click" BorderThickness="0" Background="{x:Null}" Margin="5,5,0,0" BorderBrush="{x:Null}" Height="23" VerticalAlignment="Top">
             <Image Focusable="False" Source="/Grease;component/Images/document-open-folder.png"></Image>
@@ -29,8 +29,8 @@
         <Label Content="Volume:" Height="28" HorizontalAlignment="Left" Margin="7,0,0,110" Name="label1" VerticalAlignment="Bottom" />
         <Label Content=" " Height="28" HorizontalAlignment="Left" Margin="57,48,0,0" Name="lblVolumeLevel" VerticalAlignment="Top" />
         <Label Content="" Height="28" HorizontalAlignment="Left" Margin="22,82,0,0" Name="lblCount" VerticalAlignment="Top" />
-        <CheckBox Content="Shuffle" Height="16" HorizontalAlignment="Left" Margin="285,10,0,0" Name="chkShuffle" VerticalAlignment="Top" Checked="chkShuffle_Checked" />
-        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="264,128,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click_1" />
+        <CheckBox Content="Shuffle" Height="16" HorizontalAlignment="Left" Margin="285,10,0,0" Name="chkShuffle" VerticalAlignment="Top" Checked="chkShuffle_Checked" Unchecked="chkShuffle_Unchecked" />
+        <CheckBox Content="Repeat" Height="16" HorizontalAlignment="Left" Margin="347,11,0,0" Name="chkRepeat" VerticalAlignment="Top" Checked="chkRepeat_Checked" Unchecked="chkRepeat_Unchecked" />
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static g:KeyCommands.PlayPauseCommand }" Executed="PlayPause_Executed"></CommandBinding>

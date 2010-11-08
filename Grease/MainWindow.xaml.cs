@@ -27,7 +27,8 @@ namespace Grease
         private MusicLibrary library;
         private Mp3Info currSong;
         private bool isPlaying = false;
-        private bool isshuffle = false;
+        private bool isShuffle = false;
+        private bool isRepeat = false;
 
         public MainWindow()
         {
@@ -150,7 +151,7 @@ namespace Grease
             {
                 if (currSong == null || next)
                 {
-                    currSong = library.Next(isshuffle);
+                    currSong = library.Next(isShuffle,isRepeat);
                     Player.Source = new Uri(currSong.FullPath);
                     lblCurrentlyPlaying.Content = currSong.Name;
                     //vrd
@@ -195,13 +196,24 @@ namespace Grease
 
         private void chkShuffle_Checked(object sender, RoutedEventArgs e)
         {
-            isshuffle = true;
+            isShuffle = true;
+            library.PlayedSongs.Clear();
+            library.CurrentSongIndex = -1;
         }
 
-        private void button1_Click_1(object sender, RoutedEventArgs e)
+        private void chkShuffle_Unchecked(object sender, RoutedEventArgs e)
         {
-
+            isShuffle = false;
         }
 
+        private void chkRepeat_Checked(object sender, RoutedEventArgs e)
+        {
+            isRepeat = true;
+        }
+
+        private void chkRepeat_Unchecked(object sender, RoutedEventArgs e)
+        {
+            isRepeat = false;
+        }
     }
 }
