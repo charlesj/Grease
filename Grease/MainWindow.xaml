@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:g="clr-namespace:Grease"
         mc:Ignorable="d" x:Class="Grease.MainWindow"
-        Title="Grease2" Height="225" Width="451" Icon="/Grease;component/Images/Grease.ico">
+        Title="Grease2" Height="225" Width="451" Icon="/Grease;component/Images/Grease.ico" Name="GreaseMainWindow">
     <Grid>
         <Button HorizontalAlignment="Left" Focusable="False" x:Name="btnChooseDirectory" Width="25" Click="btnChooseDirectory_Click" BorderThickness="0" Background="{x:Null}" Margin="5,5,0,0" BorderBrush="{x:Null}" Height="23" VerticalAlignment="Top">
             <Image Focusable="False" Source="/Grease;component/Images/document-open-folder.png"></Image>
@@ -31,6 +31,9 @@
         <Label Content="" Height="28" HorizontalAlignment="Left" Margin="22,82,0,0" Name="lblCount" VerticalAlignment="Top" />
         <CheckBox Content="Shuffle" Height="16" HorizontalAlignment="Left" Margin="285,10,0,0" Name="chkShuffle" VerticalAlignment="Top" Checked="chkShuffle_Checked" Unchecked="chkShuffle_Unchecked" />
         <CheckBox Content="Repeat" Height="16" HorizontalAlignment="Left" Margin="347,11,0,0" Name="chkRepeat" VerticalAlignment="Top" Checked="chkRepeat_Checked" Unchecked="chkRepeat_Unchecked" />
+        <Slider Height="23" HorizontalAlignment="Left" Margin="252,87,0,0" Name="posSlider" VerticalAlignment="Top" Width="153" ValueChanged="posSlider_ValueChanged" />
+        <Label Content="Time" Height="28" HorizontalAlignment="Left" Margin="178,85,0,0" Name="lblT" VerticalAlignment="Top" />
+        <Label Content="" Height="28" HorizontalAlignment="Left" Margin="252,116,0,0" Name="lbltime" VerticalAlignment="Top" />
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static g:KeyCommands.PlayPauseCommand }" Executed="PlayPause_Executed"></CommandBinding>

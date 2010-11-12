@@ -29,6 +29,7 @@ namespace Grease
         private bool isPlaying = false;
         private bool isShuffle = false;
         private bool isRepeat = false;
+        int songLength;
 
         public MainWindow()
         {
@@ -40,6 +41,7 @@ namespace Grease
             KeyCommands.PreviousTrackCommand.InputGestures.Add(new KeyGesture(Key.Left));
             KeyCommands.VolumeDownCommand.InputGestures.Add(new KeyGesture(Key.Down));
             KeyCommands.VolumeUpCommand.InputGestures.Add(new KeyGesture(Key.Up));
+
             
             library = new MusicLibrary();
             volumeSlider.Value = (double)1.00;
@@ -159,8 +161,16 @@ namespace Grease
                     //vrd
 
                 }
+                if(Player.NaturalDuration.HasTimeSpan)
+                    songLength = (int)Player.NaturalDuration.TimeSpan.Seconds;
+                
                 Player.Play();
                 isPlaying = true;
+                GreaseMainWindow.Title =  currSong.Name;
+
+
+                posSlider.Maximum = songLength;
+
             }
         }
 
@@ -214,6 +224,14 @@ namespace Grease
         private void chkRepeat_Unchecked(object sender, RoutedEventArgs e)
         {
             isRepeat = false;
+        }
+
+        private void posSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Player.Position = Player.Position + new TimeSpan(0,0,(int)posSlider.Value);
+            lbltime.Content = Player.Position.Hours.ToString() +":"+ Player.Position.Minutes.ToString()+ ":" + Player.Position.Seconds.ToString();
+
+
         }
     }
 }
