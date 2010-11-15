@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
+using System.Windows.Threading;
+using System.Windows.Controls.Primitives;
 using System.Threading;
 using Grease.Utils;
 
@@ -29,20 +31,24 @@ namespace Grease
         private bool isPlaying = false;
         private bool isShuffle = false;
         private bool isRepeat = false;
+        private bool isDragging = false;
         int songLength;
+
+        DispatcherTimer timer;
+
 
         public MainWindow()
         {
             InitializeComponent();
 
             //keyboard shortcuts
-            KeyCommands.PlayPauseCommand.InputGestures.Add(new KeyGesture ( Key.Space ));
+            KeyCommands.PlayPauseCommand.InputGestures.Add(new KeyGesture(Key.Space));
             KeyCommands.NextTrackCommand.InputGestures.Add(new KeyGesture(Key.Right));
             KeyCommands.PreviousTrackCommand.InputGestures.Add(new KeyGesture(Key.Left));
             KeyCommands.VolumeDownCommand.InputGestures.Add(new KeyGesture(Key.Down));
             KeyCommands.VolumeUpCommand.InputGestures.Add(new KeyGesture(Key.Up));
 
-            
+
             library = new MusicLibrary();
             volumeSlider.Value = (double)1.00;
             RefreshVolumeValueDisplay();
@@ -51,6 +57,13 @@ namespace Grease
             {
                 LoadSongs(md);
             }
+
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(200);
+            timer.Tick += new EventHandler(timer_Tick);
+
+            chkShuffle.IsChecked = Settings.Default.Shuffle;
+
         }
 
         private void LoadSongs(string folder)
@@ -106,7 +119,7 @@ namespace Grease
         }
 
         private void PlayPause_Executed(object sender, ExecutedRoutedEventArgs e)
-        {  
+        {
             if (isPlaying)
                 Pause();
             else
@@ -153,7 +166,7 @@ namespace Grease
             {
                 if (currSong == null || next)
                 {
-                    currSong = library.Next(isShuffle,isRepeat);
+                    currSong = library.Next(isShuffle, isRepeat);
                     Player.Source = new Uri(currSong.FullPath);
                     lblCurrentlyPlaying.Content = currSong.Name;
                     //vrd
@@ -161,15 +174,15 @@ namespace Grease
                     //vrd
 
                 }
-                if(Player.NaturalDuration.HasTimeSpan)
+                if (Player.NaturalDuration.HasTimeSpan)
                     songLength = (int)Player.NaturalDuration.TimeSpan.Seconds;
-                
+
                 Player.Play();
                 isPlaying = true;
-                GreaseMainWindow.Title =  currSong.Name;
+                GreaseMainWindow.Title = currSong.Name;
 
 
-                posSlider.Maximum = songLength;
+
 
             }
         }
@@ -209,11 +222,18 @@ namespace Grease
             isShuffle = true;
             library.PlayedSongs.Clear();
             library.CurrentSongIndex = -1;
+
+            Settings.Default.Shuffle = true;
+            Settings.Default.Save();
+
+            //System.Windows.MessageBox.Show(Settings.Default.Shuffle.ToString());
         }
 
         private void chkShuffle_Unchecked(object sender, RoutedEventArgs e)
         {
             isShuffle = false;
+            Settings.Default.Shuffle = false;
+            Settings.Default.Save();
         }
 
         private void chkRepeat_Checked(object sender, RoutedEventArgs e)
@@ -226,12 +246,41 @@ namespace Grease
             isRepeat = false;
         }
 
-        private void posSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void Player_MediaOpened(object sender, RoutedEventArgs e)
         {
-            Player.Position = Player.Position + new TimeSpan(0,0,(int)posSlider.Value);
-            lbltime.Content = Player.Position.Hours.ToString() +":"+ Player.Position.Minutes.ToString()+ ":" + Player.Position.Seconds.ToString();
+            if (Player.NaturalDuration.HasTimeSpan)
+            {
+                posSlider.Maximum = Player.NaturalDuration.TimeSpan.TotalSeconds;
+                posSlider.SmallChange = 1;
+                posSlider.LargeChange = Math.Min(10, Player.NaturalDuration.TimeSpan.TotalSeconds / 10);
 
+            }
+            timer.Start();
 
         }
+
+        private void posSlider_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            isDragging = true;
+        }
+
+        private void posSlider_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            isDragging = false;
+            Player.Position = TimeSpan.FromSeconds(posSlider.Value);
+            //lbltime.Content = TimeSpan.FromSeconds(posSlider.Value);
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            if (!isDragging)
+            {
+                posSlider.Value = Player.Position.TotalSeconds;
+                lbltime.Content = String.Format("{0:00}:{1:00}:{2:00}", (int)Player.Position.Hours, (int)Player.Position.Minutes, (int)Player.Position.Seconds);
+            }
+        }
+
+
+
     }
 }
