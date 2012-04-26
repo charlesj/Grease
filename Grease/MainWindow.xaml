@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:g="clr-namespace:Grease"
         mc:Ignorable="d" x:Class="Grease.MainWindow"
-        Title="Grease2" Height="225" Width="451" Icon="/Grease;component/Images/Grease.ico" Name="GreaseMainWindow">
+        Title="Grease" Height="118" Width="283" Icon="/Grease;component/Images/Grease.ico">
     <Grid>
         <Button HorizontalAlignment="Left" Focusable="False" x:Name="btnChooseDirectory" Width="25" Click="btnChooseDirectory_Click" BorderThickness="0" Background="{x:Null}" Margin="5,5,0,0" BorderBrush="{x:Null}" Height="23" VerticalAlignment="Top">
             <Image Focusable="False" Source="/Grease;component/Images/document-open-folder.png"></Image>
         </Button>
         <Label Content="No Songs Playing" Focusable="False" Margin="6,28,9,25" x:Name="lblCurrentlyPlaying" />
         <Label Content="No files to Play" Focusable="False"  x:Name="lblSongCount" Background="{x:Null}" Margin="24,5,0,0" HorizontalAlignment="Left" Width="127.656" Height="25" VerticalAlignment="Top" />
-        <MediaElement Height="10" Visibility="Hidden" Focusable="False" HorizontalAlignment="Left" Margin="231,12,0,0" x:Name="Player" VerticalAlignment="Top" Width="10" LoadedBehavior="Manual" MediaEnded="CompletedSong" MediaOpened="Player_MediaOpened" />
+        <MediaElement Height="10" Visibility="Hidden" Focusable="False" HorizontalAlignment="Left" Margin="231,12,0,0" x:Name="Player" VerticalAlignment="Top" Width="10" LoadedBehavior="Manual" MediaEnded="CompletedSong" />
         <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="125,5,0,0" x:Name="btnPlay"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnPlay_Click" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
             <Image Focusable="False" Source="/Grease;component/Images/Play.png"></Image>
         </Button>
@@ -26,14 +26,8 @@
             <Image Focusable="False" Source="/Grease;component/Images/Next.png"></Image>
         </Button>
         <Slider Height="32" HorizontalAlignment="Right" Focusable="False" Margin="0,51,24,0" Name="volumeSlider" ValueChanged="ChangeMediaVolume" Value="1" Maximum="1" VerticalAlignment="Top" Width="153" />
-        <Label Content="Volume:" Height="28" HorizontalAlignment="Left" Margin="178,0,0,110" Name="label1" VerticalAlignment="Bottom" />
+        <Label Content="Volume:" Height="28" HorizontalAlignment="Left" Margin="7,47,0,0" Name="label1" VerticalAlignment="Top" />
         <Label Content=" " Height="28" HorizontalAlignment="Left" Margin="57,48,0,0" Name="lblVolumeLevel" VerticalAlignment="Top" />
-        <Label Content="" Height="28" HorizontalAlignment="Left" Margin="22,82,0,0" Name="lblCount" VerticalAlignment="Top" />
-        <CheckBox Content="Shuffle" Height="16" HorizontalAlignment="Left" Margin="285,10,0,0" Name="chkShuffle" VerticalAlignment="Top" Checked="chkShuffle_Checked" Unchecked="chkShuffle_Unchecked" />
-        <CheckBox Content="Repeat" Height="16" HorizontalAlignment="Left" Margin="347,11,0,0" Name="chkRepeat" VerticalAlignment="Top" Checked="chkRepeat_Checked" Unchecked="chkRepeat_Unchecked" />
-        <Slider Height="23" HorizontalAlignment="Right" Margin="0,87,24,0" Name="posSlider" VerticalAlignment="Top" Width="153" Thumb.DragStarted="posSlider_DragStarted" Thumb.DragCompleted="posSlider_DragCompleted" />
-        <Label Content="Time" Height="28" HorizontalAlignment="Left" Margin="178,85,0,0" Name="lblT" VerticalAlignment="Top" />
-        <Label Content="" Height="28" HorizontalAlignment="Left" Margin="252,116,0,0" Name="lbltime" VerticalAlignment="Top" />
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static g:KeyCommands.PlayPauseCommand }" Executed="PlayPause_Executed"></CommandBinding>
