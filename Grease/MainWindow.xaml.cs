@@ -59,6 +59,7 @@ namespace Grease
 
         private void LoadSongsInBG(object folder_path)
         {
+            library = new MusicLibrary();
             library.Songs = FolderHelper.GetSongs((string)folder_path);
             lblSongCount.Dispatcher.Invoke(new Action(delegate() { lblSongCount.Content = library.Songs.Count + " files found"; }));
         }

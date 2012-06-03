@@ -7,4 +7,5 @@ Grease/[Oo]bj/*
 *.user
 *.xap
 *.pfx
+*.ncrunchsolution
 Grease/[Pp]ublish
