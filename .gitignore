@@ -9,3 +9,4 @@ Grease/[Oo]bj/*
 *.pfx
 *.ncrunchsolution
 Grease/[Pp]ublish
+_ReSharper.Grease/*

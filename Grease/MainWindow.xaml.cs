@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Threading;
 using Grease.Utils;
+using MahApps.Metro.Controls;
 
 
 namespace Grease
@@ -22,7 +23,7 @@ namespace Grease
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         private MusicLibrary library;
         private Mp3Info currSong;
