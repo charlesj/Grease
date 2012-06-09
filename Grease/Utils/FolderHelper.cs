@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace Grease.Utils
@@ -13,7 +11,9 @@ namespace Grease.Utils
             var rtn = new List<Mp3Info>();
             string[] directories = Directory.GetDirectories(path);
             string[] files = Directory.GetFiles(path, "*.mp3");
+// ReSharper disable InconsistentNaming
             string[] m4a = Directory.GetFiles(path, "*.m4a");
+// ReSharper restore InconsistentNaming
             var all = files.Concat(m4a);
             foreach (var file in all)
             {

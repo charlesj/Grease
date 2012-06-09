@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Grease.Utils
 {
@@ -9,8 +7,8 @@ namespace Grease.Utils
     {
         public List<Mp3Info> Songs { get; set; }
         public List<Mp3Info> PlayedSongs { get; set; }
-        private int CurrentSongIndex = -1;
-        private Random rand = new Random(Convert.ToInt32(DateTime.Now.Second+DateTime.Now.Year+DateTime.Now.DayOfYear));
+        private int _currentSongIndex = -1;
+        private readonly Random _rand = new Random(Convert.ToInt32(DateTime.Now.Second+DateTime.Now.Year+DateTime.Now.DayOfYear));
 
 
         public MusicLibrary()
@@ -21,7 +19,7 @@ namespace Grease.Utils
 
         private Mp3Info GetRandomMp3()
         {
-            var test = Songs[rand.Next(Songs.Count - 1)];
+            var test = Songs[_rand.Next(Songs.Count - 1)];
             var numPlayedToCheck = 500;
             var min = Math.Min(numPlayedToCheck, PlayedSongs.Count);
             var hasPlayedRecently = true;
@@ -36,7 +34,7 @@ namespace Grease.Utils
                 if (!found)
                     hasPlayedRecently = false;
                 else
-                    test = Songs[rand.Next(Songs.Count - 1)];
+                    test = Songs[_rand.Next(Songs.Count - 1)];
             }
             return test;
         }
@@ -44,30 +42,30 @@ namespace Grease.Utils
         
         public Mp3Info Next()
         {
-            if (CurrentSongIndex < PlayedSongs.Count)
+            if (_currentSongIndex < PlayedSongs.Count)
             {
-                if (CurrentSongIndex + 1 == PlayedSongs.Count)
+                if (_currentSongIndex + 1 == PlayedSongs.Count)
                 {
                     PlayedSongs.Add(GetRandomMp3());
                 }
             }
-            CurrentSongIndex += 1;
-            return PlayedSongs[CurrentSongIndex];
+            _currentSongIndex += 1;
+            return PlayedSongs[_currentSongIndex];
         }
 
         public Mp3Info Previous()
         {
-            if (CurrentSongIndex < 0)
+            if (_currentSongIndex < 0)
             {
                 if (PlayedSongs.Count == 0)
                     PlayedSongs.Add(GetRandomMp3());
-                CurrentSongIndex = 0;
-                return PlayedSongs[CurrentSongIndex];
+                _currentSongIndex = 0;
+                return PlayedSongs[_currentSongIndex];
             }
-            if (CurrentSongIndex == 0)
-                return PlayedSongs[CurrentSongIndex];
-            CurrentSongIndex -= 1;
-            return PlayedSongs[CurrentSongIndex];
+            if (_currentSongIndex == 0)
+                return PlayedSongs[_currentSongIndex];
+            _currentSongIndex -= 1;
+            return PlayedSongs[_currentSongIndex];
         }
         
     }

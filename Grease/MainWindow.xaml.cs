@@ -1,21 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
+using System.Globalization;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.Threading;
 using Grease.Utils;
-using MahApps.Metro.Controls;
 
 
 namespace Grease
@@ -23,14 +12,15 @@ namespace Grease
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow
     {
-        private MusicLibrary library;
-        private Mp3Info currSong;
-        private bool isPlaying = false;
+        private MusicLibrary _library;
+        private Mp3Info _currSong;
+        private bool _isPlaying;
 
         public MainWindow()
         {
+            _isPlaying = false;
             InitializeComponent();
 
             //keyboard shortcuts
@@ -40,8 +30,8 @@ namespace Grease
             KeyCommands.VolumeDownCommand.InputGestures.Add(new KeyGesture(Key.Down));
             KeyCommands.VolumeUpCommand.InputGestures.Add(new KeyGesture(Key.Up));
             
-            library = new MusicLibrary();
-            volumeSlider.Value = (double)1.00;
+            _library = new MusicLibrary();
+            volumeSlider.Value = 1.00;
             RefreshVolumeValueDisplay();
             var md = Settings.Default.MusicDirectory;
             if (!string.IsNullOrEmpty(md) && md != "None")
@@ -52,24 +42,25 @@ namespace Grease
 
         private void LoadSongs(string folder)
         {
-            Thread songLoader = new Thread(LoadSongsInBG);
-            songLoader.Name = "Background Song Loader";
+            var songLoader = new Thread(LoadSongsInBG) {Name = "Background Song Loader"};
             songLoader.Start(folder);
             lblSongCount.Content = "Loading Music...";
         }
 
-        private void LoadSongsInBG(object folder_path)
+        private void LoadSongsInBG(object folderPath)
         {
-            library = new MusicLibrary();
-            library.Songs = FolderHelper.GetSongs((string)folder_path);
-            lblSongCount.Dispatcher.Invoke(new Action(delegate() { lblSongCount.Content = library.Songs.Count + " files found"; }));
+            _library = new MusicLibrary {Songs = FolderHelper.GetSongs((string) folderPath)};
+            lblSongCount.Dispatcher.Invoke(new Action(delegate { lblSongCount.Content = _library.Songs.Count + " files found"; }));
         }
 
-        private void btnChooseDirectory_Click(object sender, RoutedEventArgs e)
+        private void BtnChooseDirectoryClick(object sender, RoutedEventArgs e)
         {
             var pathFinder = new FolderBrowserDialog();
-            //pathFinder.RootFolder = Environment.SpecialFolder.MyDocuments;
-            var path = pathFinder.ShowDialog();
+            if (!string.IsNullOrEmpty(Settings.Default.MusicDirectory))
+            {
+                pathFinder.SelectedPath = Settings.Default.MusicDirectory;
+            }
+            pathFinder.ShowDialog();
             if (!string.IsNullOrEmpty(pathFinder.SelectedPath))
             {
                 LoadSongs(pathFinder.SelectedPath);
@@ -78,22 +69,22 @@ namespace Grease
             }
         }
 
-        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        private void BtnPlayClick(object sender, RoutedEventArgs e)
         {
             Play();
         }
 
-        private void btnPrevious_Click(object sender, RoutedEventArgs e)
+        private void BtnPreviousClick(object sender, RoutedEventArgs e)
         {
             Previous();
         }
 
-        private void btnPause_Click(object sender, RoutedEventArgs e)
+        private void BtnPauseClick(object sender, RoutedEventArgs e)
         {
             Pause();
         }
 
-        private void btnNext_Click(object sender, RoutedEventArgs e)
+        private void BtnNextClick(object sender, RoutedEventArgs e)
         {
             Play(true);
         }
@@ -103,35 +94,35 @@ namespace Grease
             Play(true);
         }
 
-        private void PlayPause_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void PlayPauseExecuted(object sender, ExecutedRoutedEventArgs e)
         {  
-            if (isPlaying)
+            if (_isPlaying)
                 Pause();
             else
                 Play();
         }
 
-        private void NextTrack_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void NextTrackExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             Play(true);
         }
 
-        private void PreviousTrack_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void PreviousTrackExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             Previous();
         }
 
-        private void VolumeDown_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void VolumeDownExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            if (volumeSlider.Value != 0 && volumeSlider.Value > .1)
+            if (Math.Abs(volumeSlider.Value - 0) > 0.1 && volumeSlider.Value > .1)
                 volumeSlider.Value = volumeSlider.Value - .1;
             else
                 volumeSlider.Value = 0;
         }
 
-        private void VolumeUp_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void VolumeUpExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            if (volumeSlider.Value != 1 && volumeSlider.Value < .9)
+            if (Math.Abs(volumeSlider.Value - 1) > 0.1 && volumeSlider.Value < .9)
                 volumeSlider.Value = volumeSlider.Value + .1;
             else
                 volumeSlider.Value = 1;
@@ -139,7 +130,7 @@ namespace Grease
 
         private void ChangeMediaVolume(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
-            Player.Volume = (double)volumeSlider.Value;
+            Player.Volume = volumeSlider.Value;
             RefreshVolumeValueDisplay();
         }
 
@@ -147,35 +138,35 @@ namespace Grease
         private void Play(bool next = false)
         {
             Pause();
-            if (library.Songs != null && library.Songs.Count > 0)
+            if (_library.Songs != null && _library.Songs.Count > 0)
             {
-                if (currSong == null || next)
+                if (_currSong == null || next)
                 {
-                    currSong = library.Next();
-                    Player.Source = new Uri(currSong.FullPath);
-                    lblCurrentlyPlaying.Content = currSong.Name;
+                    _currSong = _library.Next();
+                    Player.Source = new Uri(_currSong.FullPath);
+                    lblCurrentlyPlaying.Content = _currSong.Name;
                 }
                 Player.Play();
-                isPlaying = true;
+                _isPlaying = true;
             }
         }
 
         private void Pause()
         {
             Player.Pause();
-            isPlaying = false;
+            _isPlaying = false;
         }
 
         private void Previous()
         {
-            if (library.PlayedSongs.Count > 0)
+            if (_library.PlayedSongs.Count > 0)
             {
                 Pause();
-                currSong = library.Previous();
-                Player.Source = new Uri(currSong.FullPath);
-                lblCurrentlyPlaying.Content = currSong.Name;
+                _currSong = _library.Previous();
+                Player.Source = new Uri(_currSong.FullPath);
+                lblCurrentlyPlaying.Content = _currSong.Name;
                 Player.Play();
-                isPlaying = true;
+                _isPlaying = true;
             }
         }
 
@@ -184,7 +175,7 @@ namespace Grease
             var vol = volumeSlider.Value;
             if (lblVolumeLevel == null)
                 lblVolumeLevel = new System.Windows.Controls.Label();
-            lblVolumeLevel.Content = (Math.Round(vol, 2) * 100).ToString() + "%";
+            lblVolumeLevel.Content = (Math.Round(vol, 2) * 100).ToString(CultureInfo.InvariantCulture) + "%";
         }
     }
 }
