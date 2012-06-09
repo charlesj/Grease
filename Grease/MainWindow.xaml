@@ -25,17 +25,17 @@
         <Label Content="No Songs Playing" Focusable="False" Margin="6,28,9,25" x:Name="lblCurrentlyPlaying" />
         <Label Content="No files to Play" Focusable="False"  x:Name="lblSongCount" Background="{x:Null}" Margin="24,5,0,0" HorizontalAlignment="Left" Width="127.656" Height="25" VerticalAlignment="Top" />
         <MediaElement Height="10" Visibility="Hidden" Focusable="False" HorizontalAlignment="Left" Margin="231,12,0,0" x:Name="Player" VerticalAlignment="Top" Width="10" LoadedBehavior="Manual" MediaEnded="CompletedSong" />
-        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="125,5,0,0" x:Name="btnPlay"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnPlay_Click" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
-            <Image Focusable="False" Source="/Grease;component/Images/Play.png"></Image>
+        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="150,5,0,0" x:Name="btnPlay"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnPlay_Click" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
+            <![CDATA[>]]>
         </Button>
-        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="175,5,0,0" x:Name="btnBack"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnPrevious_Click" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
-            <Image Focusable="False" Source="/Grease;component/Images/Back.png"></Image>
+        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="200,5,0,0" x:Name="btnBack"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnPrevious_Click" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
+            <![CDATA[<<]]>
         </Button>
-        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="150,5,0,0" x:Name="btnPause"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnPause_Click" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" BorderThickness="0" Background="{x:Null}">
-            <Image Focusable="False" Source="/Grease;component/Images/Pause.png"></Image>
+        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="175,5,0,0" x:Name="btnPause"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnPause_Click" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" BorderThickness="0" Background="{x:Null}">
+            <![CDATA[||]]>
         </Button>
-        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="200,5,0,0" x:Name="btnNext"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnNext_Click" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Background="{x:Null}" BorderThickness="0">
-            <Image Focusable="False" Source="/Grease;component/Images/Next.png"></Image>
+        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="225,5,0,0" x:Name="btnNext"  BorderBrush="{x:Null}" VerticalAlignment="Top" Width="25" Click="btnNext_Click" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Background="{x:Null}" BorderThickness="0">
+            <![CDATA[>>]]>
         </Button>
         <Slider Height="32" HorizontalAlignment="Right" Focusable="False" Margin="0,51,24,0" Name="volumeSlider" ValueChanged="ChangeMediaVolume" Value="1" Maximum="1" VerticalAlignment="Top" Width="153" />
         <Label Content="Volume:" Height="28" HorizontalAlignment="Left" Margin="7,47,0,0" Name="label1" VerticalAlignment="Top" />
