@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -181,9 +181,6 @@
     <Resource Include="Images\Play.png" />
     <Resource Include="Images\Back.png" />
     <Resource Include="Images\Next.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Main.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Grease.ico" />
