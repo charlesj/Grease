@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:g="clr-namespace:Grease"
         mc:Ignorable="d" x:Class="Grease.MainWindow"
-        Title="Grease" Height="125" Width="283" Icon="/Grease;component/Images/Main.ico">
+        Title="Grease" Height="115" Width="283" Icon="/Grease;component/Images/Grease.ico" ShowIconOnTitleBar="false">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

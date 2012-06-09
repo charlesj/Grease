@@ -66,7 +66,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Main.ico</ApplicationIcon>
+    <ApplicationIcon>Grease.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -151,12 +151,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Main.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Grease.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
@@ -182,17 +176,6 @@
     <Resource Include="Images\Grease.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\control_fastforward.png" />
-    <Resource Include="Images\control_pause.png" />
-    <Resource Include="Images\control_play.png" />
-    <Resource Include="Images\control_start.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\folder.png" />
-    <Resource Include="Images\folder_error.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\document-open.png" />
     <Resource Include="Images\document-open-folder.png" />
     <Resource Include="Images\Pause.png" />
     <Resource Include="Images\Play.png" />
@@ -200,10 +183,10 @@
     <Resource Include="Images\Next.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Main.ico" />
+    <Resource Include="Main.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Main.ico" />
+    <Resource Include="Grease.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
