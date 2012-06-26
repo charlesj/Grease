@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:g="clr-namespace:Grease"
         mc:Ignorable="d" x:Class="Grease.MainWindow"
-        Title="Grease" Height="115" Width="283" Icon="/Grease;component/Images/Grease.ico" ShowIconOnTitleBar="false">
+        Title="Grease" Height="115" Width="283" Icon="/Grease;component/Images/Grease.ico" ShowIconOnTitleBar="False">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -18,6 +18,9 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+    <Controls:MetroWindow.WindowCommands>
+        <Controls:WindowCommands Background="#0077ff" Focusable="False" />
+    </Controls:MetroWindow.WindowCommands>
     <Grid>
         <Button HorizontalAlignment="Left" Focusable="False" x:Name="btnChooseDirectory" Width="25" Click="BtnChooseDirectoryClick" BorderThickness="0" Background="{x:Null}" Margin="5,5,0,0" BorderBrush="{x:Null}" Height="25" Padding="0"  VerticalAlignment="Top">
             <Image Focusable="False" Source="/Grease;component/Images/document-open-folder.png"></Image>
