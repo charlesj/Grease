@@ -177,5 +177,15 @@ namespace Grease
                 lblVolumeLevel = new System.Windows.Controls.Label();
             lblVolumeLevel.Content = (Math.Round(vol, 2) * 100).ToString(CultureInfo.InvariantCulture) + "%";
         }
+
+        private void WindowsCommandGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            Keyboard.ClearFocus();
+        }
+
+        private void WindowsCommandGotFocus(object sender, RoutedEventArgs e)
+        {
+            Keyboard.ClearFocus();
+        }
     }
 }

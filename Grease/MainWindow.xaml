@@ -19,7 +19,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <Controls:MetroWindow.WindowCommands>
-        <Controls:WindowCommands Background="#0077ff" Focusable="False" />
+        <Controls:WindowCommands Background="#0077ff" Focusable="False" GotKeyboardFocus="WindowsCommandGotKeyboardFocus" GotFocus="WindowsCommandGotFocus" />
     </Controls:MetroWindow.WindowCommands>
     <Grid>
         <Button HorizontalAlignment="Left" Focusable="False" x:Name="btnChooseDirectory" Width="25" Click="BtnChooseDirectoryClick" BorderThickness="0" Background="{x:Null}" Margin="5,5,0,0" BorderBrush="{x:Null}" Height="25" Padding="0"  VerticalAlignment="Top">
