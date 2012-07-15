@@ -116,6 +116,7 @@
     <Compile Include="Utils\FolderHelper.cs" />
     <Compile Include="Utils\Mp3Info.cs" />
     <Compile Include="Utils\MusicLibrary.cs" />
+    <Compile Include="WpfPlayer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -194,6 +195,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Grease.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Grease.Core\Grease.Core.csproj">
+      <Project>{B217D8AA-A050-40E9-BF3F-C2FA48A7F124}</Project>
+      <Name>Grease.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

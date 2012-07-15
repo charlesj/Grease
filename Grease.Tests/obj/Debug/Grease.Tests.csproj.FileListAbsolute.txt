@@ -1,0 +1,7 @@
+E:\Code\Grease\Grease.Tests\bin\Debug\Grease.Tests.dll
+E:\Code\Grease\Grease.Tests\bin\Debug\Grease.Tests.pdb
+E:\Code\Grease\Grease.Tests\bin\Debug\xunit.dll
+E:\Code\Grease\Grease.Tests\bin\Debug\xunit.xml
+E:\Code\Grease\Grease.Tests\obj\Debug\Grease.Tests.csprojResolveAssemblyReference.cache
+E:\Code\Grease\Grease.Tests\obj\Debug\Grease.Tests.dll
+E:\Code\Grease\Grease.Tests\obj\Debug\Grease.Tests.pdb
