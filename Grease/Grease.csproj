@@ -113,9 +113,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Utils\FolderHelper.cs" />
-    <Compile Include="Utils\Mp3Info.cs" />
-    <Compile Include="Utils\MusicLibrary.cs" />
     <Compile Include="WpfPlayer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
