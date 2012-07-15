@@ -11,5 +11,7 @@ namespace Grease.Core
         public string Album { get; set; }
         public int TrackNum { get; set; }
         public string FileName { get; set; }
+        public bool HasImage { get; set; }
+        public string ImagePath { get; set; }
     }
 }

@@ -12,11 +12,11 @@ namespace Grease.Core
             var playableExtensions = new List<string> {"*.mp3", "*.m4a"};
             var rtn = new List<MusicFileInfo>();
             var currentDirectory = new DirectoryInfo(path);
-
+            string image = GetImage(currentDirectory);
             foreach (var extension in playableExtensions)
             {
                 var musicFiles = currentDirectory.GetFiles(extension);
-                rtn.AddRange(musicFiles.Select(GetMusicFileInfo));
+                rtn.AddRange(musicFiles.Select(musicfile => GetMusicFileInfo(musicfile, image)));
             }
 
             foreach (var directory in currentDirectory.GetDirectories())
@@ -32,7 +32,24 @@ namespace Grease.Core
             throw new NotImplementedException();
         }
 
-        private MusicFileInfo GetMusicFileInfo(FileInfo info)
+        private string GetImage(DirectoryInfo directory)
+        {
+            var imageExtensions = new List<string> { "*.jpg", "*.png" };
+            var candidates = new List<FileInfo>();
+            foreach (var extension in imageExtensions)
+            {
+                var imageFiles = directory.GetFiles(extension);
+                candidates.AddRange(imageFiles);
+            }
+            if (candidates.Count > 0)
+            {
+                var largest = candidates.OrderByDescending(fi => fi.Length).First();
+                return largest.FullName;
+            }
+            return string.Empty;
+        }
+
+        private MusicFileInfo GetMusicFileInfo(FileInfo info, string imagePath)
         {
             var taglib = TagLib.File.Create(info.FullName);
             var rtn= new MusicFileInfo
@@ -47,6 +64,11 @@ namespace Grease.Core
             if (string.IsNullOrEmpty(rtn.Name))
             {
                 rtn.Name = rtn.FileName;
+            }
+            if (!string.IsNullOrEmpty(imagePath))
+            {
+                rtn.HasImage = true;
+                rtn.ImagePath = imagePath;
             }
             return rtn;
         }

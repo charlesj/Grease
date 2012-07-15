@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:g="clr-namespace:Grease"
         mc:Ignorable="d" x:Class="Grease.MainWindow"
-        Title="Grease" Height="115" Width="283" Icon="/Grease;component/Images/Grease.ico" ShowIconOnTitleBar="False">
+        Title="Grease" Height="300" Width="300" Icon="/Grease;component/Images/Grease.ico" ShowIconOnTitleBar="False">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -25,7 +25,8 @@
         <Button HorizontalAlignment="Left" Focusable="False" x:Name="btnChooseDirectory" Width="25" Click="BtnChooseDirectoryClick" BorderThickness="0" Background="{x:Null}" Margin="5,5,0,0" BorderBrush="{x:Null}" Height="25" Padding="0"  VerticalAlignment="Top">
             <Image Focusable="False" Source="/Grease;component/Images/document-open-folder.png"></Image>
         </Button>
-        <Label Content="No Songs Playing" Focusable="False" Margin="2,33,13,20" x:Name="lblCurrentlyPlaying" />
+        <Label Content="No Songs Playing" Focusable="False" Margin="2,33,13,200" x:Name="lblCurrentlyPlaying" />
+        <Label Content="No Songs Playing" Focusable="False" Margin="2,57,13,175" Name="lblCurrentAlbum" />
         <Label Content="No files to Play" Focusable="False"  x:Name="lblSongCount" Background="{x:Null}" Margin="33,5,0,0" HorizontalAlignment="Left" Width="127.656" Height="25" VerticalAlignment="Top" />
         <MediaElement Height="10" Visibility="Hidden" Focusable="False" HorizontalAlignment="Left" Margin="231,12,0,0" x:Name="Player" VerticalAlignment="Top" Width="10" LoadedBehavior="Manual" MediaEnded="CompletedSong" />
         <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="140,5,0,0" x:Name="btnPlay"  BorderBrush="{x:Null}" Padding="0" VerticalAlignment="Top" Width="25" Click="BtnPlayClick" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
@@ -40,9 +41,10 @@
         <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="230,5,0,0" x:Name="btnNext"  BorderBrush="{x:Null}" Padding="0" VerticalAlignment="Top" Width="25" Click="BtnNextClick" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Background="{x:Null}" BorderThickness="0">
             <Image Focusable="False" Source="/Grease;component/Images/Next.png"></Image>
         </Button>
-        <Slider Height="32" HorizontalAlignment="Left" Focusable="False" Margin="90,53,0,0" Name="volumeSlider" ValueChanged="ChangeMediaVolume" Value="1" Maximum="1" VerticalAlignment="Top" Width="173" />
-        <Label Content="Volume:" Height="28" HorizontalAlignment="Left" Margin="2,55,0,0" Name="label1" VerticalAlignment="Top" />
-        <Label Content=" " Height="28" HorizontalAlignment="Left" Margin="52,55,0,0" Name="lblVolumeLevel" VerticalAlignment="Top" />
+        <Slider Height="32" HorizontalAlignment="Left" Focusable="False" Margin="90,235,0,0" Name="volumeSlider" ValueChanged="ChangeMediaVolume" Value="1" Maximum="1" VerticalAlignment="Top" Width="173" />
+        <Label Content="Volume:" Height="28" HorizontalAlignment="Left" Margin="2,237,0,0" Name="label1" VerticalAlignment="Top" />
+        <Label Content=" " Height="28" HorizontalAlignment="Left" Margin="52,237,0,0" Name="lblVolumeLevel" VerticalAlignment="Top" />
+        <Image Height="150" HorizontalAlignment="Left" Margin="40,85,0,0" Name="imgAlbumArt" Stretch="Fill" VerticalAlignment="Top" Width="200" />
     </Grid>
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static g:KeyCommands.PlayPauseCommand }" Executed="PlayPauseExecuted"></CommandBinding>

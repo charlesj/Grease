@@ -8,5 +8,7 @@
         public string Album { get; set; }
         public string Artist { get; set; }
         public int TrackNum { get; set; }
+        public bool HasImage { get; set; }
+        public string ImagePath { get; set; }
     }
 }

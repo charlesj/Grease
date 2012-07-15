@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Forms;
 using System.Threading;
+using System.Windows.Media.Imaging;
 using Grease.Core;
+using MahApps.Metro;
 
 
 namespace Grease
@@ -19,6 +22,8 @@ namespace Grease
         public MainWindow()
         {
             InitializeComponent();
+            
+            ThemeManager.ChangeTheme(this, new Accent("GreaseTheme", new Uri("pack://application:,,,/Grease;component/GreaseTheme.xaml")), Theme.Light);
 
             //keyboard shortcuts
             KeyCommands.PlayPauseCommand.InputGestures.Add(new KeyGesture ( Key.Space ));
@@ -136,6 +141,21 @@ namespace Grease
         {
             var curr = _engine.Current;
             lblCurrentlyPlaying.Content = curr.Name;
+            lblCurrentAlbum.Content = curr.Album;
+            if (curr.HasImage)
+            {
+                var img = new BitmapImage();
+                img.BeginInit();
+                img.UriSource = new Uri(curr.ImagePath);
+                img.EndInit();
+                //lblCurrentAlbum.Content = string.Format("h: {0} w: {1}", img.Height, img.Width);
+                imgAlbumArt.Source = img;
+            }
+            else
+            {
+                imgAlbumArt.Source = null;
+            }
+            
         }
 
         private void Play(bool next = false)

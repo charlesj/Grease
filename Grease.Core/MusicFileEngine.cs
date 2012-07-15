@@ -83,7 +83,7 @@ namespace Grease.Core
             get
             {
                 return new CurrentlyPlayingInfo
-                           {Album = _currSong.Album, Name = _currSong.Name, TrackNum = _currSong.TrackNum};
+                           {Album = _currSong.Album, Name = _currSong.Name, TrackNum = _currSong.TrackNum, HasImage = _currSong.HasImage, ImagePath = _currSong.ImagePath};
             }
         }
 
