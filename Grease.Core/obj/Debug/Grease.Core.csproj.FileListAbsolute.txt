@@ -1,8 +1,0 @@
-E:\Code\Grease\Grease.Core\bin\Debug\Grease.Core.dll
-E:\Code\Grease\Grease.Core\bin\Debug\Grease.Core.pdb
-E:\Code\Grease\Grease.Core\obj\Debug\Grease.Core.dll
-E:\Code\Grease\Grease.Core\obj\Debug\Grease.Core.pdb
-E:\Code\Grease\Grease.Core\bin\Debug\policy.2.0.taglib-sharp.dll
-E:\Code\Grease\Grease.Core\bin\Debug\taglib-sharp.dll
-E:\Code\Grease\Grease.Core\bin\Debug\policy.2.0.taglib-sharp.config
-E:\Code\Grease\Grease.Core\obj\Debug\Grease.Core.csprojResolveAssemblyReference.cache
