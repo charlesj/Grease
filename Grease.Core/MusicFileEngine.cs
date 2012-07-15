@@ -8,9 +8,21 @@ namespace Grease.Core
         private readonly IGreaseFileSystemAccess _fsAccess;
         private bool _isPlaying;
         private MusicFileInfo _currSong;
+
+        public bool IsPlaying
+        {
+            get { return _isPlaying; }
+            set { _isPlaying = value; }
+        }
+
+        public int FoundCount
+        {
+            get { return MusicLibrary.Songs.Count; }
+        }
+
         public MusicLibrary MusicLibrary { get; private set; }
 
-        public MusicFileEngine(IMusicPlayer player, IGreaseFileSystemAccess fsAccess, string path)
+        public MusicFileEngine(IMusicPlayer player, IGreaseFileSystemAccess fsAccess, string path = null)
         {
             if (player == null) throw new ArgumentNullException("player");
             if (fsAccess == null) throw new ArgumentNullException("fsAccess");
@@ -18,7 +30,9 @@ namespace Grease.Core
             _fsAccess = fsAccess;
             _isPlaying = false;
             MusicLibrary = new MusicLibrary();
-            Load(path);
+            if(!string.IsNullOrEmpty(path))
+                Load(path);
+            _player.ChangeVolume(1.0);
         }
 
         public void Play(bool next = false)

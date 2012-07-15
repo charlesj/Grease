@@ -9,5 +9,7 @@ namespace Grease.Core
         void ChangeVolume(double newVolume);
         void Load(string path);
         CurrentlyPlayingInfo Current { get; }
+        bool IsPlaying { get; set; }
+        int FoundCount { get; }
     }
 }

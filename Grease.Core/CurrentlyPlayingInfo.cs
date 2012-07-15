@@ -10,5 +10,6 @@ namespace Grease.Core
         public string Name { get; set; }
         public string Album { get; set; }
         public int TrackNum { get; set; }
+        public string FileName { get; set; }
     }
 }

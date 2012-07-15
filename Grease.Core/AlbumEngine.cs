@@ -52,5 +52,16 @@ namespace Grease.Core
         {
             get { throw new NotImplementedException(); }
         }
+
+        public bool IsPlaying
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+
+        public int FoundCount
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

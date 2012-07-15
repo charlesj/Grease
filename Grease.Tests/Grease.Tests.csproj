@@ -43,10 +43,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicFileAccessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Grease.Core\Grease.Core.csproj">
+      <Project>{B217D8AA-A050-40E9-BF3F-C2FA48A7F124}</Project>
+      <Name>Grease.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

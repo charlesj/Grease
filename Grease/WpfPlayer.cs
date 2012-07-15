@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
+using Grease.Core;
 
-namespace Grease.Core
+namespace Grease
 {
     public class WpfPlayer : IMusicPlayer
     {
@@ -16,19 +17,25 @@ namespace Grease.Core
             _player = player;
         }
 
-        public void Play(string path)
+        public void Play()
         {
-            
+            _player.Play();
         }
 
         public void Pause()
         {
-            
+            _player.Pause();
         }
 
         public void ChangeVolume(double toChange)
         {
-            
+            _player.Volume = toChange;
+        }
+
+        public string Source
+        {
+            get { return _player.Source.ToString(); }
+            set { _player.Source = new Uri(value);}
         }
     }
 }

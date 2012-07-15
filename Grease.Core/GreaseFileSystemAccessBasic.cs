@@ -9,7 +9,7 @@ namespace Grease.Core
     {
         public List<MusicFileInfo> GetMusicFiles(string path)
         {
-            var playableExtensions = new List<string> {".mp3", ".m4a"};
+            var playableExtensions = new List<string> {"*.mp3", "*.m4a"};
             var rtn = new List<MusicFileInfo>();
             var currentDirectory = new DirectoryInfo(path);
 
@@ -35,7 +35,7 @@ namespace Grease.Core
         private MusicFileInfo GetMusicFileInfo(FileInfo info)
         {
             var taglib = TagLib.File.Create(info.FullName);
-            return new MusicFileInfo
+            var rtn= new MusicFileInfo
                           {
                               FullPath = info.FullName,
                               FileName = info.Name,
@@ -44,6 +44,11 @@ namespace Grease.Core
                               Artist = taglib.Tag.AlbumArtists.ToString(),
                               TrackNum = (int) taglib.Tag.Track
                           };
+            if (string.IsNullOrEmpty(rtn.Name))
+            {
+                rtn.Name = rtn.FileName;
+            }
+            return rtn;
         }
     }
 }

@@ -1,6 +1,12 @@
 Grease/[Bb]in/*
+Grease.Core/[Bb]in/*
+Grease.Tests/[Bb]in/*
 Grease/[Dd]ebug/*
+Grease.Core/[Dd]ebug/*
+Grease.Tests/[Dd]ebug/*
 Grease/[Oo]bj/*
+Grease.Core/[Oo]bj/*
+Grease.Tests/[Oo]bj/*
 *.log
 *.suo
 *.cache

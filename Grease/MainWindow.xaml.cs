@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Forms;
 using System.Threading;
-using Grease.Utils;
+using Grease.Core;
 
 
 namespace Grease
@@ -14,13 +14,10 @@ namespace Grease
     /// </summary>
     public partial class MainWindow
     {
-        private MusicLibrary _library;
-        private Mp3Info _currSong;
-        private bool _isPlaying;
+        private readonly IMusicEngine _engine;
 
         public MainWindow()
         {
-            _isPlaying = false;
             InitializeComponent();
 
             //keyboard shortcuts
@@ -30,9 +27,10 @@ namespace Grease
             KeyCommands.VolumeDownCommand.InputGestures.Add(new KeyGesture(Key.Down));
             KeyCommands.VolumeUpCommand.InputGestures.Add(new KeyGesture(Key.Up));
             
-            _library = new MusicLibrary();
             volumeSlider.Value = 1.00;
             RefreshVolumeValueDisplay();
+            _engine = new MusicFileEngine(new WpfPlayer(Player), new GreaseFileSystemAccessBasic());
+
             var md = Settings.Default.MusicDirectory;
             if (!string.IsNullOrEmpty(md) && md != "None")
             {
@@ -42,15 +40,15 @@ namespace Grease
 
         private void LoadSongs(string folder)
         {
-            var songLoader = new Thread(LoadSongsInBG) {Name = "Background Song Loader"};
+            var songLoader = new Thread(LoadSongsInBackgound) {Name = "Background Song Loader"};
             songLoader.Start(folder);
             lblSongCount.Content = "Loading Music...";
         }
 
-        private void LoadSongsInBG(object folderPath)
+        private void LoadSongsInBackgound(object folderPath)
         {
-            _library = new MusicLibrary {Songs = FolderHelper.GetSongs((string) folderPath)};
-            lblSongCount.Dispatcher.Invoke(new Action(delegate { lblSongCount.Content = _library.Songs.Count + " files found"; }));
+            _engine.Load((string)folderPath);
+            lblSongCount.Dispatcher.Invoke(new Action(delegate { lblSongCount.Content = _engine.FoundCount + " files found"; }));
         }
 
         private void BtnChooseDirectoryClick(object sender, RoutedEventArgs e)
@@ -96,7 +94,7 @@ namespace Grease
 
         private void PlayPauseExecuted(object sender, ExecutedRoutedEventArgs e)
         {  
-            if (_isPlaying)
+            if (_engine.IsPlaying)
                 Pause();
             else
                 Play();
@@ -130,44 +128,31 @@ namespace Grease
 
         private void ChangeMediaVolume(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
-            Player.Volume = volumeSlider.Value;
+            if (_engine != null) _engine.ChangeVolume(volumeSlider.Value);
             RefreshVolumeValueDisplay();
         }
 
+        private void RefreshCurrentInfo()
+        {
+            var curr = _engine.Current;
+            lblCurrentlyPlaying.Content = curr.Name;
+        }
 
         private void Play(bool next = false)
         {
-            Pause();
-            if (_library.Songs != null && _library.Songs.Count > 0)
-            {
-                if (_currSong == null || next)
-                {
-                    _currSong = _library.Next();
-                    Player.Source = new Uri(_currSong.FullPath);
-                    lblCurrentlyPlaying.Content = _currSong.Name;
-                }
-                Player.Play();
-                _isPlaying = true;
-            }
+            _engine.Play(next);
+            RefreshCurrentInfo();
         }
 
         private void Pause()
         {
-            Player.Pause();
-            _isPlaying = false;
+            _engine.Pause();
         }
 
         private void Previous()
         {
-            if (_library.PlayedSongs.Count > 0)
-            {
-                Pause();
-                _currSong = _library.Previous();
-                Player.Source = new Uri(_currSong.FullPath);
-                lblCurrentlyPlaying.Content = _currSong.Name;
-                Player.Play();
-                _isPlaying = true;
-            }
+            _engine.Previous();
+            RefreshCurrentInfo();
         }
 
         private void RefreshVolumeValueDisplay()
