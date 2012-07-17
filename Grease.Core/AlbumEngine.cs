@@ -48,7 +48,7 @@ namespace Grease.Core
             throw new NotImplementedException();
         }
 
-        public CurrentlyPlayingInfo Current
+        public CurrentlyPlayingViewModel Current
         {
             get { throw new NotImplementedException(); }
         }

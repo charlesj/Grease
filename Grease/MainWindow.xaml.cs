@@ -34,7 +34,7 @@ namespace Grease
             
             volumeSlider.Value = 1.00;
             RefreshVolumeValueDisplay();
-            _engine = new MusicFileEngine(new WpfPlayer(Player), new GreaseFileSystemAccessBasic());
+            _engine = new MusicFileEngine(new WpfPlayer(Player), new WindowsFileSystemAccess(new TagLibInformationProvider()));
 
             var md = Settings.Default.MusicDirectory;
             if (!string.IsNullOrEmpty(md) && md != "None")

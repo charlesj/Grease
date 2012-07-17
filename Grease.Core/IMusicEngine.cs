@@ -8,7 +8,7 @@ namespace Grease.Core
         void Previous();
         void ChangeVolume(double newVolume);
         void Load(string path);
-        CurrentlyPlayingInfo Current { get; }
+        CurrentlyPlayingViewModel Current { get; }
         bool IsPlaying { get; set; }
         int FoundCount { get; }
     }

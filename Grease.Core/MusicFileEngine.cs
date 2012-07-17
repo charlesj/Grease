@@ -78,11 +78,11 @@ namespace Grease.Core
             _player.ChangeVolume(newVolume);
         }
 
-        public CurrentlyPlayingInfo Current
+        public CurrentlyPlayingViewModel Current
         {
             get
             {
-                return new CurrentlyPlayingInfo
+                return new CurrentlyPlayingViewModel
                            {Album = _currSong.Album, Name = _currSong.Name, TrackNum = _currSong.TrackNum, HasImage = _currSong.HasImage, ImagePath = _currSong.ImagePath};
             }
         }

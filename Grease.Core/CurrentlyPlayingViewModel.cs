@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Grease.Core
 {
-    public class CurrentlyPlayingInfo
+    public class CurrentlyPlayingViewModel
     {
         public string Name { get; set; }
         public string Album { get; set; }
