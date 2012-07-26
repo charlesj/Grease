@@ -17,10 +17,10 @@ namespace Grease.Core
 
         public int FoundCount
         {
-            get { return MusicLibrary.Songs.Count; }
+            get { return Library.Songs.Count; }
         }
 
-        public MusicLibrary MusicLibrary { get; private set; }
+        public MusicLibrary Library { get; private set; }
 
         public MusicFileEngine(IMusicPlayer player, IGreaseFileSystemAccess fsAccess, string path = null)
         {
@@ -29,7 +29,7 @@ namespace Grease.Core
             _player = player;
             _fsAccess = fsAccess;
             _isPlaying = false;
-            MusicLibrary = new MusicLibrary();
+            Library = new MusicLibrary();
             if(!string.IsNullOrEmpty(path))
                 Load(path);
             _player.ChangeVolume(1.0);
@@ -38,11 +38,11 @@ namespace Grease.Core
         public void Play(bool next = false)
         {
             Pause();
-            if (MusicLibrary.Songs != null && MusicLibrary.Songs.Count > 0)
+            if (Library.Songs != null && Library.Songs.Count > 0)
             {
                 if (_currSong == null || next)
                 {
-                    _currSong = MusicLibrary.GetNext();
+                    _currSong = Library.GetNext();
                     _player.Source = _currSong.FullPath;
                 }
                 _player.Play();
@@ -63,10 +63,10 @@ namespace Grease.Core
 
         public void Previous()
         {
-            if (MusicLibrary.PlayedSongs.Count > 0)
+            if (Library.PlayedSongs.Count > 0)
             {
                 Pause();
-                _currSong = MusicLibrary.GetPrevious();
+                _currSong = Library.GetPrevious();
                 _player.Source =_currSong.FullPath;
                 _player.Play();
                 _isPlaying = true;
@@ -83,13 +83,13 @@ namespace Grease.Core
             get
             {
                 return new CurrentlyPlayingViewModel
-                           {Album = _currSong.Album, Name = _currSong.Name, TrackNum = _currSong.TrackNum, HasImage = _currSong.HasImage, ImagePath = _currSong.ImagePath};
+                           {Album = _currSong.Album, Name = _currSong.Name, TrackNum = _currSong.TrackNum, HasImage = _currSong.HasImage, ImagePath = _currSong.ImagePath, Artist = _currSong.Artist};
             }
         }
 
         public void Load(string path)
         {
-            MusicLibrary.Songs = _fsAccess.GetMusicFiles(path);
+            Library.Songs = _fsAccess.GetMusicFiles(path);
         }
     }
 }

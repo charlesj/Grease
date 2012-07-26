@@ -57,7 +57,7 @@
     <Compile Include="IMusicPlayer.cs" />
     <Compile Include="MusicFileInfo.cs" />
     <Compile Include="MusicInfoTransport.cs" />
-    <Compile Include="MusicSongLibrary.cs" />
+    <Compile Include="MusicLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

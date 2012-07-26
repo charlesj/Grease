@@ -80,7 +80,7 @@ namespace Grease.Core
         public bool HasImage { get; set; }
         public string ImagePath { get; set; }
 
-        private void LoadAdditionalInfo()
+        public void LoadAdditionalInfo()
         {
             if (!_haveTriedToLoad)
             {

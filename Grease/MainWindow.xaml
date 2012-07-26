@@ -1,56 +1,73 @@
 ﻿<Controls:MetroWindow
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:g="clr-namespace:Grease"
-        mc:Ignorable="d" x:Class="Grease.MainWindow"
-        Title="Grease" Height="300" Width="300" Icon="/Grease;component/Images/Grease.ico" ShowIconOnTitleBar="False">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
-    <Controls:MetroWindow.WindowCommands>
-        <Controls:WindowCommands Background="#0077ff" Focusable="False" GotKeyboardFocus="WindowsCommandGotKeyboardFocus" GotFocus="WindowsCommandGotFocus" />
-    </Controls:MetroWindow.WindowCommands>
-    <Grid>
-        <Button HorizontalAlignment="Left" Focusable="False" x:Name="btnChooseDirectory" Width="25" Click="BtnChooseDirectoryClick" BorderThickness="0" Background="{x:Null}" Margin="5,5,0,0" BorderBrush="{x:Null}" Height="25" Padding="0"  VerticalAlignment="Top">
-            <Image Focusable="False" Source="/Grease;component/Images/document-open-folder.png"></Image>
-        </Button>
-        <Label Content="No Songs Playing" Focusable="False" Margin="2,33,13,200" x:Name="lblCurrentlyPlaying" />
-        <Label Content="No Songs Playing" Focusable="False" Margin="2,57,13,175" Name="lblCurrentAlbum" />
-        <Label Content="No files to Play" Focusable="False"  x:Name="lblSongCount" Background="{x:Null}" Margin="33,5,0,0" HorizontalAlignment="Left" Width="127.656" Height="25" VerticalAlignment="Top" />
-        <MediaElement Height="10" Visibility="Hidden" Focusable="False" HorizontalAlignment="Left" Margin="231,12,0,0" x:Name="Player" VerticalAlignment="Top" Width="10" LoadedBehavior="Manual" MediaEnded="CompletedSong" />
-        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="140,5,0,0" x:Name="btnPlay"  BorderBrush="{x:Null}" Padding="0" VerticalAlignment="Top" Width="25" Click="BtnPlayClick" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
-            <Image Focusable="False" Source="/Grease;component/Images/Play.png"></Image>
-        </Button>
-        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="200,5,0,0" x:Name="btnBack"  BorderBrush="{x:Null}" Padding="0" VerticalAlignment="Top" Width="25" Click="BtnPreviousClick" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
-            <Image Focusable="False" Source="/Grease;component/Images/Back.png"></Image>
-        </Button>
-        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="170,5,0,0" x:Name="btnPause"  BorderBrush="{x:Null}" Padding="0" VerticalAlignment="Top" Width="25" Click="BtnPauseClick" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" BorderThickness="0" Background="{x:Null}">
-            <Image Focusable="False" Source="/Grease;component/Images/Pause.png"></Image>
-        </Button>
-        <Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="230,5,0,0" x:Name="btnNext"  BorderBrush="{x:Null}" Padding="0" VerticalAlignment="Top" Width="25" Click="BtnNextClick" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Background="{x:Null}" BorderThickness="0">
-            <Image Focusable="False" Source="/Grease;component/Images/Next.png"></Image>
-        </Button>
-        <Slider Height="32" HorizontalAlignment="Left" Focusable="False" Margin="90,235,0,0" Name="volumeSlider" ValueChanged="ChangeMediaVolume" Value="1" Maximum="1" VerticalAlignment="Top" Width="173" />
-        <Label Content="Volume:" Height="28" HorizontalAlignment="Left" Margin="2,237,0,0" Name="label1" VerticalAlignment="Top" />
-        <Label Content=" " Height="28" HorizontalAlignment="Left" Margin="52,237,0,0" Name="lblVolumeLevel" VerticalAlignment="Top" />
-        <Image Height="150" HorizontalAlignment="Left" Margin="40,85,0,0" Name="imgAlbumArt" Stretch="Fill" VerticalAlignment="Top" Width="200" />
-    </Grid>
-    <Window.CommandBindings>
-        <CommandBinding Command="{x:Static g:KeyCommands.PlayPauseCommand }" Executed="PlayPauseExecuted"></CommandBinding>
-        <CommandBinding Command="{x:Static g:KeyCommands.NextTrackCommand }" Executed="NextTrackExecuted"></CommandBinding>
-        <CommandBinding Command="{x:Static g:KeyCommands.PreviousTrackCommand }" Executed="PreviousTrackExecuted"></CommandBinding>
-        <CommandBinding Command="{x:Static g:KeyCommands.VolumeDownCommand }" Executed="VolumeDownExecuted" ></CommandBinding> 
-        <CommandBinding Command="{x:Static g:KeyCommands.VolumeUpCommand }" Executed="VolumeUpExecuted"></CommandBinding>
-    </Window.CommandBindings>
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+		xmlns:g="clr-namespace:Grease"
+		mc:Ignorable="d" x:Class="Grease.MainWindow"
+		Title="Grease" Height="235" Width="646" Icon="/Grease;component/Images/Grease.ico" ShowIconOnTitleBar="False">
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
+	<Controls:MetroWindow.WindowCommands>
+		<Controls:WindowCommands Background="#0077ff" Focusable="False" GotKeyboardFocus="WindowsCommandGotKeyboardFocus" GotFocus="WindowsCommandGotFocus">
+			<Button Content="music folder" Click="BtnChooseDirectoryClick" />
+		</Controls:WindowCommands>
+	</Controls:MetroWindow.WindowCommands>
+	<Grid>
+		<!--<Button HorizontalAlignment="Left" Focusable="False" x:Name="btnChooseDirectory" Width="25" Click="BtnChooseDirectoryClick" BorderThickness="0" Background="{x:Null}" Margin="5,5,0,0" BorderBrush="{x:Null}" Height="25" Padding="0"  VerticalAlignment="Top"></Button>-->
+		<Label Content="No Songs Playing" Focusable="False" Margin="10,0,230,160" x:Name="lblCurrentlyPlaying" Height="30" VerticalAlignment="Bottom" />
+		<Label Content="No Songs Playing" Focusable="False" Margin="10,0,230,130" Name="lblCurrentAlbum" Height="30" VerticalAlignment="Bottom" />
+		<Label Content="No Songs Playing" Focusable="False" Margin="10,0,230,100" Name="lblCurrentArtist" Height="30" VerticalAlignment="Bottom" />
+		<!--<Label Content="No files to Play" Focusable="False"  x:Name="lblSongCount" Background="{x:Null}" Margin="0,0,229,37" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="101" />-->
+		<MediaElement Height="10" Visibility="Hidden" Focusable="False" HorizontalAlignment="Left" Margin="720,0,0,12" x:Name="Player" VerticalAlignment="Bottom" Width="10" LoadedBehavior="Manual" MediaEnded="CompletedSong" />
+		<Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="15,0,0,35" x:Name="btnPlay"  BorderBrush="{x:Null}" Padding="0" VerticalAlignment="Bottom" Width="25" Click="BtnPlayClick" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
+			<Image Focusable="False" Source="/Grease;component/Images/Play.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
+		</Button>
+		<Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="75,0,0,35"  x:Name="btnBack"  BorderBrush="{x:Null}" Padding="0" VerticalAlignment="Bottom" Width="25" Click="BtnPreviousClick" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
+			<Image Focusable="False" Source="/Grease;component/Images/Back.png" Width="25" Height="25"></Image>
+		</Button>
+		<Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="45,0,0,35" x:Name="btnPause"  BorderBrush="{x:Null}" Padding="0" VerticalAlignment="Bottom" Width="25" Click="BtnPauseClick" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" BorderThickness="0" Background="{x:Null}">
+			<Image Focusable="False" Source="/Grease;component/Images/Pause.png" Width="25" Height="25"></Image>
+		</Button>
+		<Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="105,0,0,35" x:Name="btnNext"  BorderBrush="{x:Null}" Padding="0" VerticalAlignment="Bottom" Width="25" Click="BtnNextClick" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Background="{x:Null}" BorderThickness="0">
+			<Image Focusable="False" Source="/Grease;component/Images/Next.png"  VerticalAlignment="Bottom" Width="25" Height="25" HorizontalAlignment="Left" ></Image>
+		</Button>
+		<Slider Height="32" HorizontalAlignment="Left" Focusable="False" Margin="221,0,0,32" Name="volumeSlider" ValueChanged="ChangeMediaVolume" Value="1" Maximum="1" VerticalAlignment="Bottom" Width="173" />
+		<Label Content="Volume:" HorizontalAlignment="Left" Margin="152,0,0,34" Name="label1" Height="28" VerticalAlignment="Bottom" />
+		<Label Content=" " Height="28" HorizontalAlignment="Left" Margin="183,502,0,0" Name="lblVolumeLevel" VerticalAlignment="Top" />
+		<Image Margin="0,0,23,42" Name="imgAlbumArt" Stretch="Fill" HorizontalAlignment="Right" Width="200" Height="150" VerticalAlignment="Bottom" />
+		<Label Content="Status" Margin="0,0,0,0" Name="lblStatus" Height="28" VerticalAlignment="Bottom" Background="#CC252534" Foreground="White" />
+		
+		
+		<!--<ListView Margin="12,12,12,215" Name="lvMusic">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="Name" Width="250"  DisplayMemberBinding="{Binding Name}"/>
+					<GridViewColumn Header="Artist" Width="250" DisplayMemberBinding="{Binding Artist}"/>
+					<GridViewColumn Header="Album" Width="250" DisplayMemberBinding="{Binding Album}"/>
+				</GridView>
+			</ListView.View>
+		</ListView>-->
+		
+		<!--<Slider Focusable="False" Height="32" HorizontalAlignment="Left" Margin="72,0,0,67" Maximum="1" Name="sliderPosition" Value="1" VerticalAlignment="Bottom" Width="400" />
+		<Label Content="Elapsed" HorizontalAlignment="Left" Margin="10,0,0,68" Name="lblElapsed" Height="30" VerticalAlignment="Bottom" />
+		<Label Content="Remaining" Height="30" HorizontalAlignment="Left" Margin="476,0,0,68" Name="lblRemaining" VerticalAlignment="Bottom" />-->
+	</Grid>
+	<Window.CommandBindings>
+		<CommandBinding Command="{x:Static g:KeyCommands.PlayPauseCommand }" Executed="PlayPauseExecuted"></CommandBinding>
+		<CommandBinding Command="{x:Static g:KeyCommands.NextTrackCommand }" Executed="NextTrackExecuted"></CommandBinding>
+		<CommandBinding Command="{x:Static g:KeyCommands.PreviousTrackCommand }" Executed="PreviousTrackExecuted"></CommandBinding>
+		<CommandBinding Command="{x:Static g:KeyCommands.VolumeDownCommand }" Executed="VolumeDownExecuted" ></CommandBinding> 
+		<CommandBinding Command="{x:Static g:KeyCommands.VolumeUpCommand }" Executed="VolumeUpExecuted"></CommandBinding>
+	</Window.CommandBindings>
 </Controls:MetroWindow>
