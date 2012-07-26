@@ -82,7 +82,7 @@ namespace Grease.Core
 		{
 			get
 			{
-				if (Library.PlayedSongs.Count > 1)
+				if (Library.PlayedSongs.Count != 0)
 				{
 					return new CurrentlyPlayingViewModel
 						{
@@ -94,9 +94,7 @@ namespace Grease.Core
 							Artist = _currSong.Artist
 						};
 				}
-				else
-				{
-					return new CurrentlyPlayingViewModel
+				return new CurrentlyPlayingViewModel
 					{
 						Album = string.Empty,
 						Name = string.Empty,
@@ -105,7 +103,6 @@ namespace Grease.Core
 						ImagePath = string.Empty,
 						Artist = string.Empty
 					};
-				}
 			}
 		}
 
