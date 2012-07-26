@@ -24,12 +24,16 @@
 		</Controls:WindowCommands>
 	</Controls:MetroWindow.WindowCommands>
 	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="240*" />
+			<ColumnDefinition Width="384*" />
+		</Grid.ColumnDefinitions>
 		<!--<Button HorizontalAlignment="Left" Focusable="False" x:Name="btnChooseDirectory" Width="25" Click="BtnChooseDirectoryClick" BorderThickness="0" Background="{x:Null}" Margin="5,5,0,0" BorderBrush="{x:Null}" Height="25" Padding="0"  VerticalAlignment="Top"></Button>-->
-		<Label Content="No Songs Playing" Focusable="False" Margin="10,0,230,160" x:Name="lblCurrentlyPlaying" Height="30" VerticalAlignment="Bottom" />
-		<Label Content="No Songs Playing" Focusable="False" Margin="10,0,230,130" Name="lblCurrentAlbum" Height="30" VerticalAlignment="Bottom" />
-		<Label Content="No Songs Playing" Focusable="False" Margin="10,0,230,100" Name="lblCurrentArtist" Height="30" VerticalAlignment="Bottom" />
+		<Label Content="No Songs Playing" Focusable="False" Margin="10,0,230,160" x:Name="lblCurrentlyPlaying" Height="30" VerticalAlignment="Bottom" Grid.ColumnSpan="2" />
+		<Label Content="No Songs Playing" Focusable="False" Margin="10,0,230,130" Name="lblCurrentAlbum" Height="30" VerticalAlignment="Bottom" Grid.ColumnSpan="2" />
+		<Label Content="No Songs Playing" Focusable="False" Margin="10,0,230,100" Name="lblCurrentArtist" Height="30" VerticalAlignment="Bottom" Grid.ColumnSpan="2" />
 		<!--<Label Content="No files to Play" Focusable="False"  x:Name="lblSongCount" Background="{x:Null}" Margin="0,0,229,37" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="101" />-->
-		<MediaElement Height="10" Visibility="Hidden" Focusable="False" HorizontalAlignment="Left" Margin="720,0,0,12" x:Name="Player" VerticalAlignment="Bottom" Width="10" LoadedBehavior="Manual" MediaEnded="CompletedSong" />
+		<MediaElement Height="10" Visibility="Hidden" Focusable="False" HorizontalAlignment="Left" Margin="480,0,0,12" x:Name="Player" VerticalAlignment="Bottom" Width="10" LoadedBehavior="Manual" MediaEnded="CompletedSong" Grid.Column="1" />
 		<Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="15,0,0,35" x:Name="btnPlay"  BorderBrush="{x:Null}" Padding="0" VerticalAlignment="Bottom" Width="25" Click="BtnPlayClick" d:LayoutOverrides="VerticalAlignment" Background="{x:Null}" BorderThickness="0">
 			<Image Focusable="False" Source="/Grease;component/Images/Play.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
 		</Button>
@@ -42,11 +46,11 @@
 		<Button Height="25" Focusable="False" HorizontalAlignment="Left" Margin="105,0,0,35" x:Name="btnNext"  BorderBrush="{x:Null}" Padding="0" VerticalAlignment="Bottom" Width="25" Click="BtnNextClick" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Background="{x:Null}" BorderThickness="0">
 			<Image Focusable="False" Source="/Grease;component/Images/Next.png"  VerticalAlignment="Bottom" Width="25" Height="25" HorizontalAlignment="Left" ></Image>
 		</Button>
-		<Slider Height="32" HorizontalAlignment="Left" Focusable="False" Margin="221,0,0,32" Name="volumeSlider" ValueChanged="ChangeMediaVolume" Value="1" Maximum="1" VerticalAlignment="Bottom" Width="173" />
-		<Label Content="Volume:" HorizontalAlignment="Left" Margin="152,0,0,34" Name="label1" Height="28" VerticalAlignment="Bottom" />
-		<Label Content=" " Height="28" HorizontalAlignment="Left" Margin="183,502,0,0" Name="lblVolumeLevel" VerticalAlignment="Top" />
-		<Image Margin="0,0,23,42" Name="imgAlbumArt" Stretch="Fill" HorizontalAlignment="Right" Width="200" Height="150" VerticalAlignment="Bottom" />
-		<Label Content="Status" Margin="0,0,0,0" Name="lblStatus" Height="28" VerticalAlignment="Bottom" Background="#CC252534" Foreground="White" />
+		<Slider Height="32" HorizontalAlignment="Left" Focusable="False" Margin="221,0,0,29" Name="volumeSlider" ValueChanged="ChangeMediaVolume" Value="1" Maximum="1" VerticalAlignment="Bottom" Width="173" Grid.ColumnSpan="2" />
+		<Label Content="Volume:" HorizontalAlignment="Left" Margin="130,0,0,32" Name="label1" Height="28" VerticalAlignment="Bottom" />
+		<Label Content=" " Height="28" HorizontalAlignment="Left" Margin="180,0,0,32" Name="lblVolumeLevel" VerticalAlignment="Bottom" />
+		<Image Margin="0,0,23,42" Name="imgAlbumArt" Stretch="Fill" HorizontalAlignment="Right" Width="200" Height="150" VerticalAlignment="Bottom" Grid.Column="1" />
+		<Label Content="Status" Name="lblStatus" Height="28" VerticalAlignment="Bottom" Background="#CC252534" Foreground="White" Grid.ColumnSpan="2" />
 		
 		
 		<!--<ListView Margin="12,12,12,215" Name="lvMusic">
