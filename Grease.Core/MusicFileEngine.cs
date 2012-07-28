@@ -37,16 +37,19 @@ namespace Grease.Core
 
 		public void Play(bool next = false)
 		{
-			Pause();
-			if (Library.Songs != null && Library.Songs.Count > 0)
+			if (!_isPlaying || next)
 			{
-				if (_currSong == null || next)
+				//Pause();
+				if (Library.Songs != null && Library.Songs.Count > 0)
 				{
-					_currSong = Library.GetNext();
-					_player.Source = _currSong.FullPath;
+					if (_currSong == null || next)
+					{
+						_currSong = Library.GetNext();
+						_player.Source = _currSong.FullPath;
+					}
+					_player.Play();
+					_isPlaying = true;
 				}
-				_player.Play();
-				_isPlaying = true;
 			}
 		}
 

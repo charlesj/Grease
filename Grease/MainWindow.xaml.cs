@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -26,7 +27,6 @@ namespace Grease
 	public partial class MainWindow
 	{
 		private readonly IMusicEngine _engine;
-		//private List<IMusicFileInfo> _viewSongs;
 
 		public MainWindow()
 		{
@@ -43,13 +43,18 @@ namespace Grease
 			
 			volumeSlider.Value = 1.00;
 			RefreshVolumeValueDisplay();
-			_engine = new MusicFileEngine(new WpfPlayer(Player), new WindowsFileSystemAccess(new TagLibInformationProvider()));
+			_engine = new MusicFileEngine(new WpfPlayer(Player, sliderPosition, lblElapsed, lblRemaining), new WindowsFileSystemAccess(new TagLibInformationProvider()));
 
 			var md = Settings.Default.MusicDirectory;
 			if (!string.IsNullOrEmpty(md) && md != "None")
 			{
 				LoadSongs(md);
 			}
+		}
+
+		private void OnCurrTimelineOnCurrentTimeInvalidated(object sender, EventArgs args)
+		{
+			sliderPosition.Value = Player.Position.Milliseconds;
 		}
 
 		private void LoadSongs(string folder)
@@ -63,24 +68,8 @@ namespace Grease
 		{
 			_engine.Load((string)folderPath);
 			lblStatus.Dispatcher.Invoke(new Action(delegate { lblStatus.Content = _engine.FoundCount + " files found"; }));
-			//lblSongCount.Dispatcher.Invoke(new Action(delegate { lblSongCount.Visibility = Visibility.Hidden; }));
 			//gdMusic.Dispatcher.Invoke(new Action(delegate { gdMusic}));
-			//var listrefresher = new Thread(RefreshMusicListInBackground) { Name = "Background Song Loader" };
-			//listrefresher.Start();
 		}
-
-		//private void RefreshMusicListInBackground()
-		//{
-		//    lvMusic.Dispatcher.Invoke(new Action(delegate { lvMusic.IsEnabled = false; }));
-		//    _viewSongs = new List<IMusicFileInfo>();
-		//    var infoProvider = new TagLibInformationProvider();
-		//    foreach (var song in _engine.Library.Songs)
-		//    {
-		//        _viewSongs.Add(infoProvider.GetInfo(song.FullPath));
-		//    }
-		//    lvMusic.Dispatcher.Invoke(new Action(delegate { lvMusic.ItemsSource = _viewSongs; }));
-		//    lvMusic.Dispatcher.Invoke(new Action(delegate { lvMusic.IsEnabled = true; }));
-		//}
 
 		private void BtnChooseDirectoryClick(object sender, RoutedEventArgs e)
 		{
@@ -218,6 +207,15 @@ namespace Grease
 		private void WindowsCommandGotFocus(object sender, RoutedEventArgs e)
 		{
 			Keyboard.ClearFocus();
+		}
+
+		private void MediaOpened(object sender, RoutedEventArgs e)
+		{
+			//currTimeline.Source = Player.Source;
+			//currTimeline.1
+
+			//sliderPosition.Maximum = Player.NaturalDuration.TimeSpan.Milliseconds;
+			//lblRemaining.Content = "M" + Player.NaturalDuration.TimeSpan.Milliseconds;
 		}
 
 		//private void PlayerMediaOpened(object sender, RoutedEventArgs ee)

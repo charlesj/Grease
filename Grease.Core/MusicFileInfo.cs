@@ -5,7 +5,7 @@ namespace Grease.Core
     public class MusicFileInfo : IMusicFileInfo
     {
         private bool _haveTriedToLoad;
-        private IMusicTagProvider _tagProvider;
+        private readonly IMusicTagProvider _tagProvider;
 
         private string _name;
         public string Name
