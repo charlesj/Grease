@@ -1,13 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Grease.Core;
-using Xunit;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="BasicFileAccessTests.cs" company="Developing Enterprises">
+//   Josh Charles
+// </copyright>
+// <summary>
+//   Defines the BasicFileAccessTests type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Grease.Tests
 {
-    public class BasicFileAccessTests
+	using System;
+	using System.Diagnostics.CodeAnalysis;
+
+	using Xunit;
+
+	[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+	public class BasicFileAccessTests
     {
         [Fact]
         public void RecursiveFunctionWorks()
@@ -27,7 +35,7 @@ namespace Grease.Tests
             stopwatch.Stop();
             var elapsed = stopwatch.Elapsed;
             Console.WriteLine("{0} seconds {1} milliseconds {2} files found", elapsed.Seconds, elapsed.Milliseconds, musicFiles.Count);
-            Assert.True(elapsed < new TimeSpan(0,0,1));
+	        Assert.True(elapsed < new TimeSpan(0, 0, 1));
         }
     }
 }

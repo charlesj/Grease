@@ -1,66 +1,200 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using Grease.Core;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="WpfPlayer.cs" company="Developing Enterprises">
+//   Josh Charles
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Grease
 {
+	using System;
+	using System.Windows;
+	using System.Windows.Controls;
+	using System.Windows.Input;
+	using System.Windows.Media;
+	using System.Windows.Media.Animation;
+
+	using Grease.Core;
+
+	/// <summary>
+	/// The wpf player.
+	/// </summary>
 	public class WpfPlayer : IMusicPlayer
 	{
-		private readonly MediaElement _player;
-		private readonly Slider _slider;
-		private readonly Label _elapsed;
-		private readonly Label _remaining;
-		private readonly MediaTimeline _timeline;
-		
-		//private readonly Slider _slider;
-		//private readonly Label _elapsed;
-		//private readonly Label _remaining;
+		/// <summary>
+		/// The _elapsed.
+		/// </summary>
+		private readonly Label elapsed;
 
+		/// <summary>
+		/// The _player.
+		/// </summary>
+		private readonly MediaElement player;
+
+		/// <summary>
+		/// The _remaining.
+		/// </summary>
+		private readonly Label remaining;
+
+		/// <summary>
+		/// The _slider.
+		/// </summary>
+		private readonly Slider slider;
+
+		/// <summary>
+		/// The _timeline.
+		/// </summary>
+		private readonly MediaTimeline timeline;
+
+		// private readonly Slider _slider;
+		// private readonly Label _elapsed;
+		// private readonly Label _remaining;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="WpfPlayer"/> class.
+		/// </summary>
+		/// <param name="player">
+		/// The player.
+		/// </param>
+		/// <param name="slider">
+		/// The slider.
+		/// </param>
+		/// <param name="elapsed">
+		/// The elapsed.
+		/// </param>
+		/// <param name="remaining">
+		/// The remaining.
+		/// </param>
+		/// <exception cref="ArgumentNullException">
+		/// Thrown if player is null
+		/// </exception>
 		public WpfPlayer(MediaElement player, Slider slider, Label elapsed, Label remaining)
 		{
-			if (player == null) throw new ArgumentNullException("player");
-			_player = player;
-			_slider = slider;
-			_elapsed = elapsed;
-			_remaining = remaining;
-			_timeline = new MediaTimeline();
-			_timeline.CurrentTimeInvalidated += TimelineCurrentTimeInvalidated;
-			_player.MediaOpened += PlayerOnMediaOpened;
-			_slider.MouseUp += SliderOnMouseUp;
-			//_slider = slider;
-			//_elapsed = elapsed;
-			//_remaining = remaining;
-			//_player.SourceUpdated += SourceUpdated;
-			
+			if (player == null)
+			{
+				throw new ArgumentNullException("player");
+			}
+
+			this.player = player;
+			this.slider = slider;
+			this.elapsed = elapsed;
+			this.remaining = remaining;
+			this.timeline = new MediaTimeline();
+			this.timeline.CurrentTimeInvalidated += this.TimelineCurrentTimeInvalidated;
+			this.player.MediaOpened += this.PlayerOnMediaOpened;
+			this.slider.MouseUp += this.SliderOnMouseUp;
+
+			// _slider = slider;
+			// _elapsed = elapsed;
+			// _remaining = remaining;
+			// _player.SourceUpdated += SourceUpdated;
 		}
 
-		private void SliderOnMouseUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+		/// <summary>
+		/// Gets or sets the source.
+		/// </summary>
+		public string Source
 		{
-			_player.Clock.Controller.Seek(TimeSpan.FromSeconds(_slider.Value), TimeSeekOrigin.BeginTime);
+			get
+			{
+				return this.timeline.Source.ToString();
+			}
+
+			set
+			{
+				this.timeline.Source = new Uri(value);
+				this.player.Clock = this.timeline.CreateClock();
+			}
 		}
 
+		/// <summary>
+		/// The change volume.
+		/// </summary>
+		/// <param name="newVolume">
+		/// The to change.
+		/// </param>
+		public void ChangeVolume(double newVolume)
+		{
+			this.player.Volume = newVolume;
+		}
 
+		/// <summary>
+		/// The pause.
+		/// </summary>
+		public void Pause()
+		{
+			if (this.player.Clock != null && this.player.Clock.Controller != null)
+			{
+				this.player.Clock.Controller.Pause();
+			}
+		}
+
+		/// <summary>
+		/// The play.
+		/// </summary>
+		public void Play()
+		{
+			if (this.player.Clock != null && this.player.Clock.Controller != null)
+			{
+				if (this.player.Clock.IsPaused)
+				{
+					this.player.Clock.Controller.Resume();
+				}
+				else
+				{
+					this.player.Clock.Controller.Begin();
+				}
+			}
+		}
+
+		/// <summary>
+		/// The player on media opened.
+		/// </summary>
+		/// <param name="sender">
+		/// The sender.
+		/// </param>
+		/// <param name="routedEventArgs">
+		/// The routed event args.
+		/// </param>
 		private void PlayerOnMediaOpened(object sender, RoutedEventArgs routedEventArgs)
 		{
-			_slider.Maximum = _player.Clock.NaturalDuration.TimeSpan.TotalMilliseconds;
+			this.slider.Maximum = this.player.Clock.NaturalDuration.TimeSpan.TotalMilliseconds;
 		}
 
-		void TimelineCurrentTimeInvalidated(object sender, EventArgs e)
+		/// <summary>
+		/// The slider on mouse up.
+		/// </summary>
+		/// <param name="sender">
+		/// The sender.
+		/// </param>
+		/// <param name="mouseButtonEventArgs">
+		/// The mouse button event args.
+		/// </param>
+		private void SliderOnMouseUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
 		{
-			_slider.Value = _player.Position.TotalMilliseconds;
-			_elapsed.Content = _player.Position.ToString("mm':'ss");
-			if (_player.Clock.NaturalDuration != Duration.Automatic)
+			var clockController = this.player.Clock.Controller;
+			if (clockController != null)
 			{
-				var diff = _player.Clock.NaturalDuration.TimeSpan - _player.Position;
-				_remaining.Content = diff.ToString("mm':'ss");
+				clockController.Seek(TimeSpan.FromSeconds(this.slider.Value), TimeSeekOrigin.BeginTime);
+			}
+		}
+
+		/// <summary>
+		/// The timeline current time invalidated.
+		/// </summary>
+		/// <param name="sender">
+		/// The sender.
+		/// </param>
+		/// <param name="e">
+		/// The e.
+		/// </param>
+		private void TimelineCurrentTimeInvalidated(object sender, EventArgs e)
+		{
+			this.slider.Value = this.player.Position.TotalMilliseconds;
+			this.elapsed.Content = this.player.Position.ToString("mm':'ss");
+			if (this.player.Clock.NaturalDuration != Duration.Automatic)
+			{
+				var diff = this.player.Clock.NaturalDuration.TimeSpan - this.player.Position;
+				this.remaining.Content = diff.ToString("mm':'ss");
 			}
 		}
 
@@ -81,40 +215,5 @@ namespace Grease
 		////        _player.Clock.Controller.Seek(TimeSpan.FromSeconds(_slider.Value), TimeSeekOrigin.BeginTime);
 		////    };
 		////}
-
-		public void Play()
-		{
-			if (_player.Clock != null && _player.Clock.Controller != null)
-			{
-				if( _player.Clock.IsPaused)
-					_player.Clock.Controller.Resume();
-				else
-				{
-					_player.Clock.Controller.Begin();	
-				}
-				
-			}
-		}
-
-		public void Pause()
-		{
-			if (_player.Clock != null && _player.Clock.Controller != null) 
-				_player.Clock.Controller.Pause();
-		}
-
-		public void ChangeVolume(double toChange)
-		{
-			_player.Volume = toChange;
-		}
-
-		public string Source
-		{
-			get { return _timeline.Source.ToString(); }
-			set
-			{
-				_timeline.Source = new Uri(value);
-				_player.Clock = _timeline.CreateClock();
-			}
-		}
 	}
 }

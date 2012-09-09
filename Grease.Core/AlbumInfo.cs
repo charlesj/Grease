@@ -1,13 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AlbumInfo.cs" company="Developing Enterprises">
+//   Josh Charles
+// </copyright>
+// <summary>
+//   Defines the AlbumInfo type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Grease.Core
 {
-    public class AlbumInfo
+	/// <summary>
+	/// The album info.
+	/// </summary>
+	public class AlbumInfo
     {
-        public string Artist { get; set; }
-        public string Name { get; set; }
+		/// <summary>
+		/// Gets or sets the artist of the album.
+		/// </summary>
+		public string Artist { get; set; }
+
+		/// <summary>
+		/// Gets or sets the name of the album.
+		/// </summary>
+		public string Name { get; set; }
     }
 }

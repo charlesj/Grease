@@ -1,99 +1,195 @@
-﻿using System;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MusicFileInfo.cs" company="Developing Enterprises">
+//   Josh Charles
+// </copyright>
+// <summary>
+//   Defines the MusicFileInfo type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Grease.Core
 {
-    public class MusicFileInfo : IMusicFileInfo
-    {
-        private bool _haveTriedToLoad;
-        private readonly IMusicTagProvider _tagProvider;
+	using System;
 
-        private string _name;
-        public string Name
-        {
-            get
-            {
-                LoadAdditionalInfo();  
-                return _name; 
-            }
-            set { _name = value; }
-        }
+	/// <summary>
+	/// The music file info.
+	/// </summary>
+	public class MusicFileInfo : IMusicFileInfo
+	{
+		/// <summary>
+		/// The _tag provider.
+		/// </summary>
+		private readonly IMusicTagProvider tagProvider;
 
-        private string _fileName;
-        public string FileName
-        {
-            get
-            {
-                LoadAdditionalInfo();
-                return _fileName;
-            }
-            set { _fileName = value; }
-        }
+		/// <summary>
+		/// The _artist.
+		/// </summary>
+		private string artist;
 
-        public string FullPath { get; set; }
-        private string _album;
-        public string Album
-        {
-            get
-            {
-                LoadAdditionalInfo();
-                return _album;
-            }
-            set { _album = value; }
-        }
+		/// <summary>
+		/// The _track num.
+		/// </summary>
+		private int trackNum;
 
-        private string _artist;
-        public string Artist
-        {
-            get
-            {
-                LoadAdditionalInfo();
-                return _artist;
-            }
-            set { _artist = value; }
-        }
+		/// <summary>
+		/// The album.
+		/// </summary>
+		private string album;
 
-        private int _trackNum;
+		/// <summary>
+		/// The file name.
+		/// </summary>
+		private string fileName;
 
-        public MusicFileInfo(IMusicTagProvider tagProvider)
-        {
-            if (tagProvider != null)
-            {
-                _tagProvider = tagProvider;
-            }
-            else
-            {
-                throw new ArgumentNullException("tagProvider");
-            }
-            _haveTriedToLoad = false;
-        }
+		/// <summary>
+		/// The have tried to load.
+		/// </summary>
+		private bool haveTriedToLoad;
 
-        public int TrackNum
-        {
-            get
-            {
-                LoadAdditionalInfo();
-                return _trackNum;
-            }
-            set { _trackNum = value; }
-        }
+		/// <summary>
+		/// The name.
+		/// </summary>
+		private string name;
 
-        public bool HasImage { get; set; }
-        public string ImagePath { get; set; }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="MusicFileInfo"/> class.
+		/// </summary>
+		/// <param name="tagProvider">
+		/// The tag provider.
+		/// </param>
+		/// <exception cref="ArgumentNullException">
+		/// Thrown if tagProvider is null.
+		/// </exception>
+		public MusicFileInfo(IMusicTagProvider tagProvider)
+		{
+			if (tagProvider != null)
+			{
+				this.tagProvider = tagProvider;
+			}
+			else
+			{
+				throw new ArgumentNullException("tagProvider");
+			}
 
-        public void LoadAdditionalInfo()
-        {
-            if (!_haveTriedToLoad)
-            {
-                var loaded = _tagProvider.GetInfo(FullPath);
-                Album = loaded.Album;
-                Artist = loaded.Artist;
-                Name = loaded.Name;
-                FileName = loaded.FileName;
-                HasImage = loaded.HasImage;
-                ImagePath = loaded.ImagePath;
-                TrackNum = loaded.TrackNum;
-                _haveTriedToLoad = true;
-            }
-        }
-    }
+			this.haveTriedToLoad = false;
+		}
+
+		/// <summary>
+		/// Gets or sets the album.
+		/// </summary>
+		public string Album
+		{
+			get
+			{
+				this.LoadAdditionalInfo();
+				return this.album;
+			}
+
+			set
+			{
+				this.album = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the artist.
+		/// </summary>
+		public string Artist
+		{
+			get
+			{
+				this.LoadAdditionalInfo();
+				return this.artist;
+			}
+
+			set
+			{
+				this.artist = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the file name.
+		/// </summary>
+		public string FileName
+		{
+			get
+			{
+				this.LoadAdditionalInfo();
+				return this.fileName;
+			}
+
+			set
+			{
+				this.fileName = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the full path.
+		/// </summary>
+		public string FullPath { get; set; }
+
+		/// <summary>
+		/// Gets or sets a value indicating whether has image.
+		/// </summary>
+		public bool HasImage { get; set; }
+
+		/// <summary>
+		/// Gets or sets the image path.
+		/// </summary>
+		public string ImagePath { get; set; }
+
+		/// <summary>
+		/// Gets or sets the name.
+		/// </summary>
+		public string Name
+		{
+			get
+			{
+				this.LoadAdditionalInfo();
+				return this.name;
+			}
+
+			set
+			{
+				this.name = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the track num.
+		/// </summary>
+		public int TrackNum
+		{
+			get
+			{
+				this.LoadAdditionalInfo();
+				return this.trackNum;
+			}
+
+			set
+			{
+				this.trackNum = value;
+			}
+		}
+
+		/// <summary>
+		/// The load additional info.
+		/// </summary>
+		public void LoadAdditionalInfo()
+		{
+			if (!this.haveTriedToLoad)
+			{
+				IMusicFileInfo loaded = this.tagProvider.GetInfo(this.FullPath);
+				this.Album = loaded.Album;
+				this.Artist = loaded.Artist;
+				this.Name = loaded.Name;
+				this.FileName = loaded.FileName;
+				this.HasImage = loaded.HasImage;
+				this.ImagePath = loaded.ImagePath;
+				this.TrackNum = loaded.TrackNum;
+				this.haveTriedToLoad = true;
+			}
+		}
+	}
 }
