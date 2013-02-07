@@ -1,10 +1,27 @@
-﻿<Window x:Class="Grease.MainWindow"
+﻿<controls:MetroWindow x:Class="Grease.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:routing="clr-namespace:ReactiveUI.Routing;assembly=ReactiveUI.Routing_Net45"
-		Icon="Grease.ico"
+                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                       Icon="Grease.ico"
         Title="Grease" Height="350" Width="525">
-    <Grid>
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
+	<controls:MetroWindow.WindowCommands>
+		<controls:WindowCommands>
+			<Button Content="Settings" />
+		</controls:WindowCommands>
+	</controls:MetroWindow.WindowCommands>
+	<Grid>
 		<routing:RoutedViewHost x:Name="ViewHost" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
 	</Grid>
-</Window>
+</controls:MetroWindow>

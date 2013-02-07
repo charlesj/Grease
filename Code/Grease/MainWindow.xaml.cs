@@ -9,6 +9,10 @@
 
 namespace Grease
 {
+	using System;
+
+	using MahApps.Metro;
+
 	using ReactiveUI;
 	using ReactiveUI.Routing;
 
@@ -23,7 +27,11 @@ namespace Grease
 		public MainWindow()
 		{
 			InitializeComponent();
-			viewHost.Router = RxApp.GetService<IScreen>().Router;
+
+			ThemeManager.ChangeTheme(
+				this, new Accent("GreaseTheme", new Uri("pack://application:,,,/Grease;component/Accents/GreaseAccent.xaml")), Theme.Light);
+
+			this.ViewHost.Router = RxApp.GetService<IScreen>().Router;
 			this.DataContext = GreaseApp.ViewModel;
 		}
 	}
