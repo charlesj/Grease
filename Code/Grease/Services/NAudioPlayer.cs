@@ -168,7 +168,11 @@ namespace Grease.Services
 		/// </summary>
 		public void Pause()
 		{
-			this.player.Pause();
+			if (this.player != null)
+			{
+				this.player.Pause();
+			}
+
 			this.timer.Stop();
 		}
 

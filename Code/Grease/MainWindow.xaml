@@ -2,8 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:routing="clr-namespace:ReactiveUI.Routing;assembly=ReactiveUI.Routing_Net45"
-        Title="MainWindow" Height="350" Width="525">
+		Icon="Grease.ico"
+        Title="Grease" Height="350" Width="525">
     <Grid>
-		<routing:RoutedViewHost x:Name="viewHost" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+		<routing:RoutedViewHost x:Name="ViewHost" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
 	</Grid>
 </Window>
