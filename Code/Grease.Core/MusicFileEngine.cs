@@ -32,8 +32,14 @@ namespace Grease.Core
 		/// </summary>
 		private ITrackInfo currSong;
 
+		/// <summary>
+		/// The elapsed.
+		/// </summary>
 		private TimeSpan elapsed;
 
+		/// <summary>
+		/// The total time.
+		/// </summary>
 		private TimeSpan totalTime;
 
 		/// <summary>
@@ -60,34 +66,26 @@ namespace Grease.Core
 			}
 
 			this.player = player;
-			this.player.PropertyChanged += PlayerOnPropertyChanged;
-			this.player.TrackEnded += PlayerOnTrackEnded;
+			this.player.PropertyChanged += this.PlayerOnPropertyChanged;
+			this.player.TrackEnded += this.PlayerOnTrackEnded;
 			this.currentlyPlaying = false;
 		}
 
-		private void PlayerOnTrackEnded()
-		{
-			this.Next();
-		}
+		/// <summary>
+		/// The property changed.
+		/// </summary>
+		public event PropertyChangedEventHandler PropertyChanged;
 
-		private void PlayerOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-		{
-			if (propertyChangedEventArgs.PropertyName == "Elapsed")
-			{
-				this.Elapsed = this.player.Elapsed;
-			}
-			if (propertyChangedEventArgs.PropertyName == "TotalTime")
-			{
-				this.TotalTime = this.player.TotalTime;
-			}
-		}
-
+		/// <summary>
+		/// Gets or sets the elapsed.
+		/// </summary>
 		public TimeSpan Elapsed
 		{
 			get
 			{
 				return this.elapsed;
 			}
+
 			set
 			{
 				if (this.elapsed != value)
@@ -98,12 +96,16 @@ namespace Grease.Core
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the total time.
+		/// </summary>
 		public TimeSpan TotalTime
 		{
 			get
 			{
 				return this.totalTime;
 			}
+
 			set
 			{
 				if (this.totalTime != value)
@@ -223,14 +225,48 @@ namespace Grease.Core
 			this.player.ChangeVolume(newVolume);
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged;
-
+		/// <summary>
+		/// The raise property changed.
+		/// </summary>
+		/// <param name="propertyName">
+		/// The property name.
+		/// </param>
 		protected virtual void RaisePropertyChanged(string propertyName)
 		{
-			var handler = PropertyChanged;
+			var handler = this.PropertyChanged;
 			if (handler != null)
 			{
 				handler(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		/// <summary>
+		/// The player on track ended.
+		/// </summary>
+		private void PlayerOnTrackEnded()
+		{
+			this.Next();
+		}
+
+		/// <summary>
+		/// The player on property changed.
+		/// </summary>
+		/// <param name="sender">
+		/// The sender.
+		/// </param>
+		/// <param name="propertyChangedEventArgs">
+		/// The property changed event args.
+		/// </param>
+		private void PlayerOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+		{
+			if (propertyChangedEventArgs.PropertyName == "Elapsed")
+			{
+				this.Elapsed = this.player.Elapsed;
+			}
+
+			if (propertyChangedEventArgs.PropertyName == "TotalTime")
+			{
+				this.TotalTime = this.player.TotalTime;
 			}
 		}
 	}

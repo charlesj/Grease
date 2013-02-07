@@ -36,9 +36,15 @@ namespace Grease.Core
 		/// </summary>
 		ITrackInfo Current { get; }
 
+		/// <summary>
+		/// Gets or sets the elapsed on the current track.
+		/// </summary>
 		TimeSpan Elapsed { get; set; }
-		TimeSpan TotalTime { get; set; }
 
+		/// <summary>
+		/// Gets or sets the total time of the current track.
+		/// </summary>
+		TimeSpan TotalTime { get; set; }
 
 		/// <summary>
 		/// The play.

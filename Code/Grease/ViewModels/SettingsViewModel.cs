@@ -1,6 +1,18 @@
-﻿namespace Grease.ViewModels
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SettingsViewModel.cs" company="Developing Enterprises">
+//   Josh Charles
+// </copyright>
+// <summary>
+//   Defines the SettingsViewModel type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Grease.ViewModels
 {
-	class SettingsViewModel
+	/// <summary>
+	/// The settings view model.
+	/// </summary>
+	public class SettingsViewModel
 	{
 	}
 }

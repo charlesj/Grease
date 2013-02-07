@@ -109,7 +109,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Services\PlaybackTimer.cs" />
     <Compile Include="Services\TagLibInformationProvider.cs" />
     <Compile Include="Services\WindowsFileSystemTrackLocater.cs" />
     <Compile Include="Services\NAudioPlayer.cs" />

@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SettingsView.xaml.cs" company="Developing Enterprises">
+//   Josh Charles
+// </copyright>
+// <summary>
+//   Interaction logic for SettingsView.xaml
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Grease.Views
 {
 	/// <summary>
 	/// Interaction logic for SettingsView.xaml
 	/// </summary>
-	public partial class SettingsView : UserControl
+	public partial class SettingsView 
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="SettingsView"/> class.
+		/// </summary>
 		public SettingsView()
 		{
 			InitializeComponent();

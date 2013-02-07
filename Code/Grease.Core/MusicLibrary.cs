@@ -11,44 +11,20 @@ namespace Grease.Core
 {
 	using System;
 	using System.Collections.ObjectModel;
-	using System.Linq;
-
-	public interface IMusicLibrary
-	{
-		/// <summary>
-		/// Gets or sets the played songs.
-		/// </summary>
-		ObservableCollection<ITrackInfo> PlayedSongs { get; set; }
-
-		/// <summary>
-		/// Gets or sets the songs.
-		/// </summary>
-		ObservableCollection<ITrackInfo> Songs { get; set; }
-
-		/// <summary>
-		/// The get next.
-		/// </summary>
-		/// <returns>
-		/// The Grease.Core.TrackInfo.
-		/// </returns>
-		ITrackInfo GetNext();
-
-		/// <summary>
-		/// The get previous.
-		/// </summary>
-		/// <returns>
-		/// The Grease.Core.TrackInfo.
-		/// </returns>
-		ITrackInfo GetPrevious();
-	}
 
 	/// <summary>
 	/// The music library.
 	/// </summary>
 	public class MusicLibrary : IMusicLibrary
 	{
+		/// <summary>
+		/// The locater.  Used to locate tracks from some source, most likely the file system.
+		/// </summary>
 		private readonly ITrackLocater locater;
 
+		/// <summary>
+		/// The provider. Used to read metadata from the different music files.
+		/// </summary>
 		private readonly IMusicTagProvider provider;
 
 		/// <summary>
@@ -64,6 +40,12 @@ namespace Grease.Core
 		/// <summary>
 		/// Initializes a new instance of the <see cref="MusicLibrary"/> class.
 		/// </summary>
+		/// <param name="locater">
+		/// The locater.
+		/// </param>
+		/// <param name="provider">
+		/// The provider.
+		/// </param>
 		public MusicLibrary(ITrackLocater locater, IMusicTagProvider provider)
 		{
 			this.locater = locater;
@@ -170,7 +152,7 @@ namespace Grease.Core
 
 			if (test.Name == "Default")
 			{
-				//try loading
+				// try loading
 				var result = this.provider.GetInfo(test.FullPath);
 				this.Songs.Remove(test);
 				this.Songs.Add(result);

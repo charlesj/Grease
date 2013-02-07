@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Sandbox.cs" company="Developing Enterprises">
+//   Josh Charles
+// </copyright>
+// <summary>
+//   Defines the Sandbox type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Grease.Tests
 {
+	using System.Diagnostics.CodeAnalysis;
 	using System.IO;
 	using System.Threading;
 
@@ -13,6 +17,7 @@ namespace Grease.Tests
 
 	using Xunit;
 
+	[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
 	public class Sandbox
     {
 		[Fact]
@@ -23,7 +28,7 @@ namespace Grease.Tests
 			var file = new AudioFileReader(path);
 			file.Volume = 0.8f;
 			wavePlayer.Init(file);
-			//wavePlayer.PlaybackStopped += wavePlayer_PlaybackStopped;
+			////wavePlayer.PlaybackStopped += wavePlayer_PlaybackStopped;
 			wavePlayer.Play();
 
 			Thread.Sleep(10000);

@@ -21,34 +21,47 @@ namespace Grease.Services
 	public class NAudioPlayer : ReactiveObject, IMusicPlayer
 	{
 		/// <summary>
+		/// The timer.
+		/// </summary>
+		private readonly DispatcherTimer timer;
+	
+		/// <summary>
 		/// The _player.
 		/// </summary>
 		private IWavePlayer player;
 
+		/// <summary>
+		/// The file.
+		/// </summary>
 		private AudioFileReader file;
 
+		/// <summary>
+		/// The length value.
+		/// </summary>
 		private float lengthValue;
 
+		/// <summary>
+		/// The elapsed.
+		/// </summary>
 		private TimeSpan elapsed;
 
+		/// <summary>
+		/// The total time.
+		/// </summary>
 		private TimeSpan totalTime;
 
+		/// <summary>
+		/// The source.
+		/// </summary>
 		private string source;
-
-		private readonly PlaybackTimer playbackTimer;
-
-		private DispatcherTimer timer;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="NAudioPlayer"/> class.
 		/// </summary>
 		public NAudioPlayer()
 		{
-			this.timer = new DispatcherTimer();
-			this.timer.Interval = new TimeSpan(0,0,0,0,10);
+			this.timer = new DispatcherTimer { Interval = new TimeSpan(0, 0, 0, 0, 10) };
 			this.timer.Tick += (sender, args) => this.Elapsed = this.file.CurrentTime;
-			this.playbackTimer = new PlaybackTimer();
-			this.playbackTimer.ObservableForProperty(model => model.Elapsed).Subscribe(param => this.Elapsed = param.Value);
 			this.ObservableForProperty(model => model.Source).Subscribe(param => this.Stop());
 			
 			this.LengthValue = 0;
@@ -56,16 +69,10 @@ namespace Grease.Services
 			this.Elapsed = new TimeSpan(0);
 		}
 
-		private void Stop()
-		{
-			timer.Stop();
-			if (this.player != null)
-			{
-				this.player.Stop();
-				this.player.Dispose();
-				this.player = null;
-			}
-		}
+		/// <summary>
+		/// The track ended.
+		/// </summary>
+		public event TrackEndedEventHandler TrackEnded;
 
 		/// <summary>
 		/// Gets or sets the source.
@@ -83,42 +90,60 @@ namespace Grease.Services
 			}
 		}
 
+		/// <summary>
+		/// Gets the length value.
+		/// </summary>
 		public float LengthValue
 		{
 			get
 			{
 				return this.lengthValue;
 			}
+
 			private set
 			{
 				this.RaiseAndSetIfChanged(model => model.LengthValue, ref this.lengthValue, value);
 			}
 		}
 
+		/// <summary>
+		/// Gets the elapsed.
+		/// </summary>
 		public TimeSpan Elapsed
 		{
 			get
 			{
 				return this.elapsed;
 			}
+
 			private set
 			{
 				this.RaiseAndSetIfChanged(model => model.Elapsed, ref this.elapsed, value);
 			}
 		}
 
+		/// <summary>
+		/// Gets the total time.
+		/// </summary>
 		public TimeSpan TotalTime
 		{
 			get
 			{
 				return this.totalTime;
 			}
+
 			private set
 			{
 				this.RaiseAndSetIfChanged(model => model.TotalTime, ref this.totalTime, value);
 			}
 		}
 
+		/// <summary>
+		/// The scrub.
+		/// </summary>
+		/// <param name="value">
+		/// The value.
+		/// </param>
 		public void Scrub(double value)
 		{
 			throw new NotImplementedException();
@@ -144,8 +169,7 @@ namespace Grease.Services
 		public void Pause()
 		{
 			this.player.Pause();
-			//this.playbackTimer.Pause();
-			timer.Stop();
+			this.timer.Stop();
 		}
 
 		/// <summary>
@@ -157,10 +181,9 @@ namespace Grease.Services
 			{
 				this.player = new WaveOut();
 				this.file = new AudioFileReader(this.source) { Volume = 0.8f };
-				this.player.Init(file);
+				this.player.Init(this.file);
 				this.player.PlaybackStopped += this.PlaybackStopped;
 				this.player.Play();
-				//this.playbackTimer.Start();
 
 				this.TotalTime = this.file.TotalTime;
 			}
@@ -168,17 +191,13 @@ namespace Grease.Services
 			{
 				this.player.Play();
 			}
+
 			this.timer.Start();
 		}
 
-		private void PlaybackStopped(object sender, StoppedEventArgs e)
-		{
-			this.RaiseTrackEnded();
-			this.playbackTimer.Stop();
-		}
-
-		public event TrackEndedEventHandler TrackEnded;
-
+		/// <summary>
+		/// The raise track ended.
+		/// </summary>
 		protected virtual void RaiseTrackEnded()
 		{
 			var handler = this.TrackEnded;
@@ -188,8 +207,33 @@ namespace Grease.Services
 			}
 		}
 
+		/// <summary>
+		/// The playback stopped.
+		/// </summary>
+		/// <param name="sender">
+		/// The sender.
+		/// </param>
+		/// <param name="e">
+		/// The e.
+		/// </param>
+		private void PlaybackStopped(object sender, StoppedEventArgs e)
+		{
+			this.RaiseTrackEnded();
+			this.timer.Stop();
+		}
 
-
-		
+		/// <summary>
+		/// The stop.
+		/// </summary>
+		private void Stop()
+		{
+			this.timer.Stop();
+			if (this.player != null)
+			{
+				this.player.Stop();
+				this.player.Dispose();
+				this.player = null;
+			}
+		}
 	}
 }

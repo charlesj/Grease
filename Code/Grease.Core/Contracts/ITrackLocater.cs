@@ -17,7 +17,7 @@ namespace Grease.Core
 	public interface ITrackLocater
     {
 		/// <summary>
-		/// Gets the music files for a given path
+		/// Gets the music files for a given path.  Should search recursively.
 		/// </summary>
 		/// <param name="path">
 		/// The path.
