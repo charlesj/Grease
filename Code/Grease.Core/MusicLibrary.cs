@@ -51,7 +51,16 @@ namespace Grease.Core
 			this.locater = locater;
 			this.provider = provider;
 			this.NumberToPlayBeforeRepeats = 500;
-			this.Songs = this.locater.GetMusicFiles(@"E:\Dropbox\Music\Muse\The 2nd Law [Explicit]");
+			try
+			{
+				this.Songs = this.locater.GetMusicFiles(@"E:\Dropbox\Mudddsic\Muse\The 2nd Law [Explicit]");
+			}
+			catch (Exception)
+			{
+				throw new NotImplementedException("The path to the music directory is currently hard coded until the settings are reimplemented using the new framework.  "
+				                                  + "You can change the value in Grease.Core.MusicLibrary.cs");
+			}
+
 			this.PlayedSongs = new ObservableCollection<ITrackInfo>();
 		}
 
