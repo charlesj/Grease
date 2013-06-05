@@ -53,7 +53,7 @@ namespace Grease.Core
 			this.NumberToPlayBeforeRepeats = 500;
 			try
 			{
-				this.Songs = this.locater.GetMusicFiles(@"E:\Dropbox\Mudddsic\Muse\The 2nd Law [Explicit]");
+				this.Songs = this.locater.GetMusicFiles(@"E:\Dropbox\Music\Muse\The 2nd Law [Explicit]");
 			}
 			catch (Exception)
 			{
