@@ -33,16 +33,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Contracts\ISettings.cs" />
     <Compile Include="Contracts\ITrackLocater.cs" />
     <Compile Include="Contracts\IMusicEngine.cs" />
     <Compile Include="Contracts\ITrackInfo.cs" />
     <Compile Include="Contracts\IMusicPlayer.cs" />
     <Compile Include="Contracts\IMusicTagProvider.cs" />
     <Compile Include="Contracts\IMusicLibrary.cs" />
+    <Compile Include="Contracts\SettingChangedEventArgs.cs" />
+    <Compile Include="Contracts\SettingChangedEventHandler.cs" />
     <Compile Include="MusicFileEngine.cs" />
     <Compile Include="Models\TrackInfo.cs" />
     <Compile Include="MusicLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="TrackEndedEventHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

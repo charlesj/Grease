@@ -15,16 +15,11 @@ namespace Grease.Core
 	/// The GreaseFileSystemAccess interface.
 	/// </summary>
 	public interface ITrackLocater
-    {
+	{
+
 		/// <summary>
-		/// Gets the music files for a given path.  Should search recursively.
+		/// Gets the found.  As tracks are located, they are put into the Found collection.
 		/// </summary>
-		/// <param name="path">
-		/// The path.
-		/// </param>
-		/// <returns>
-		/// The List of music files for the path
-		/// </returns>
-		ObservableCollection<ITrackInfo> GetMusicFiles(string path);
-    }
+		ObservableCollection<ITrackInfo> Found { get; }
+	}
 }

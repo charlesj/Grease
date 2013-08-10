@@ -23,11 +23,6 @@ namespace Grease.Core
 		private readonly ITrackLocater locater;
 
 		/// <summary>
-		/// The provider. Used to read metadata from the different music files.
-		/// </summary>
-		private readonly IMusicTagProvider provider;
-
-		/// <summary>
 		/// The _rand.
 		/// </summary>
 		private readonly Random rand = new Random(DateTime.Now.Millisecond);
@@ -43,24 +38,11 @@ namespace Grease.Core
 		/// <param name="locater">
 		/// The locater.
 		/// </param>
-		/// <param name="provider">
-		/// The provider.
-		/// </param>
-		public MusicLibrary(ITrackLocater locater, IMusicTagProvider provider)
+		public MusicLibrary(ITrackLocater locater)
 		{
 			this.locater = locater;
-			this.provider = provider;
 			this.NumberToPlayBeforeRepeats = 500;
-			try
-			{
-				this.Songs = this.locater.GetMusicFiles(@"E:\Dropbox\Music\Muse\The 2nd Law [Explicit]");
-			}
-			catch (Exception)
-			{
-				throw new NotImplementedException("The path to the music directory is currently hard coded until the settings are reimplemented using the new framework.  "
-				                                  + "You can change the value in Grease.Core.MusicLibrary.cs");
-			}
-
+			
 			this.PlayedSongs = new ObservableCollection<ITrackInfo>();
 		}
 
@@ -75,9 +57,15 @@ namespace Grease.Core
 		public ObservableCollection<ITrackInfo> PlayedSongs { get; set; }
 
 		/// <summary>
-		/// Gets or sets the songs.
+		/// Gets the songs in the library.
 		/// </summary>
-		public ObservableCollection<ITrackInfo> Songs { get; set; }
+		public ObservableCollection<ITrackInfo> Songs
+		{
+			get
+			{
+				return this.locater.Found;
+			}
+		}
 
 		/// <summary>
 		/// The get next.
@@ -128,7 +116,7 @@ namespace Grease.Core
 		}
 
 		/// <summary>
-		/// The get random music file.
+		/// This method gets a random file from the library.  It will then check to see if it's been played recently. If it has, it gets another track.
 		/// </summary>
 		/// <returns>
 		/// The Grease.Core.TrackInfo.
@@ -158,16 +146,7 @@ namespace Grease.Core
 					test = this.Songs[this.rand.Next(this.Songs.Count - 1)];
 				}
 			}
-
-			if (test.Name == "Default")
-			{
-				// try loading
-				var result = this.provider.GetInfo(test.FullPath);
-				this.Songs.Remove(test);
-				this.Songs.Add(result);
-				return result;
-			}
-
+			
 			return test;
 		}
 	}

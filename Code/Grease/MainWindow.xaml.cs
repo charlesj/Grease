@@ -10,6 +10,7 @@
 namespace Grease
 {
 	using System;
+	using System.Windows;
 
 	using MahApps.Metro;
 

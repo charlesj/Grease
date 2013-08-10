@@ -9,10 +9,15 @@
 
 namespace Grease.ViewModels
 {
+	using System;
+
+	using Grease.Core;
+
 	using Ninject;
 
 	using ReactiveUI;
 	using ReactiveUI.Routing;
+	using ReactiveUI.Xaml;
 
 	/// <summary>
 	/// The application view model.
@@ -35,11 +40,27 @@ namespace Grease.ViewModels
 			
 			var initialViewModel = RxApp.GetService<IPlayerViewModel>();
 			this.Router.Navigate.Execute(initialViewModel);
+
+			this.GoToSettings = new ReactiveCommand();
+			this.GoToSettings.Subscribe(param => this.ShowSettings());
+		}
+
+		/// <summary>
+		/// The show settings.
+		/// </summary>
+		private void ShowSettings()
+		{
+			this.Router.Navigate.Execute(RxApp.GetService<ISettingsViewModel>());
 		}
 
 		/// <summary>
 		/// Gets the router.
 		/// </summary>
 		public IRoutingState Router { get; private set; }
+
+		/// <summary>
+		/// Gets the song opened command.
+		/// </summary>
+		public ReactiveCommand GoToSettings { get; private set; }
 	}
 }

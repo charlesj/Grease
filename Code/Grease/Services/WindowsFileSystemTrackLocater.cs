@@ -6,10 +6,10 @@
 
 namespace Grease
 {
+	using System;
 	using System.Collections.Generic;
 	using System.Collections.ObjectModel;
 	using System.IO;
-	using System.Linq;
 
 	using Grease.Core;
 
@@ -24,56 +24,73 @@ namespace Grease
 		private readonly IMusicTagProvider provider;
 
 		/// <summary>
+		/// The settings.
+		/// </summary>
+		private readonly ISettings settings;
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="WindowsFileSystemTrackLocater"/> class.
 		/// </summary>
 		/// <param name="provider">
 		/// The provider.
 		/// </param>
-		public WindowsFileSystemTrackLocater(IMusicTagProvider provider)
+		/// <param name="settings">
+		/// The settings.
+		/// </param>
+		public WindowsFileSystemTrackLocater(IMusicTagProvider provider, ISettings settings)
 		{
+			this.Found = new ObservableCollection<ITrackInfo>();
 			this.provider = provider;
+			this.settings = settings;
+			this.settings.OnSettingChanged += this.SettingsOnOnSettingChanged;
 		}
+
+		/// <summary>
+		/// Gets the found.
+		/// </summary>
+		public ObservableCollection<ITrackInfo> Found { get; private set; }
 
 		/// <summary>
 		/// The get music files.
 		/// </summary>
-		/// <param name="path">
-		/// The path.
+		/// <param name="pathToSearch">
+		/// The path To Search.
 		/// </param>
-		/// <returns>
-		/// The System.Collections.Generic.List`1[T -&gt; Grease.Core.MusicFileInfo].
-		/// </returns>
-		public ObservableCollection<ITrackInfo> GetMusicFiles(string path)
+		private void GetMusicFiles(string pathToSearch)
 		{
 			var playableExtensions = new List<string> { "*.mp3", "*.m4a" };
-			var allSongs = new List<ITrackInfo>();
-			var directories = Directory.GetDirectories(path);
+			var allSongs = new List<string>();
+			var directories = Directory.GetDirectories(pathToSearch);
 			foreach (var extension in playableExtensions)
 			{
-				var musicFiles = Directory.GetFiles(path, extension);
-				allSongs.AddRange(musicFiles.Select(this.GetMusicFileInfo));
+				var musicFiles = Directory.GetFiles(pathToSearch, extension);
+				allSongs.AddRange(musicFiles);
 			}
+
+			allSongs.ForEach(filePath =>
+				{ 
+					var processed = this.provider.GetInfo(filePath);
+					this.Found.Add(processed);
+				});
 
 			foreach (var directory in directories)
 			{
-				allSongs = allSongs.Concat(this.GetMusicFiles(directory)).ToList();
+				this.GetMusicFiles(directory);
 			}
-
-			return new ObservableCollection<ITrackInfo>(allSongs);
 		}
 
 		/// <summary>
-		/// The get music file info.
+		/// The settings on on setting changed.
 		/// </summary>
-		/// <param name="path">
-		/// The path.
+		/// <param name="args">
+		/// The args.
 		/// </param>
-		/// <returns>
-		/// The Grease.Core.MusicFileInfo.
-		/// </returns>
-		private TrackInfo GetMusicFileInfo(string path)
+		private void SettingsOnOnSettingChanged(SettingChangedEventArgs args)
 		{
-			return new TrackInfo { FullPath = path };
+			if (args.Name == "RootPath")
+			{
+				this.GetMusicFiles(args.Value);
+			}
 		}
 	}
 }

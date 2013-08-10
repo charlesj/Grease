@@ -113,11 +113,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Services\TagLibInformationProvider.cs" />
+    <Compile Include="Services\WindowSettings.cs" />
     <Compile Include="Services\WindowsFileSystemTrackLocater.cs" />
     <Compile Include="Services\NAudioPlayer.cs" />
     <Compile Include="ViewModels\ApplicationBootstrapper.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModels\IPlayerViewModel.cs" />
+    <Compile Include="ViewModels\ISettingsViewModel.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\PlayerView.xaml.cs">

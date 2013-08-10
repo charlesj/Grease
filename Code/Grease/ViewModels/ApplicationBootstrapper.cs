@@ -91,6 +91,7 @@ namespace Grease.ViewModels
 			var kernel = new StandardKernel();
 			kernel.Bind(typeof(IScreen), typeof(ApplicationViewModel)).ToConstant(applicationViewModel);
 			kernel.Bind<IMusicPlayer>().To<NAudioPlayer>().InSingletonScope();
+			kernel.Bind<ISettings>().To<WindowSettings>().InSingletonScope();
 			kernel.Bind<ITrackLocater>().To<WindowsFileSystemTrackLocater>();
 			kernel.Bind<IMusicEngine>().To<MusicFileEngine>();
 			kernel.Bind<IMusicTagProvider>().To<TagLibInformationProvider>();
@@ -99,6 +100,8 @@ namespace Grease.ViewModels
 			// Setup views
 			kernel.Bind<IPlayerViewModel>().To<PlayerViewModel>();
 			kernel.Bind<IViewFor<IPlayerViewModel>>().To<PlayerView>();
+			kernel.Bind<ISettingsViewModel>().To<SettingsViewModel>();
+			kernel.Bind<IViewFor<ISettingsViewModel>>().To<SettingsView>();
 
 			return kernel;
 		}

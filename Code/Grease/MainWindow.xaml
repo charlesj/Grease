@@ -18,7 +18,7 @@
 	</Window.Resources>
 	<controls:MetroWindow.WindowCommands>
 		<controls:WindowCommands>
-			<Button Content="Settings" />
+			<Button Content="Settings" Command="{Binding GoToSettings}" />
 		</controls:WindowCommands>
 	</controls:MetroWindow.WindowCommands>
 	<Grid>

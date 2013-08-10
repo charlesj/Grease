@@ -22,9 +22,9 @@ namespace Grease.Core
 		ObservableCollection<ITrackInfo> PlayedSongs { get; set; }
 
 		/// <summary>
-		/// Gets or sets the songs.
+		/// Gets the songs in the library.
 		/// </summary>
-		ObservableCollection<ITrackInfo> Songs { get; set; }
+		ObservableCollection<ITrackInfo> Songs { get; }
 
 		/// <summary>
 		/// Returns the next track, or chooses one randomly.
