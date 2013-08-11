@@ -10,7 +10,10 @@
 namespace Grease.ViewModels
 {
 	using ReactiveUI;
-	using ReactiveUI.Routing;
+
+	public interface ISettingsViewModel : IRoutableViewModel
+	{
+	}
 
 	/// <summary>
 	/// The settings view model.

@@ -18,14 +18,8 @@ namespace Grease.Views
 	/// <summary>
 	/// Interaction logic for SettingsView.xaml
 	/// </summary>
-	public partial class SettingsView : IViewFor<ISettingsViewModel>
+	public partial class SettingsView : ISettingsView
 	{
-		/// <summary>
-		/// The view model property.
-		/// </summary>
-		public static readonly DependencyProperty ViewModelProperty =
-			DependencyProperty.Register("ViewModel", typeof(IPlayerViewModel), typeof(PlayerView), new PropertyMetadata(null));
-
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SettingsView"/> class. 
 		/// </summary>
@@ -34,31 +28,27 @@ namespace Grease.Views
 			InitializeComponent();
 		}
 
-		/// <summary>
-		/// Gets or sets the view model.
-		/// </summary>
 		public ISettingsViewModel ViewModel
 		{
-			get { return (ISettingsViewModel)GetValue(ViewModelProperty); }
-			set { SetValue(ViewModelProperty, value); }
+			get { return (ISettingsViewModel)this.DataContext; }
+			set
+			{
+				this.DataContext = value;
+			}
 		}
 
-		/// <summary>
-		/// Gets or sets the view model.
-		/// </summary>
 		object IViewFor.ViewModel
 		{
 			get { return this.ViewModel; }
-			set { this.ViewModel = (ISettingsViewModel)value; }
+			set
+			{
+				this.ViewModel = (ISettingsViewModel)value;
+			}
 		}
+	}
 
-		/// <summary>
-		/// The on apply template.
-		/// </summary>
-		public override void OnApplyTemplate()
-		{
-			base.OnApplyTemplate();
-			this.DataContext = this.ViewModel;
-		}
+	public interface ISettingsView : IViewFor<ISettingsViewModel>
+	{
+		
 	}
 }

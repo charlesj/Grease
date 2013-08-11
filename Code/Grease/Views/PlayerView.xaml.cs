@@ -18,14 +18,8 @@ namespace Grease.Views
 	/// <summary>
 	/// Interaction logic for PlayerView.xaml
 	/// </summary>
-	public partial class PlayerView : IViewFor<IPlayerViewModel>
+	public partial class PlayerView : IPlayerView
 	{
-		/// <summary>
-		/// The view model property.
-		/// </summary>
-		public static readonly DependencyProperty ViewModelProperty =
-			DependencyProperty.Register("ViewModel", typeof(IPlayerViewModel), typeof(PlayerView), new PropertyMetadata(null));
-
 		/// <summary>
 		/// Initializes a new instance of the <see cref="PlayerView"/> class.
 		/// </summary>
@@ -34,31 +28,39 @@ namespace Grease.Views
 			InitializeComponent();
 		}
 
-		/// <summary>
-		/// Gets or sets the view model.
-		/// </summary>
 		public IPlayerViewModel ViewModel
 		{
-			get { return (IPlayerViewModel)GetValue(ViewModelProperty); }
-			set { SetValue(ViewModelProperty, value); }
+			get { return (IPlayerViewModel)this.DataContext; }
+			set
+			{
+				this.DataContext = value;
+			}
 		}
 
-		/// <summary>
-		/// Gets or sets the view model.
-		/// </summary>
 		object IViewFor.ViewModel
 		{
 			get { return this.ViewModel; }
-			set { this.ViewModel = (IPlayerViewModel)value; }
+			set
+			{
+				this.ViewModel = (IPlayerViewModel)value;
+			}
 		}
 
-		/// <summary>
-		/// The on apply template.
-		/// </summary>
-		public override void OnApplyTemplate()
-		{
-			base.OnApplyTemplate();
-			this.DataContext = this.ViewModel;
-		}
+		/////// <summary>
+		/////// The on apply template.
+		/////// </summary>
+		////public override void OnApplyTemplate()
+		////{
+		////	base.OnApplyTemplate();
+		////	this.DataContext = this.ViewModel;
+		////}
+	}
+
+	/// <summary>
+	/// The PlayerView interface.
+	/// </summary>
+	public interface IPlayerView : IViewFor<IPlayerViewModel>
+	{
+		
 	}
 }

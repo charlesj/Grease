@@ -86,7 +86,7 @@ namespace Grease.Services
 
 			set
 			{
-				this.RaiseAndSetIfChanged(model => model.Source, ref this.source, value);
+				this.RaiseAndSetIfChanged(ref this.source, value);
 			}
 		}
 
@@ -102,7 +102,7 @@ namespace Grease.Services
 
 			private set
 			{
-				this.RaiseAndSetIfChanged(model => model.LengthValue, ref this.lengthValue, value);
+				this.RaiseAndSetIfChanged(ref this.lengthValue, value);
 			}
 		}
 
@@ -118,7 +118,7 @@ namespace Grease.Services
 
 			private set
 			{
-				this.RaiseAndSetIfChanged(model => model.Elapsed, ref this.elapsed, value);
+				this.RaiseAndSetIfChanged(ref this.elapsed, value);
 			}
 		}
 
@@ -134,7 +134,7 @@ namespace Grease.Services
 
 			private set
 			{
-				this.RaiseAndSetIfChanged(model => model.TotalTime, ref this.totalTime, value);
+				this.RaiseAndSetIfChanged(ref this.totalTime, value);
 			}
 		}
 

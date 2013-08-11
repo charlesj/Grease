@@ -10,12 +10,13 @@
 namespace Grease
 {
 	using System;
-	using System.Windows;
+
+	using Grease.ViewModels;
 
 	using MahApps.Metro;
 
 	using ReactiveUI;
-	using ReactiveUI.Routing;
+	using ReactiveUI.Xaml;
 
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
@@ -31,9 +32,18 @@ namespace Grease
 
 			ThemeManager.ChangeTheme(
 				this, new Accent("GreaseTheme", new Uri("pack://application:,,,/Grease;component/Accents/GreaseAccent.xaml")), Theme.Light);
+			var viewHost = new RoutedViewHost();
+			this.Presenter.Content = viewHost;
 
-			this.ViewHost.Router = RxApp.GetService<IScreen>().Router;
-			this.DataContext = GreaseApp.ViewModel;
+			var screen = RxApp.DependencyResolver.GetService<IScreen>();
+			viewHost.Router = screen.Router;
+
+			DataContext = RxApp.DependencyResolver.GetService<IMainViewModel>();
+		}
+
+		public void Connect(int connectionId, object target)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

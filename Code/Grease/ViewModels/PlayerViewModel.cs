@@ -13,9 +13,9 @@ namespace Grease.ViewModels
 
 	using Grease.Core;
 
+	using Ninject;
+
 	using ReactiveUI;
-	using ReactiveUI.Routing;
-	using ReactiveUI.Xaml;
 
 	/// <summary>
 	/// The player view model.
@@ -73,9 +73,12 @@ namespace Grease.ViewModels
 		/// <param name="hostScreen">
 		/// The host screen.
 		/// </param>
+		/// <param name="engine">
+		/// The engine.
+		/// </param>
 		public PlayerViewModel(IScreen hostScreen)
 		{
-			this.engine = RxApp.GetService<IMusicEngine>();
+			this.engine = GreaseApp.Kernel.Get<IMusicEngine>();
 			this.HostScreen = hostScreen;
 			
 			this.PauseCommand = new ReactiveCommand();
@@ -119,7 +122,7 @@ namespace Grease.ViewModels
 
 			set
 			{
-				this.RaiseAndSetIfChanged(model => model.Elapsed, ref this.elapsed, value);
+				this.RaiseAndSetIfChanged(ref this.elapsed, value);
 			}
 		}
 
@@ -135,7 +138,7 @@ namespace Grease.ViewModels
 
 			set
 			{
-				this.RaiseAndSetIfChanged(model => model.TotalTime, ref this.totalTime, value);
+				this.RaiseAndSetIfChanged(ref this.totalTime, value);
 			}
 		}
 
@@ -151,7 +154,7 @@ namespace Grease.ViewModels
 
 			set
 			{
-				this.RaiseAndSetIfChanged(model => model.Volume, ref this.volume, value);
+				this.RaiseAndSetIfChanged(ref this.volume, value);
 			}
 		}
 
@@ -167,7 +170,7 @@ namespace Grease.ViewModels
 
 			set
 			{
-				this.RaiseAndSetIfChanged(model => model.CurrentSongName, ref this.currentSongName, value);
+				this.RaiseAndSetIfChanged(ref this.currentSongName, value);
 			}
 		}
 
@@ -183,7 +186,7 @@ namespace Grease.ViewModels
 
 			set
 			{
-				this.RaiseAndSetIfChanged(model => model.CurrentArtistName, ref this.currentArtistName, value);
+				this.RaiseAndSetIfChanged(ref this.currentArtistName, value);
 			}
 		}
 
@@ -199,7 +202,7 @@ namespace Grease.ViewModels
 
 			set
 			{
-				this.RaiseAndSetIfChanged(model => model.CurrentAlbumName, ref this.currentAlbumName, value);
+				this.RaiseAndSetIfChanged(ref this.currentAlbumName, value);
 			}
 		}
 
@@ -215,7 +218,7 @@ namespace Grease.ViewModels
 
 			set
 			{
-				this.RaiseAndSetIfChanged(model => model.StatusText, ref this.statusText, value);
+				this.RaiseAndSetIfChanged(ref this.statusText, value);
 			}
 		}
 
@@ -231,7 +234,7 @@ namespace Grease.ViewModels
 
 			set
 			{
-				this.RaiseAndSetIfChanged(model => model.TimelineLocation, ref this.timelineLocation, value);
+				this.RaiseAndSetIfChanged(ref this.timelineLocation, value);
 			}
 		}
 
