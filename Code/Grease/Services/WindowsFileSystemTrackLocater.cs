@@ -10,6 +10,7 @@ namespace Grease
 	using System.Collections.Generic;
 	using System.Collections.ObjectModel;
 	using System.IO;
+	using System.Threading.Tasks;
 
 	using Grease.Core;
 
@@ -43,6 +44,7 @@ namespace Grease
 			this.provider = provider;
 			this.settings = settings;
 			this.settings.OnSettingChanged += this.SettingsOnOnSettingChanged;
+			this.GetMusicFiles(this.settings.RootPath);
 		}
 
 		/// <summary>
@@ -58,25 +60,35 @@ namespace Grease
 		/// </param>
 		private void GetMusicFiles(string pathToSearch)
 		{
-			var playableExtensions = new List<string> { "*.mp3", "*.m4a" };
-			var allSongs = new List<string>();
-			var directories = Directory.GetDirectories(pathToSearch);
-			foreach (var extension in playableExtensions)
-			{
-				var musicFiles = Directory.GetFiles(pathToSearch, extension);
-				allSongs.AddRange(musicFiles);
-			}
+			Task.Factory.StartNew(
+				() =>
+					{
+						if (pathToSearch == null)
+						{
+							return;
+						}
 
-			allSongs.ForEach(filePath =>
-				{ 
-					var processed = this.provider.GetInfo(filePath);
-					this.Found.Add(processed);
-				});
+						var playableExtensions = new List<string> { "*.mp3", "*.m4a" };
+						var allSongs = new List<string>();
+						var directories = Directory.GetDirectories(pathToSearch);
+						foreach (var extension in playableExtensions)
+						{
+							var musicFiles = Directory.GetFiles(pathToSearch, extension);
+							allSongs.AddRange(musicFiles);
+						}
 
-			foreach (var directory in directories)
-			{
-				this.GetMusicFiles(directory);
-			}
+						allSongs.ForEach(
+							filePath =>
+								{
+									var processed = this.provider.GetInfo(filePath);
+									this.Found.Add(processed);
+								});
+
+						foreach (var directory in directories)
+						{
+							this.GetMusicFiles(directory);
+						}
+					});
 		}
 
 		/// <summary>
@@ -87,6 +99,7 @@ namespace Grease
 		/// </param>
 		private void SettingsOnOnSettingChanged(SettingChangedEventArgs args)
 		{
+			this.Found.Clear();
 			if (args.Name == "RootPath")
 			{
 				this.GetMusicFiles(args.Value);

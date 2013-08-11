@@ -22,6 +22,22 @@ namespace Grease.Services
 		public WindowSettings()
 		{
 			this.RootPath = Properties.Settings.Default.MusicFilePath;
+			this.OnSettingChanged += this.SettingsChanged;
+		}
+
+		/// <summary>
+		/// The settings changed.
+		/// </summary>
+		/// <param name="args">
+		/// The args.
+		/// </param>
+		private void SettingsChanged(SettingChangedEventArgs args)
+		{
+			if (args.Name == "RootPath")
+			{
+				Properties.Settings.Default.MusicFilePath = args.Value;
+				Properties.Settings.Default.Save();
+			}
 		}
 	}
 }

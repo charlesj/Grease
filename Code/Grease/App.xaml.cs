@@ -21,62 +21,46 @@ namespace Grease
 	/// <summary>
 	/// Interaction logic for App.xaml
 	/// </summary>
-	public partial class GreaseApp : IScreen
+	public partial class GreaseApp
 	{
 		/// <summary>
-		/// Gets the router.
+		/// The kernel.
 		/// </summary>
-		public IRoutingState Router { get; private set; }
+		private IKernel kernel;
 
 		/// <summary>
-		/// Gets the view model.
+		/// The view model.
 		/// </summary>
-		public static MainViewModel ViewModel { get; private set; }
+		private IApplicationViewModel viewModel;
 
 		/// <summary>
-		/// Gets the kernel.
+		/// The on startup.
 		/// </summary>
-		public static IKernel Kernel { get; private set; }
-
-		/// <summary>
-		/// The configure service locator.
-		/// </summary>
-		public void ConfigureServiceLocator()
-		{
-			Kernel = GetStandardKernel();
-
-
-
-			////resolver.RegisterLazySingleton(() => new SettingsView(), typeof(IViewFor<ISettingsViewModel>));
-			////resolver.RegisterLazySingleton(() => new PlayerView(), typeof(IViewFor<IPlayerViewModel>));
-
-			////resolver.Register(() => new PlayerViewModel(this, Kernel.Get<IMusicEngine>()), typeof(IPlayerViewModel));
-			////resolver.Register(() => new SettingsViewModel(this), typeof(ISettingsViewModel));
-		}
-
+		/// <param name="e">
+		/// The e.
+		/// </param>
 		protected override void OnStartup(System.Windows.StartupEventArgs e)
 		{
 			base.OnStartup(e);
 
-			this.Router = new RoutingState();
-
+			this.kernel = GetStandardKernel();
+			this.viewModel = new ApplicationViewModel();
 			var resolver = (ModernDependencyResolver)RxApp.DependencyResolver;
 
-			resolver.RegisterConstant(this, typeof(IScreen));
-			resolver.RegisterConstant(this.Router, typeof(IRoutingState));
+			resolver.RegisterConstant(this.viewModel, typeof(IScreen));
+			resolver.RegisterConstant(this.viewModel.Router, typeof(IRoutingState));
 
 			resolver.RegisterLazySingleton(() => new TestingView(), typeof(ITestingView));
 			resolver.RegisterLazySingleton(() => new PlayerView(), typeof(IPlayerView));
 			resolver.RegisterLazySingleton(() => new SettingsView(), typeof(ISettingsView));
 
-			resolver.Register(() => new MainViewModel(this), typeof(IMainViewModel));
-			resolver.Register(() => new TestingViewModel(this), typeof(ITestingViewModel));
-			resolver.Register(() => new PlayerViewModel(this), typeof(IPlayerViewModel));
-			resolver.Register(() => new SettingsViewModel(this), typeof(ISettingsViewModel));
+			resolver.Register(() => new MainViewModel(this.viewModel), typeof(IMainViewModel));
+			resolver.Register(() => new TestingViewModel(this.viewModel), typeof(ITestingViewModel));
+			resolver.Register(() => new PlayerViewModel(this.viewModel, this.kernel.Get<IMusicEngine>()), typeof(IPlayerViewModel));
+			resolver.Register(() => new SettingsViewModel(this.viewModel, this.kernel.Get<ISettings>()), typeof(ISettingsViewModel));
 
-			var welcomeVm = RxApp.DependencyResolver.GetService<ISettingsViewModel>();
-			//var welcomeVm = RxApp.DependencyResolver.GetService<ITestingViewModel>();
-			this.Router.Navigate.Execute(welcomeVm);
+			var welcomeVm = RxApp.DependencyResolver.GetService<IPlayerViewModel>();
+			this.viewModel.Router.Navigate.Execute(welcomeVm);
 		}
 
 		/// <summary>
@@ -89,7 +73,7 @@ namespace Grease
 		{
 			// setup ninject
 			var kernel = new StandardKernel();
-			////kernel.Bind(typeof(IScreen), typeof(MainViewModel)).ToConstant(applicationViewModel);
+
 			kernel.Bind<IMusicPlayer>().To<NAudioPlayer>().InSingletonScope();
 			kernel.Bind<ISettings>().To<WindowSettings>().InSingletonScope();
 			kernel.Bind<ITrackLocater>().To<WindowsFileSystemTrackLocater>();

@@ -22,6 +22,7 @@
 		</controls:WindowCommands>
 	</controls:MetroWindow.WindowCommands>
 	<Grid>
-		<ContentPresenter x:Name="Presenter" />
+		<ContentPresenter x:Name="Presenter" Margin="0,0,0,28" />
+		<Label Content="{Binding StatusText}" Background="DimGray" Foreground="White" Height="26" VerticalAlignment="Bottom"/>
 	</Grid>
 </controls:MetroWindow>

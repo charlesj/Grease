@@ -30,8 +30,7 @@ namespace Grease
 		{
 			InitializeComponent();
 
-			ThemeManager.ChangeTheme(
-				this, new Accent("GreaseTheme", new Uri("pack://application:,,,/Grease;component/Accents/GreaseAccent.xaml")), Theme.Light);
+			ThemeManager.ChangeTheme(this, new Accent("GreaseTheme", new Uri("pack://application:,,,/Grease;component/Accents/GreaseAccent.xaml")), Theme.Light);
 			var viewHost = new RoutedViewHost();
 			this.Presenter.Content = viewHost;
 
@@ -39,11 +38,6 @@ namespace Grease
 			viewHost.Router = screen.Router;
 
 			DataContext = RxApp.DependencyResolver.GetService<IMainViewModel>();
-		}
-
-		public void Connect(int connectionId, object target)
-		{
-			throw new NotImplementedException();
 		}
 	}
 }

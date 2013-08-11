@@ -10,17 +10,16 @@
 namespace Grease.ViewModels
 {
 	using System;
+	using System.Collections.Specialized;
 
 	using Grease.Core;
-
-	using Ninject;
 
 	using ReactiveUI;
 
 	/// <summary>
 	/// The player view model.
 	/// </summary>
-	public class PlayerViewModel : ReactiveObject, IPlayerViewModel
+	public class PlayerViewModel : BaseViewModel, IPlayerViewModel
 	{
 		/// <summary>
 		/// The elapsed.
@@ -76,10 +75,10 @@ namespace Grease.ViewModels
 		/// <param name="engine">
 		/// The engine.
 		/// </param>
-		public PlayerViewModel(IScreen hostScreen)
+		public PlayerViewModel(IScreen hostScreen, IMusicEngine engine)
+			: base(hostScreen)
 		{
-			this.engine = GreaseApp.Kernel.Get<IMusicEngine>();
-			this.HostScreen = hostScreen;
+			this.engine = engine;
 			
 			this.PauseCommand = new ReactiveCommand();
 			this.PauseCommand.Subscribe(param => this.engine.Pause());
@@ -108,6 +107,16 @@ namespace Grease.ViewModels
 			});
 
 			this.engine.ObservableForProperty(model => model.TotalTime).Subscribe(param => this.TotalTime = param.Value);
+
+			this.SongsOnCollectionChanged(null, null);
+
+			this.engine.Library.Songs.CollectionChanged += SongsOnCollectionChanged;
+		}
+
+		private void SongsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+		{
+			string message = string.Format("{0} songs loaded", this.engine.Library.Songs.Count);
+			this.WriteToStatusBar(message);
 		}
 
 		/// <summary>
@@ -281,18 +290,13 @@ namespace Grease.ViewModels
 		/// <summary>
 		/// Gets the url path segment.
 		/// </summary>
-		public string UrlPathSegment
+		public override string UrlPathSegment
 		{
 			get
 			{
 				return "Player";
 			}
 		}
-
-		/// <summary>
-		/// Gets the host screen.
-		/// </summary>
-		public IScreen HostScreen { get; private set; }
 
 		/// <summary>
 		/// The update current playing info.
