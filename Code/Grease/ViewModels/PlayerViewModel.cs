@@ -72,6 +72,8 @@ namespace Grease.ViewModels
 
 		private string formattedVolume;
 
+		private string currentAlbumArtSource;
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="PlayerViewModel"/> class.
 		/// </summary>
@@ -273,6 +275,22 @@ namespace Grease.ViewModels
 		}
 
 		/// <summary>
+		/// Gets or sets the current album art source.
+		/// </summary>
+		public string CurrentAlbumArtSource
+		{
+			get
+			{
+				return this.currentAlbumArtSource;
+			}
+
+			set
+			{
+				this.RaiseAndSetIfChanged(ref this.currentAlbumArtSource, value);
+			}
+		}
+
+		/// <summary>
 		/// Gets or sets the status text.
 		/// </summary>
 		public string StatusText
@@ -381,6 +399,7 @@ namespace Grease.ViewModels
 			this.CurrentAlbumName = track.Album;
 			this.CurrentArtistName = track.Artist;
 			this.CurrentSongName = track.Name;
+			this.CurrentAlbumArtSource = track.ImagePath;
 		}
 	}
 }

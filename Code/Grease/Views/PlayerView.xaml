@@ -5,12 +5,12 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:greaseViewModels="clr-namespace:Grease.ViewModels"
 			 mc:Ignorable="d" 
-			 d:DesignHeight="200" d:DesignWidth="600">
+			 d:DesignHeight="300" d:DesignWidth="600">
 	<Grid d:DataContext="{d:DesignInstance Type=greaseViewModels:PlayerViewModel}" Margin="0,0,0,0">
 
-		<Label Content="{Binding CurrentSongName}" Name="CurrentSongName" Height="30" VerticalAlignment="Top" Margin="0,96,5,0"></Label>
-		<Label Content="{Binding CurrentArtistName}" Name="CurrentArtistname" Margin="0,159,5,0" Height="30" VerticalAlignment="Top"></Label>
-		<Label Content="{Binding CurrentAlbumName}" Name="CurrentAlbumName" Margin="0,127,5,0" Height="30" VerticalAlignment="Top"></Label>
+		<Label Content="{Binding CurrentSongName}" Name="CurrentSongName" Height="30" VerticalAlignment="Top" Margin="0,96,210,0"></Label>
+		<Label Content="{Binding CurrentArtistName}" Name="CurrentArtistname" Margin="0,159,210,0" Height="30" VerticalAlignment="Top"></Label>
+		<Label Content="{Binding CurrentAlbumName}" Name="CurrentAlbumName" Margin="0,127,210,0" Height="30" VerticalAlignment="Top"></Label>
 		<Button Command="{Binding PlayCommand}" Margin="5,5,0,0" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top">
 			<Image Focusable="False" Source="/Grease;component/Images/Play.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
 		</Button>
@@ -29,7 +29,7 @@
 		<Label Content="{Binding FormattedElapsed}" Name="ElapsedText" Margin="10,53,0,0" HorizontalAlignment="Left" Width="80" Height="27" VerticalAlignment="Top"></Label>
 		<Slider Value="{Binding TimelineLocation}" Maximum="1" Name="TimelineSlider" Margin="95,53,90,0" Height="30" VerticalAlignment="Top"/>
 		<Label Content="Volume" HorizontalAlignment="Left" Margin="180,10,0,0" VerticalAlignment="Top"/>
-
+		<Image Margin="0,105,10,10" Name="AlbumArt" Source="{Binding CurrentAlbumArtSource}" Stretch="Fill" HorizontalAlignment="Right" Width="195"/>
 	</Grid>
 	<UserControl.InputBindings>
 		<KeyBinding Command="TogglePlayPause" Key="Space"></KeyBinding>
