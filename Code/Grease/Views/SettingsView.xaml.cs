@@ -9,8 +9,6 @@
 
 namespace Grease.Views
 {
-	using System.Windows;
-
 	using Grease.ViewModels;
 
 	using ReactiveUI;
@@ -28,27 +26,36 @@ namespace Grease.Views
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// Gets or sets the view model.
+		/// </summary>
 		public ISettingsViewModel ViewModel
 		{
-			get { return (ISettingsViewModel)this.DataContext; }
+			get
+			{
+				return (ISettingsViewModel)this.DataContext;
+			}
+
 			set
 			{
 				this.DataContext = value;
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the view model.
+		/// </summary>
 		object IViewFor.ViewModel
 		{
-			get { return this.ViewModel; }
+			get
+			{
+				return this.ViewModel;
+			}
+
 			set
 			{
 				this.ViewModel = (ISettingsViewModel)value;
 			}
 		}
-	}
-
-	public interface ISettingsView : IViewFor<ISettingsViewModel>
-	{
-		
 	}
 }

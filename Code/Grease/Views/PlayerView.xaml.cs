@@ -9,8 +9,6 @@
 
 namespace Grease.Views
 {
-	using System.Windows;
-
 	using Grease.ViewModels;
 
 	using ReactiveUI;
@@ -28,39 +26,36 @@ namespace Grease.Views
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// Gets or sets the view model.
+		/// </summary>
 		public IPlayerViewModel ViewModel
 		{
-			get { return (IPlayerViewModel)this.DataContext; }
+			get
+			{
+				return (IPlayerViewModel)this.DataContext;
+			}
+
 			set
 			{
 				this.DataContext = value;
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the view model.
+		/// </summary>
 		object IViewFor.ViewModel
 		{
-			get { return this.ViewModel; }
+			get
+			{
+				return this.ViewModel;
+			}
+
 			set
 			{
 				this.ViewModel = (IPlayerViewModel)value;
 			}
 		}
-
-		/////// <summary>
-		/////// The on apply template.
-		/////// </summary>
-		////public override void OnApplyTemplate()
-		////{
-		////	base.OnApplyTemplate();
-		////	this.DataContext = this.ViewModel;
-		////}
-	}
-
-	/// <summary>
-	/// The PlayerView interface.
-	/// </summary>
-	public interface IPlayerView : IViewFor<IPlayerViewModel>
-	{
-		
 	}
 }

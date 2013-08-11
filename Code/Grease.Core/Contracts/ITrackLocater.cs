@@ -16,7 +16,6 @@ namespace Grease.Core
 	/// </summary>
 	public interface ITrackLocater
 	{
-
 		/// <summary>
 		/// Gets the found.  As tracks are located, they are put into the Found collection.
 		/// </summary>

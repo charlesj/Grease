@@ -1,4 +1,13 @@
-﻿namespace Grease.ViewModels
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IPlayerViewModel.cs" company="Developing Enterprises">
+//   Josh Charles
+// </copyright>
+// <summary>
+//   The PlayerViewModel interface.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Grease.ViewModels
 {
 	using System;
 

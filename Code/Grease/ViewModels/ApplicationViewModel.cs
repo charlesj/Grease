@@ -44,9 +44,8 @@ namespace Grease.ViewModels
 				return this.statusBarText;
 			}
 
-			set
+			private set
 			{
-				this.RaisePropertyChanged("StatusBarText");
 				this.RaiseAndSetIfChanged(ref this.statusBarText, value);
 			}
 		}

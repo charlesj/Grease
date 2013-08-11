@@ -50,12 +50,10 @@ namespace Grease
 			resolver.RegisterConstant(this.viewModel, typeof(IScreen));
 			resolver.RegisterConstant(this.viewModel.Router, typeof(IRoutingState));
 
-			resolver.RegisterLazySingleton(() => new TestingView(), typeof(ITestingView));
 			resolver.RegisterLazySingleton(() => new PlayerView(), typeof(IPlayerView));
 			resolver.RegisterLazySingleton(() => new SettingsView(), typeof(ISettingsView));
 
 			resolver.Register(() => new MainViewModel(this.viewModel), typeof(IMainViewModel));
-			resolver.Register(() => new TestingViewModel(this.viewModel), typeof(ITestingViewModel));
 			resolver.Register(() => new PlayerViewModel(this.viewModel, this.kernel.Get<IMusicEngine>()), typeof(IPlayerViewModel));
 			resolver.Register(() => new SettingsViewModel(this.viewModel, this.kernel.Get<ISettings>()), typeof(ISettingsViewModel));
 

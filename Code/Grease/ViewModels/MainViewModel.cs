@@ -23,8 +23,14 @@ namespace Grease.ViewModels
 		/// </summary>
 		private readonly IScreen screen;
 
+		/// <summary>
+		/// The status text.
+		/// </summary>
 		private string statusText;
 
+		/// <summary>
+		/// The application view model.
+		/// </summary>
 		private IApplicationViewModel applicationViewModel;
 
 		/// <summary>
@@ -59,6 +65,7 @@ namespace Grease.ViewModels
 			{
 				return this.statusText;
 			}
+
 			set
 			{
 				this.RaiseAndSetIfChanged(ref this.statusText, value);

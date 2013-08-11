@@ -110,13 +110,7 @@ namespace Grease.ViewModels
 
 			this.SongsOnCollectionChanged(null, null);
 
-			this.engine.Library.Songs.CollectionChanged += SongsOnCollectionChanged;
-		}
-
-		private void SongsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
-		{
-			string message = string.Format("{0} songs loaded", this.engine.Library.Songs.Count);
-			this.WriteToStatusBar(message);
+			this.engine.Library.Songs.CollectionChanged += this.SongsOnCollectionChanged;
 		}
 
 		/// <summary>
@@ -296,6 +290,21 @@ namespace Grease.ViewModels
 			{
 				return "Player";
 			}
+		}
+
+		/// <summary>
+		/// The songs on collection changed.
+		/// </summary>
+		/// <param name="sender">
+		/// The sender.
+		/// </param>
+		/// <param name="args">
+		/// The args.
+		/// </param>
+		private void SongsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+		{
+			string message = string.Format("{0} songs loaded", this.engine.Library.Songs.Count);
+			this.WriteToStatusBar(message);
 		}
 
 		/// <summary>
