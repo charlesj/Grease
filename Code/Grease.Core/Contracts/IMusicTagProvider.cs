@@ -13,16 +13,24 @@ namespace Grease.Core
 	/// The MusicTagProvider interface.
 	/// </summary>
 	public interface IMusicTagProvider
-    {
+	{
+		///// <summary>
+		///// The get info.
+		///// </summary>
+		///// <param name="path">
+		///// The path.
+		///// </param>
+		///// <returns>
+		///// The Grease.Core.ITrackInfo.
+		///// </returns>
+		//ITrackInfo GetInfo(string path);
+
 		/// <summary>
 		/// The get info.
 		/// </summary>
-		/// <param name="path">
-		/// The path.
+		/// <param name="info">
+		/// The info.
 		/// </param>
-		/// <returns>
-		/// The Grease.Core.ITrackInfo.
-		/// </returns>
-		ITrackInfo GetInfo(string path);
-    }
+		void LazyLoad(ITrackInfo info, string path);
+	}
 }

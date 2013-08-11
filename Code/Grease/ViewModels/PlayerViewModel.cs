@@ -66,6 +66,12 @@ namespace Grease.ViewModels
 		/// </summary>
 		private IMusicEngine engine;
 
+		private string formattedElapsed;
+
+		private string formattedTotalTime;
+
+		private string formattedVolume;
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="PlayerViewModel"/> class.
 		/// </summary>
@@ -98,15 +104,24 @@ namespace Grease.ViewModels
 			this.CurrentSongName = this.CurrentArtistName = this.CurrentAlbumName = "No Song Playing";
 			
 			// setup interactions
-			this.ObservableForProperty(model => model.Volume).Subscribe(param => this.engine.ChangeVolume(param.Value));
+			this.ObservableForProperty(model => model.Volume).Subscribe(param =>
+				{
+					this.engine.ChangeVolume(param.Value);
+					this.FormattedVolume = this.Volume.ToString("P");
+				});
 			this.engine.ObservableForProperty(model => model.Current).Subscribe(param => this.UpdateCurrentPlayingInfo(param.Value));
 			this.engine.ObservableForProperty(model => model.Elapsed).Subscribe(param =>
 			{
 				this.Elapsed = param.Value;
 				this.TimelineLocation = this.Elapsed.TotalMilliseconds / this.TotalTime.TotalMilliseconds;
+				this.FormattedElapsed = this.Elapsed.ToString("hh':'mm':'ss");
 			});
 
-			this.engine.ObservableForProperty(model => model.TotalTime).Subscribe(param => this.TotalTime = param.Value);
+			this.engine.ObservableForProperty(model => model.TotalTime).Subscribe(param =>
+				{ 
+					this.TotalTime = param.Value;
+					this.FormattedTotalTime = this.TotalTime.ToString("hh':'mm':'ss");
+				});
 
 			this.SongsOnCollectionChanged(null, null);
 
@@ -130,6 +145,22 @@ namespace Grease.ViewModels
 		}
 
 		/// <summary>
+		/// Gets or sets the formatted elapsed.
+		/// </summary>
+		public string FormattedElapsed
+		{
+			get
+			{
+				return this.formattedElapsed;
+			}
+
+			set
+			{
+				this.RaiseAndSetIfChanged(ref this.formattedElapsed, value);
+			}
+		}
+
+		/// <summary>
 		/// Gets or sets the total time.
 		/// </summary>
 		public TimeSpan TotalTime
@@ -146,6 +177,22 @@ namespace Grease.ViewModels
 		}
 
 		/// <summary>
+		/// Gets or sets the formatted total time.
+		/// </summary>
+		public string FormattedTotalTime
+		{
+			get
+			{
+				return this.formattedTotalTime;
+			}
+
+			set
+			{
+				this.RaiseAndSetIfChanged(ref this.formattedTotalTime, value);
+			}
+		}
+
+		/// <summary>
 		/// Gets or sets the volume.
 		/// </summary>
 		public float Volume
@@ -158,6 +205,22 @@ namespace Grease.ViewModels
 			set
 			{
 				this.RaiseAndSetIfChanged(ref this.volume, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the formatted volume.
+		/// </summary>
+		public string FormattedVolume
+		{
+			get
+			{
+				return this.formattedVolume;
+			}
+
+			set
+			{
+				this.RaiseAndSetIfChanged(ref this.formattedVolume, value);
 			}
 		}
 

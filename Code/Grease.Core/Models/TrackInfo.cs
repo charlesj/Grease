@@ -14,10 +14,29 @@ namespace Grease.Core
 	public class TrackInfo : ITrackInfo
 	{
 		/// <summary>
+		/// The provider.
+		/// </summary>
+		private readonly IMusicTagProvider provider;
+
+		/// <summary>
+		/// Whether the tags have been loaded from the file system.
+		/// </summary>
+		private bool hasLoadedTags;
+
+		/// <summary>
+		/// The full path.
+		/// </summary>
+		private string fullPath;
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="TrackInfo"/> class.
 		/// </summary>
-		public TrackInfo()
+		/// <param name="provider">
+		/// The tag provider.  It is injected into the class so that it can lazily load the information needed.
+		/// </param>
+		public TrackInfo(IMusicTagProvider provider)
 		{
+			this.provider = provider;
 			this.Name = "Default";
 			this.FileName = "Default";
 			this.FullPath = "Default";
@@ -41,7 +60,19 @@ namespace Grease.Core
 		/// <summary>
 		/// Gets or sets the full path.
 		/// </summary>
-		public string FullPath { get; set; }
+		public string FullPath
+		{
+			get
+			{
+				this.CheckLazyLoading();
+				return this.fullPath;
+			}
+
+			set
+			{
+				this.fullPath = value;
+			}
+		}
 
 		/// <summary>
 		/// Gets or sets the album.
@@ -67,5 +98,14 @@ namespace Grease.Core
 		/// Gets or sets the image path.
 		/// </summary>
 		public string ImagePath { get; set; }
+
+		private void CheckLazyLoading()
+		{
+			if (!this.hasLoadedTags)
+			{
+				this.provider.LazyLoad(this, this.fullPath);
+				this.hasLoadedTags = true;
+			}
+		}
 	}
 }

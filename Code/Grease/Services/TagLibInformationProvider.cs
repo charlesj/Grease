@@ -28,30 +28,53 @@ namespace Grease
 		/// <returns>
 		/// The Grease.Core.IMusicFileInfo.
 		/// </returns>
-		public ITrackInfo GetInfo(string path)
+		////public ITrackInfo GetInfo(string path)
+		////{
+		////	var rtn = new TrackInfo(this);
+		////	var fileInfo = new FileInfo(path);
+		////	rtn.FullPath = fileInfo.FullName;
+		////	rtn.FileName = fileInfo.Name;
+		////	rtn.ImagePath = this.GetImage(fileInfo);
+		////	if (!string.IsNullOrEmpty(rtn.ImagePath))
+		////	{
+		////		rtn.HasImage = true;
+		////	}
+
+		////	var tags = File.Create(path);
+		////	rtn.Album = tags.Tag.Album; 
+		////	rtn.Artist = tags.Tag.JoinedAlbumArtists;
+		////	rtn.Name = tags.Tag.Title;
+		////	rtn.TrackNum = (int)tags.Tag.Track;
+
+		////	if (string.IsNullOrEmpty(rtn.Name))
+		////	{
+		////		rtn.Name = rtn.FileName;
+		////	}
+
+		////	return rtn;
+		////}
+
+		public void LazyLoad(ITrackInfo info, string path)
 		{
-			var rtn = new TrackInfo();
 			var fileInfo = new FileInfo(path);
-			rtn.FullPath = fileInfo.FullName;
-			rtn.FileName = fileInfo.Name;
-			rtn.ImagePath = this.GetImage(fileInfo);
-			if (!string.IsNullOrEmpty(rtn.ImagePath))
+
+			info.FileName = fileInfo.Name;
+			info.ImagePath = this.GetImage(fileInfo);
+			if (!string.IsNullOrEmpty(info.ImagePath))
 			{
-				rtn.HasImage = true;
+				info.HasImage = true;
 			}
 
 			var tags = File.Create(path);
-			rtn.Album = tags.Tag.Album;
-			rtn.Artist = tags.Tag.JoinedAlbumArtists;
-			rtn.Name = tags.Tag.Title;
-			rtn.TrackNum = (int)tags.Tag.Track;
+			info.Album = tags.Tag.Album;
+			info.Artist = tags.Tag.JoinedAlbumArtists;
+			info.Name = tags.Tag.Title;
+			info.TrackNum = (int)tags.Tag.Track;
 
-			if (string.IsNullOrEmpty(rtn.Name))
+			if (string.IsNullOrEmpty(info.Name))
 			{
-				rtn.Name = rtn.FileName;
+				info.Name = info.FileName;
 			}
-
-			return rtn;
 		}
 
 		/// <summary>

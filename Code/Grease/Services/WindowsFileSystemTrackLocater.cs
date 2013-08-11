@@ -68,7 +68,7 @@ namespace Grease
 							return;
 						}
 
-						var playableExtensions = new List<string> { "*.mp3", "*.m4a" };
+						var playableExtensions = new List<string> { "*.mp3"};//, "*.m4a" };
 						var allSongs = new List<string>();
 						var directories = Directory.GetDirectories(pathToSearch);
 						foreach (var extension in playableExtensions)
@@ -80,8 +80,9 @@ namespace Grease
 						allSongs.ForEach(
 							filePath =>
 								{
-									var processed = this.provider.GetInfo(filePath);
-									this.Found.Add(processed);
+									//var processed = this.provider.GetInfo(filePath);
+									//this.Found.Add(processed);
+									this.Found.Add(new TrackInfo(this.provider){ FullPath = filePath });
 								});
 
 						foreach (var directory in directories)

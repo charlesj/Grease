@@ -150,7 +150,7 @@ namespace Grease.Core
 					return this.currSong;
 				}
 
-				return new TrackInfo();
+				return null;
 			}
 		}
 
