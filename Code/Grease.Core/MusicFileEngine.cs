@@ -176,8 +176,11 @@ namespace Grease.Core
 				}
 			}
 
-			this.player.Play();
-			this.currentlyPlaying = true;
+			if (this.currSong != null)
+			{
+				this.player.Play();
+				this.currentlyPlaying = true;
+			}
 		}
 
 		/// <summary>

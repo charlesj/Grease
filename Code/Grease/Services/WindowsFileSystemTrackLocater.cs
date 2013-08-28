@@ -60,14 +60,14 @@ namespace Grease
 		/// </param>
 		private void GetMusicFiles(string pathToSearch)
 		{
+			if (string.IsNullOrEmpty(pathToSearch))
+			{
+				return;
+			}
+
 			Task.Factory.StartNew(
 				() =>
 					{
-						if (pathToSearch == null)
-						{
-							return;
-						}
-
 						var playableExtensions = new List<string> { "*.mp3"};//, "*.m4a" };
 						var allSongs = new List<string>();
 						var directories = Directory.GetDirectories(pathToSearch);

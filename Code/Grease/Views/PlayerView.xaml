@@ -32,7 +32,7 @@
 		<Image Margin="0,105,10,10" Name="AlbumArt" Source="{Binding CurrentAlbumArtSource}" Stretch="Fill" HorizontalAlignment="Right" Width="195"/>
 	</Grid>
 	<UserControl.InputBindings>
-		<KeyBinding Command="TogglePlayPause" Key="Space"></KeyBinding>
+		<KeyBinding Command="{Binding TogglePlayPause}" Key="Space"></KeyBinding>
 		<KeyBinding Command="{Binding NextSongCommand}" Key="Right"></KeyBinding>
 		<KeyBinding Command="{Binding PreviousSongCommand}" Key="Left"></KeyBinding>
 	</UserControl.InputBindings>
