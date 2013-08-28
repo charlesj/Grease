@@ -20,40 +20,14 @@ namespace Grease
 	public class TagLibInformationProvider : IMusicTagProvider
 	{
 		/// <summary>
-		/// The get info.
+		/// The track info instance can use this method to load up all the meta data information.
 		/// </summary>
+		/// <param name="info">
+		/// The info.
+		/// </param>
 		/// <param name="path">
 		/// The path.
 		/// </param>
-		/// <returns>
-		/// The Grease.Core.IMusicFileInfo.
-		/// </returns>
-		////public ITrackInfo GetInfo(string path)
-		////{
-		////	var rtn = new TrackInfo(this);
-		////	var fileInfo = new FileInfo(path);
-		////	rtn.FullPath = fileInfo.FullName;
-		////	rtn.FileName = fileInfo.Name;
-		////	rtn.ImagePath = this.GetImage(fileInfo);
-		////	if (!string.IsNullOrEmpty(rtn.ImagePath))
-		////	{
-		////		rtn.HasImage = true;
-		////	}
-
-		////	var tags = File.Create(path);
-		////	rtn.Album = tags.Tag.Album; 
-		////	rtn.Artist = tags.Tag.JoinedAlbumArtists;
-		////	rtn.Name = tags.Tag.Title;
-		////	rtn.TrackNum = (int)tags.Tag.Track;
-
-		////	if (string.IsNullOrEmpty(rtn.Name))
-		////	{
-		////		rtn.Name = rtn.FileName;
-		////	}
-
-		////	return rtn;
-		////}
-
 		public void LazyLoad(ITrackInfo info, string path)
 		{
 			var fileInfo = new FileInfo(path);

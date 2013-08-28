@@ -146,6 +146,8 @@ namespace Grease.Services
 		/// </param>
 		public void Scrub(double value)
 		{
+			// this is turning into a difficult problem because I need to make the slider bind both ways, and it 
+			// doesn't seem to like that very much.
 			throw new NotImplementedException();
 		}
 
@@ -212,7 +214,7 @@ namespace Grease.Services
 		}
 
 		/// <summary>
-		/// The playback stopped.
+		/// The playback stopped.  This means the track ended.
 		/// </summary>
 		/// <param name="sender">
 		/// The sender.
@@ -227,7 +229,7 @@ namespace Grease.Services
 		}
 
 		/// <summary>
-		/// The stop.
+		/// Stop playing any sounds.
 		/// </summary>
 		private void Stop()
 		{

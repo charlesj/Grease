@@ -66,12 +66,24 @@ namespace Grease.ViewModels
 		/// </summary>
 		private IMusicEngine engine;
 
+		/// <summary>
+		/// The formatted elapsed.
+		/// </summary>
 		private string formattedElapsed;
 
+		/// <summary>
+		/// The formatted total time.
+		/// </summary>
 		private string formattedTotalTime;
 
+		/// <summary>
+		/// The formatted volume.
+		/// </summary>
 		private string formattedVolume;
 
+		/// <summary>
+		/// The current album art source.
+		/// </summary>
 		private string currentAlbumArtSource;
 
 		/// <summary>

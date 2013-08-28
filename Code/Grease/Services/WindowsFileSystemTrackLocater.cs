@@ -6,7 +6,6 @@
 
 namespace Grease
 {
-	using System;
 	using System.Collections.Generic;
 	using System.Collections.ObjectModel;
 	using System.IO;
@@ -68,7 +67,7 @@ namespace Grease
 			Task.Factory.StartNew(
 				() =>
 					{
-						var playableExtensions = new List<string> { "*.mp3"};//, "*.m4a" };
+						var playableExtensions = new List<string> { "*.mp3" }; // , "*.m4a" };  // until I get naudio all figured out, it's mp3 only.
 						var allSongs = new List<string>();
 						var directories = Directory.GetDirectories(pathToSearch);
 						foreach (var extension in playableExtensions)
@@ -77,13 +76,7 @@ namespace Grease
 							allSongs.AddRange(musicFiles);
 						}
 
-						allSongs.ForEach(
-							filePath =>
-								{
-									//var processed = this.provider.GetInfo(filePath);
-									//this.Found.Add(processed);
-									this.Found.Add(new TrackInfo(this.provider){ FullPath = filePath });
-								});
+						allSongs.ForEach(filePath => this.Found.Add(new TrackInfo(this.provider) { FullPath = filePath }));
 
 						foreach (var directory in directories)
 						{

@@ -25,11 +25,11 @@
 		</Button>
 		<Slider Value="{Binding Volume}" Maximum="1" Name="VolumeSlider" Margin="236,5,84,0" Height="36" VerticalAlignment="Top"/>
 		<Label Content="{Binding FormattedVolume}" Name="VolumeText" Margin="0,10,10,0" HorizontalAlignment="Right" Width="69" Height="26" VerticalAlignment="Top"></Label>
-		<Label Content="{Binding FormattedTotalTime}" Name="RemaingingText" Margin="0,48,5,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Right" Width="80"></Label>
-		<Label Content="{Binding FormattedElapsed}" Name="ElapsedText" Margin="10,53,0,0" HorizontalAlignment="Left" Width="80" Height="27" VerticalAlignment="Top"></Label>
-		<Slider Value="{Binding TimelineLocation}" Maximum="1" Name="TimelineSlider" Margin="95,53,90,0" Height="30" VerticalAlignment="Top"/>
+		<Label Content="{Binding FormattedTotalTime}" Name="RemaingingText" Margin="0,50,19,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Right" Width="71"></Label>
+		<Label Content="{Binding FormattedElapsed}" Name="ElapsedText" Margin="10,50,0,0" HorizontalAlignment="Left" Width="60" Height="27" VerticalAlignment="Top"></Label>
+		<Slider Value="{Binding TimelineLocation}" Maximum="1" Name="TimelineSlider" Margin="75,50,105,0" Height="30" VerticalAlignment="Top"/>
 		<Label Content="Volume" HorizontalAlignment="Left" Margin="180,10,0,0" VerticalAlignment="Top"/>
-		<Image Margin="0,105,10,10" Name="AlbumArt" Source="{Binding CurrentAlbumArtSource}" Stretch="Fill" HorizontalAlignment="Right" Width="195"/>
+		<Image Margin="395,105,10,10" Name="AlbumArt" Source="{Binding CurrentAlbumArtSource}" Stretch="Fill"/>
 	</Grid>
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding TogglePlayPause}" Key="Space"></KeyBinding>
