@@ -4,14 +4,18 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 mc:Ignorable="d" 
-			 d:DesignHeight="300" d:DesignWidth="300">
+			d:DesignHeight="300" d:DesignWidth="600">
 	<Grid>
-		<StackPanel>
-			<Label>Settings</Label>
-			<Label>Path to Music Library</Label>
-			<TextBox IsReadOnly="True" Text="{Binding RootPath}" />
-			<Button Command="{Binding ChangeDirectoryCommand}" Content="Change Directory"></Button>
-			<Button Command="{Binding GoBackCommand}" Content="Go Back"></Button>
-		</StackPanel>
+
+		<Label Margin="82,0,0,0" FontSize="36" FontWeight="Bold" HorizontalAlignment="Left" Width="197" Height="84" VerticalAlignment="Top">Settings</Label>
+		<Label Margin="10,109,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150">Path to Music Library</Label>
+		<TextBox IsReadOnly="True" Text="{Binding RootPath}" Margin="10,84,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="503" />
+		<Button Command="{Binding ChangeDirectoryCommand}" Margin="527,66,0,0" HorizontalAlignment="Left" Width="63" Height="62" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+			<Image Focusable="False" Source="/Grease;component/Images/folder.png" HorizontalAlignment="Left" Width="51" Height="45" VerticalAlignment="Bottom"></Image>
+		</Button>
+		<Button Command="{Binding GoBackCommand}" HorizontalAlignment="Left" Width="68" Height="61" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+			<Image Focusable="False" Source="/Grease;component/Images/MetroBack.png" HorizontalAlignment="Left" Width="51" Height="45" VerticalAlignment="Bottom"></Image>
+		</Button>
+
 	</Grid>
 </UserControl>

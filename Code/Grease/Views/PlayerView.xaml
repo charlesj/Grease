@@ -11,16 +11,16 @@
 		<Label Content="{Binding CurrentSongName}" Name="CurrentSongName" Height="30" VerticalAlignment="Top" Margin="0,96,210,0"></Label>
 		<Label Content="{Binding CurrentArtistName}" Name="CurrentArtistname" Margin="0,159,210,0" Height="30" VerticalAlignment="Top"></Label>
 		<Label Content="{Binding CurrentAlbumName}" Name="CurrentAlbumName" Margin="0,127,210,0" Height="30" VerticalAlignment="Top"></Label>
-		<Button Command="{Binding PlayCommand}" Margin="5,5,0,0" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top">
+		<Button Command="{Binding PlayCommand}" Margin="5,5,0,0" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top" BorderBrush="{x:Null}" Background="{x:Null}">
 			<Image Focusable="False" Source="/Grease;component/Images/Play.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
 		</Button>
-		<Button Command="{Binding PauseCommand}" Margin="50,5,0,0" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35">
+		<Button Command="{Binding PauseCommand}" Margin="50,5,0,0" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35" Background="{x:Null}" BorderBrush="{x:Null}">
 			<Image Focusable="False" Source="/Grease;component/Images/Pause.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
 		</Button>
-		<Button Command="{Binding NextSongCommand}" Margin="140,5,0,0" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top">
+		<Button Command="{Binding NextSongCommand}" Margin="140,5,0,0" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
 			<Image Focusable="False" Source="/Grease;component/Images/Next.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
 		</Button>
-		<Button Command="{Binding PreviousSongCommand}" Margin="95,5,0,0" Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35">
+		<Button Command="{Binding PreviousSongCommand}" Margin="95,5,0,0" Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35" Background="{x:Null}" BorderBrush="{x:Null}">
 			<Image Focusable="False" Source="/Grease;component/Images/Back.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
 		</Button>
 		<Slider Value="{Binding Volume}" Maximum="1" Name="VolumeSlider" Margin="236,5,84,0" Height="36" VerticalAlignment="Top"/>

@@ -217,6 +217,12 @@
     <Resource Include="Images\Pause.png" />
     <Resource Include="Images\Play.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MetroBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\folder.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--<Import Project="..\packages\Microsoft.Bcl.Build.1.0.8\tools\Microsoft.Bcl.Build.targets" />  This was commented out in order to insure nuget package restore-->
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
