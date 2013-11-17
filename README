@@ -3,5 +3,3 @@ Grease is a simple mp3 player.  You give it a directory, it recursively searches
 It uses ReactiveUI for MVVM, NAudio for the audio playback, Ninject for dependency injection, and taglib# for music file metadata.
 
 Currently, I'm working on persisting volume changes, caching music file information to reduce load times, and polishing keyboard shortcuts.
-
-I
