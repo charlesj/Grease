@@ -19,7 +19,7 @@ namespace Grease.Tests
 
 	[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
 	public class Sandbox
-    {
+	{
 		[Fact]
 		public void Play()
 		{
@@ -33,5 +33,5 @@ namespace Grease.Tests
 
 			Thread.Sleep(10000);
 		}
-    }
+	}
 }
