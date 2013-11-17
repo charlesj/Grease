@@ -67,7 +67,8 @@ namespace Grease
 			Task.Factory.StartNew(
 				() =>
 					{
-						var playableExtensions = new List<string> { "*.mp3" }; // , "*.m4a" };  // until I get naudio all figured out, it's mp3 only.
+						// Naudio 1.7 rocks my socks!  It will play all the formats now, thanks to media foundation reader!
+						var playableExtensions = new List<string> { "*.mp3", "*.m4a", ".wav", "*.wma", "*.mp4" };  
 						var allSongs = new List<string>();
 						var directories = Directory.GetDirectories(pathToSearch);
 						foreach (var extension in playableExtensions)
