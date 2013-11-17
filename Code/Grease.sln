@@ -1,18 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grease.Core", "Grease.Core\Grease.Core.csproj", "{AF0559FA-DC8C-4109-95CF-B10B565C39F8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grease", "Grease\Grease.csproj", "{539133C8-7F42-49F9-860E-5A18E836628F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grease.Tests", "Grease.Tests\Grease.Tests.csproj", "{E09EC33B-4465-49FD-BE7B-8FE31975D3D7}"
-EndProject
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{366CE0F3-767B-4C30-B7AD-D89899DF98A6}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grease.Core", "Grease.Core\Grease.Core.csproj", "{AF0559FA-DC8C-4109-95CF-B10B565C39F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grease", "Grease\Grease.csproj", "{539133C8-7F42-49F9-860E-5A18E836628F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grease.Tests", "Grease.Tests\Grease.Tests.csproj", "{E09EC33B-4465-49FD-BE7B-8FE31975D3D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
