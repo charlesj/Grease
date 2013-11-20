@@ -4,32 +4,31 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:greaseViewModels="clr-namespace:Grease.ViewModels"
-			 mc:Ignorable="d" 
-			 d:DesignHeight="300" d:DesignWidth="600">
+			 mc:Ignorable="d" Width="750" Height="225">
 	<Grid d:DataContext="{d:DesignInstance Type=greaseViewModels:PlayerViewModel}" Margin="0,0,0,0">
 
 		<Label Content="{Binding CurrentSongName}" Name="CurrentSongName" Height="30" VerticalAlignment="Top" Margin="0,96,210,0"></Label>
 		<Label Content="{Binding CurrentArtistName}" Name="CurrentArtistname" Margin="0,159,210,0" Height="30" VerticalAlignment="Top"></Label>
 		<Label Content="{Binding CurrentAlbumName}" Name="CurrentAlbumName" Margin="0,127,210,0" Height="30" VerticalAlignment="Top"></Label>
-		<Button Command="{Binding PlayCommand}" Margin="5,5,0,0" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top" BorderBrush="{x:Null}" Background="{x:Null}">
-			<Image Focusable="False" Source="/Grease;component/Images/Play.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
+		<Button Command="{Binding PlayCommand}" Focusable="False" Margin="5,5,0,0" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top" BorderBrush="{x:Null}" Background="{x:Null}">
+			<Image Source="/Grease;component/Images/Play.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
 		</Button>
-		<Button Command="{Binding PauseCommand}" Margin="50,5,0,0" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35" Background="{x:Null}" BorderBrush="{x:Null}">
-			<Image Focusable="False" Source="/Grease;component/Images/Pause.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
+		<Button Command="{Binding PauseCommand}" Focusable="False"  Margin="50,5,0,0" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35" Background="{x:Null}" BorderBrush="{x:Null}">
+			<Image Source="/Grease;component/Images/Pause.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
 		</Button>
-		<Button Command="{Binding NextSongCommand}" Margin="140,5,0,0" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
-			<Image Focusable="False" Source="/Grease;component/Images/Next.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
+		<Button Command="{Binding NextSongCommand}" Focusable="False"  Margin="140,5,0,0" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+			<Image Source="/Grease;component/Images/Next.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
 		</Button>
-		<Button Command="{Binding PreviousSongCommand}" Margin="95,5,0,0" Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35" Background="{x:Null}" BorderBrush="{x:Null}">
-			<Image Focusable="False" Source="/Grease;component/Images/Back.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
+		<Button Command="{Binding PreviousSongCommand}" Focusable="False"  Margin="95,5,0,0" Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Width="35" Background="{x:Null}" BorderBrush="{x:Null}">
+			<Image Source="/Grease;component/Images/Back.png" HorizontalAlignment="Left" Width="25" Height="25" VerticalAlignment="Bottom"></Image>
 		</Button>
-		<Slider Value="{Binding Volume}" Maximum="1" Name="VolumeSlider" Margin="236,5,84,0" Height="36" VerticalAlignment="Top"/>
-		<Label Content="{Binding FormattedVolume}" Name="VolumeText" Margin="0,10,10,0" HorizontalAlignment="Right" Width="69" Height="26" VerticalAlignment="Top"></Label>
-		<Label Content="{Binding FormattedTotalTime}" Name="RemaingingText" Margin="0,50,19,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Right" Width="71"></Label>
+		<Slider Value="{Binding Volume}" Interval="300"  Focusable="False" Maximum="1" Name="VolumeSlider" Margin="236,5,305,0" Height="36" VerticalAlignment="Top"/>
+		<Label Content="{Binding FormattedVolume}" Name="VolumeText" Margin="0,9,221,0" HorizontalAlignment="Right" Width="69" Height="26" VerticalAlignment="Top"></Label>
+		<Label Content="{Binding FormattedTotalTime}" Name="RemaingingText" Margin="0,50,221,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Right" Width="71"></Label>
 		<Label Content="{Binding FormattedElapsed}" Name="ElapsedText" Margin="10,50,0,0" HorizontalAlignment="Left" Width="60" Height="27" VerticalAlignment="Top"></Label>
-		<Slider Value="{Binding TimelineLocation}" Maximum="1" Name="TimelineSlider" Margin="75,50,105,0" Height="30" VerticalAlignment="Top"/>
+		<Slider Value="{Binding TimelineLocation}" Maximum="1" Name="TimelineSlider" Margin="75,50,305,0" Height="30" VerticalAlignment="Top"/>
 		<Label Content="Volume" HorizontalAlignment="Left" Margin="180,10,0,0" VerticalAlignment="Top"/>
-		<Image Margin="395,105,10,10" Name="AlbumArt" Source="{Binding CurrentAlbumArtSource}" Stretch="Fill"/>
+		<Image Margin="0,10,10,45" Name="AlbumArt" Source="{Binding CurrentAlbumArtSource}" Stretch="Fill" HorizontalAlignment="Right" Width="211"/>
 	</Grid>
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding TogglePlayPause}" Key="Space"></KeyBinding>

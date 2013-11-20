@@ -10,7 +10,6 @@
 namespace Grease.ViewModels
 {
 	using System;
-	using System.Collections.Generic;
 	using System.Collections.Specialized;
 
 	using Grease.Core;
@@ -122,8 +121,11 @@ namespace Grease.ViewModels
 			// setup interactions
 			this.ObservableForProperty(model => model.Volume).Subscribe(param =>
 			{
-				this.settings.Volume = param.Value;
-				this.FormattedVolume = this.Volume.ToString("P");
+				var newVolume = Math.Round(Convert.ToDecimal(param.Value), 1);
+				this.settings.Volume = (float)newVolume;
+				this.FormattedVolume = newVolume.ToString("P");
+				//this.volume = (float)newVolume;
+
 			});
 			this.engine.ObservableForProperty(model => model.Current).Subscribe(param => this.UpdateCurrentPlayingInfo(param.Value));
 			this.engine.ObservableForProperty(model => model.Elapsed).Subscribe(param =>
@@ -146,8 +148,8 @@ namespace Grease.ViewModels
 			// setup some default values
 			this.Volume = Properties.Settings.Default.Volume;
 			this.CurrentSongName = this.CurrentArtistName = this.CurrentAlbumName = "No Song Playing";
-			this.FormattedElapsed = new TimeSpan().ToString("hh':'mm':'ss"); ;
-			this.FormattedTotalTime = new TimeSpan().ToString("hh':'mm':'ss"); ; 
+			this.FormattedElapsed = new TimeSpan().ToString("hh':'mm':'ss"); 
+			this.FormattedTotalTime = new TimeSpan().ToString("hh':'mm':'ss");
 		}
 
 		/// <summary>

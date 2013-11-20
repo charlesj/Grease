@@ -4,7 +4,7 @@
 		xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
 
 		Icon="Grease.ico" ShowIconOnTitleBar="False"
-		Title="Grease" MinHeight="300" MinWidth="600" Height="300" Width="600">
+		Title="Grease" MinHeight="240" MinWidth="750" Height="240" Width="750">
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
