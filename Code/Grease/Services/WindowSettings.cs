@@ -22,6 +22,7 @@ namespace Grease.Services
 		public WindowSettings()
 		{
 			this.RootPath = Properties.Settings.Default.MusicFilePath;
+			this.Volume = Properties.Settings.Default.Volume;
 			this.OnSettingChanged += this.SettingsChanged;
 		}
 
@@ -36,6 +37,13 @@ namespace Grease.Services
 			if (args.Name == "RootPath")
 			{
 				Properties.Settings.Default.MusicFilePath = args.Value;
+				Properties.Settings.Default.Save();
+			}
+
+			if (args.Name == "Volume")
+			{
+				var newVolume = float.Parse(args.Value);
+				Properties.Settings.Default.Volume = newVolume;
 				Properties.Settings.Default.Save();
 			}
 		}

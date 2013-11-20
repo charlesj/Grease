@@ -20,6 +20,8 @@ namespace Grease.Services
 	/// </summary>
 	public class NAudioPlayer : ReactiveObject, IMusicPlayer
 	{
+		private readonly ISettings settings;
+
 		/// <summary>
 		/// The timer.
 		/// </summary>
@@ -58,8 +60,11 @@ namespace Grease.Services
 		/// <summary>
 		/// Initializes a new instance of the <see cref="NAudioPlayer"/> class.
 		/// </summary>
-		public NAudioPlayer()
+		public NAudioPlayer(ISettings settings)
 		{
+			this.settings = settings;
+			this.settings.OnSettingChanged += settings_OnSettingChanged;
+			
 			this.timer = new DispatcherTimer { Interval = new TimeSpan(0, 0, 0, 0, 10) };
 			this.timer.Tick += (sender, args) => this.Elapsed = this.file.CurrentTime;
 			this.ObservableForProperty(model => model.Source).Subscribe(param => this.Stop());
@@ -67,6 +72,14 @@ namespace Grease.Services
 			this.LengthValue = 0;
 			this.TotalTime = new TimeSpan(0);
 			this.Elapsed = new TimeSpan(0);
+		}
+
+		void settings_OnSettingChanged(SettingChangedEventArgs args)
+		{
+			if (args.Name == "Volume")
+			{
+				this.ChangeVolume(float.Parse(args.Value));
+			}
 		}
 
 		/// <summary>

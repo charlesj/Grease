@@ -54,7 +54,7 @@ namespace Grease
 			resolver.RegisterLazySingleton(() => new SettingsView(), typeof(ISettingsView));
 
 			resolver.Register(() => new MainViewModel(this.viewModel), typeof(IMainViewModel));
-			resolver.Register(() => new PlayerViewModel(this.viewModel, this.kernel.Get<IMusicEngine>()), typeof(IPlayerViewModel));
+			resolver.Register(() => new PlayerViewModel(this.viewModel, this.kernel.Get<IMusicEngine>(), this.kernel.Get<ISettings>()), typeof(IPlayerViewModel));
 			resolver.Register(() => new SettingsViewModel(this.viewModel, this.kernel.Get<ISettings>()), typeof(ISettingsViewModel));
 
 			var welcomeVm = RxApp.DependencyResolver.GetService<IPlayerViewModel>();

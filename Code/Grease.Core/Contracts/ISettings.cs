@@ -23,5 +23,7 @@ namespace Grease.Core
 		/// Gets or sets the root path.
 		/// </summary>
 		string RootPath { get; set; }
+
+		float Volume { get; set; }
 	}
 }

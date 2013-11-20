@@ -10,6 +10,7 @@
 namespace Grease.ViewModels
 {
 	using System;
+	using System.Collections.Generic;
 	using System.Collections.Specialized;
 
 	using Grease.Core;
@@ -66,6 +67,8 @@ namespace Grease.ViewModels
 		/// </summary>
 		private IMusicEngine engine;
 
+		private readonly ISettings settings;
+
 		/// <summary>
 		/// The formatted elapsed.
 		/// </summary>
@@ -95,11 +98,13 @@ namespace Grease.ViewModels
 		/// <param name="engine">
 		/// The engine.
 		/// </param>
-		public PlayerViewModel(IScreen hostScreen, IMusicEngine engine)
+		/// <param name="settings">Settings.</param>
+		public PlayerViewModel(IScreen hostScreen, IMusicEngine engine, ISettings settings)
 			: base(hostScreen)
 		{
 			this.engine = engine;
-			
+			this.settings = settings;
+
 			this.PauseCommand = new ReactiveCommand();
 			this.PauseCommand.Subscribe(param => this.engine.Pause());
 			this.PlayCommand = new ReactiveCommand();
@@ -113,16 +118,13 @@ namespace Grease.ViewModels
 			this.LoadSongsCommand = new ReactiveCommand();
 			this.SongOpenedCommand = new ReactiveCommand();
 
-			// setup some default values
-			this.Volume = .8f;
-			this.CurrentSongName = this.CurrentArtistName = this.CurrentAlbumName = "No Song Playing";
-			
+		
 			// setup interactions
 			this.ObservableForProperty(model => model.Volume).Subscribe(param =>
-				{
-					this.engine.ChangeVolume(param.Value);
-					this.FormattedVolume = this.Volume.ToString("P");
-				});
+			{
+				this.settings.Volume = param.Value;
+				this.FormattedVolume = this.Volume.ToString("P");
+			});
 			this.engine.ObservableForProperty(model => model.Current).Subscribe(param => this.UpdateCurrentPlayingInfo(param.Value));
 			this.engine.ObservableForProperty(model => model.Elapsed).Subscribe(param =>
 			{
@@ -140,6 +142,12 @@ namespace Grease.ViewModels
 			this.SongsOnCollectionChanged(null, null);
 
 			this.engine.Library.Songs.CollectionChanged += this.SongsOnCollectionChanged;
+
+			// setup some default values
+			this.Volume = Properties.Settings.Default.Volume;
+			this.CurrentSongName = this.CurrentArtistName = this.CurrentAlbumName = "No Song Playing";
+			this.FormattedElapsed = new TimeSpan().ToString("hh':'mm':'ss"); ;
+			this.FormattedTotalTime = new TimeSpan().ToString("hh':'mm':'ss"); ; 
 		}
 
 		/// <summary>
