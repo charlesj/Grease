@@ -94,9 +94,9 @@ namespace Grease
 		/// </param>
 		private void SettingsOnOnSettingChanged(SettingChangedEventArgs args)
 		{
-			this.Found.Clear();
 			if (args.Name == "RootPath")
 			{
+				this.Found.Clear();
 				this.GetMusicFiles(args.Value);
 			}
 		}
