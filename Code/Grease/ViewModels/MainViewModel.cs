@@ -45,6 +45,12 @@ namespace Grease.ViewModels
 			this.GoToSettings = new ReactiveCommand();
 			this.GoToSettings.Subscribe(param => this.ShowSettings());
 
+			this.GlobalPlayPause = new ReactiveCommand();
+			this.GlobalPrevious = new ReactiveCommand();
+			this.GlobalNext = new ReactiveCommand();
+			this.GlobalVolumeDown = new ReactiveCommand();
+			this.GlobalVolumeUp = new ReactiveCommand();
+
 			this.applicationViewModel = this.screen as IApplicationViewModel;
 			this.applicationViewModel.ObservableForProperty(model => model.StatusBarText)
 									 .Subscribe(param => this.StatusText = param.Value);
@@ -55,6 +61,19 @@ namespace Grease.ViewModels
 		/// Gets the song opened command.
 		/// </summary>
 		public ReactiveCommand GoToSettings { get; private set; }
+
+		/// <summary>
+		/// Gets the global play.
+		/// </summary>
+		public ReactiveCommand GlobalPlayPause { get; private set; }
+
+		public ReactiveCommand GlobalPrevious { get; set; }
+
+		public ReactiveCommand GlobalNext { get; private set; }
+
+		public ReactiveCommand GlobalVolumeUp { get; set; }
+
+		public ReactiveCommand GlobalVolumeDown { get; set; }
 
 		/// <summary>
 		/// Gets or sets the text in the status bar.

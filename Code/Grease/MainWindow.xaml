@@ -20,7 +20,13 @@
 		</controls:WindowCommands>
 	</controls:MetroWindow.WindowCommands>
 	<Grid>
-		<ContentPresenter x:Name="Presenter" Margin="0,0,0,28" />
+		<ContentPresenter x:Name="Presenter" Height="182" VerticalAlignment="Top" HorizontalAlignment="Left" Width="742" />
 		<Label Content="{Binding StatusText}" Background="DimGray" Foreground="White" Height="26" VerticalAlignment="Bottom"/>
 	</Grid>
+	<Window.InputBindings>
+		<KeyBinding Command="{Binding GoToSettings}" Key="S" Modifiers="Control" />
+		<KeyBinding Command="{Binding GlobalPlayPause}" Key="Space" />
+		<KeyBinding Command="{Binding NextSongCommand}" Key="Right" />
+		<KeyBinding Command="{Binding PreviousSongCommand}" Key="Left" />
+	</Window.InputBindings>
 </controls:MetroWindow>
