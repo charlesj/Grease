@@ -117,7 +117,9 @@ namespace Grease.ViewModels
 			this.LoadSongsCommand = new ReactiveCommand();
 			this.SongOpenedCommand = new ReactiveCommand();
 
-		
+		    var screen = (IApplicationViewModel)this.HostScreen;
+		    screen.OnGlobalCommand += this.HandleGlobalCommand;
+
 			// setup interactions
 			this.ObservableForProperty(model => model.Volume).Subscribe(param =>
 			{
@@ -395,6 +397,42 @@ namespace Grease.ViewModels
 			}
 		}
 
+        public void HandleGlobalCommand(object sender, GlobalCommandEventArgs args)
+        {
+            var name = args.CommandName;
+            if (name == "PlayPause")
+            {
+                if (this.engine.CurrentlyPlaying)
+                {
+                    this.engine.Pause();
+                }
+                else
+                {
+                    this.engine.Play(false);
+                }
+            }
+
+            if (name == "NextSong")
+            {
+                this.engine.Next();
+            }
+
+            if (name == "PreviousSong")
+            {
+                this.engine.Previous();
+            }
+
+            if (name == "VolumeUp")
+            {
+                this.Volume += 0.1f;
+            }
+            
+            if (name == "VolumeDown")
+            {
+                this.Volume -= 0.1f;
+            }
+        }
+        
 		/// <summary>
 		/// The songs on collection changed.
 		/// </summary>

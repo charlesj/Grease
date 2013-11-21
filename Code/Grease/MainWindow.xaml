@@ -26,7 +26,9 @@
 	<Window.InputBindings>
 		<KeyBinding Command="{Binding GoToSettings}" Key="S" Modifiers="Control" />
 		<KeyBinding Command="{Binding GlobalPlayPause}" Key="Space" />
-		<KeyBinding Command="{Binding NextSongCommand}" Key="Right" />
-		<KeyBinding Command="{Binding PreviousSongCommand}" Key="Left" />
+        <KeyBinding Command="{Binding GlobalNext}" Key="Right" />
+        <KeyBinding Command="{Binding GlobalPrevious}" Key="Left" />
+		<KeyBinding Command="{Binding GlobalVolumeUp}" Key="Up" />
+        <KeyBinding Command="{Binding GlobalVolumeDown}" Key="Down" />
 	</Window.InputBindings>
 </controls:MetroWindow>

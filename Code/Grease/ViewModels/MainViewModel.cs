@@ -46,10 +46,15 @@ namespace Grease.ViewModels
 			this.GoToSettings.Subscribe(param => this.ShowSettings());
 
 			this.GlobalPlayPause = new ReactiveCommand();
+		    this.GlobalPlayPause.Subscribe(param => this.PushGlobalCommand("PlayPause"));
 			this.GlobalPrevious = new ReactiveCommand();
+            this.GlobalPrevious.Subscribe(param => this.PushGlobalCommand("PreviousSong"));
 			this.GlobalNext = new ReactiveCommand();
+            this.GlobalNext.Subscribe(param => this.PushGlobalCommand("NextSong"));
 			this.GlobalVolumeDown = new ReactiveCommand();
+            this.GlobalVolumeDown.Subscribe(param => this.PushGlobalCommand("VolumeDown"));
 			this.GlobalVolumeUp = new ReactiveCommand();
+            this.GlobalVolumeUp.Subscribe(param => this.PushGlobalCommand("VolumeUp"));
 
 			this.applicationViewModel = this.screen as IApplicationViewModel;
 			this.applicationViewModel.ObservableForProperty(model => model.StatusBarText)
@@ -97,6 +102,12 @@ namespace Grease.ViewModels
 		private void ShowSettings()
 		{
 			this.screen.Router.Navigate.Execute(RxApp.DependencyResolver.GetService<ISettingsViewModel>());
+		}
+
+		private void PushGlobalCommand(string command)
+		{
+            var appViewModel = this.screen as IApplicationViewModel;
+		    appViewModel.TriggerGlobalCommand(command);
 		}
 	}
 }

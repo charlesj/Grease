@@ -30,5 +30,18 @@ namespace Grease.ViewModels
 		/// The message to write.
 		/// </param>
 		void WriteToStatusBar(string message);
+
+		void TriggerGlobalCommand(string commandName);
+
+		event GlobalCommandHandler OnGlobalCommand;
 	}
+
+    public class GlobalCommandEventArgs
+    {
+        public string CommandName { get; set; }
+
+        public object Args { get; set; }
+    }
+
+    public delegate void GlobalCommandHandler(object sender, GlobalCommandEventArgs args);
 }

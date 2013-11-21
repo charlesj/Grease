@@ -60,5 +60,15 @@ namespace Grease.ViewModels
 		{
 			this.StatusBarText = message;
 		}
+
+		public void TriggerGlobalCommand(string commandName)
+		{
+			if (this.OnGlobalCommand != null)
+			{
+				OnGlobalCommand(this, new GlobalCommandEventArgs{ CommandName = commandName });
+			}
+		}
+
+		public event GlobalCommandHandler OnGlobalCommand;
 	}
 }
