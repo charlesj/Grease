@@ -199,10 +199,21 @@ namespace Grease.Services
 			if (this.player == null)
 			{
 				this.player = new WaveOut();
-				this.file = new AudioFileReader(this.source) { Volume = 0.8f };
-				this.player.Init(this.file);
-				this.player.PlaybackStopped += this.PlaybackStopped;
-				this.player.Play();
+				try
+				{
+					this.file = new AudioFileReader(this.source) { Volume = this.settings.Volume };
+					this.player.Init(this.file);
+					this.player.PlaybackStopped += this.PlaybackStopped;
+					this.player.Play();
+				}
+				catch (Exception)
+				{
+					// If we're here AudioFileReader could not play the file.  This is probably due to a 
+					// sample rate on the MP3.  See: http://naudio.codeplex.com/discussions/448140
+					// TODO: convert to MediaFoundationReader
+					this.Stop();
+					this.RaiseTrackEnded();
+				}
 
 				this.TotalTime = this.file.TotalTime;
 			}

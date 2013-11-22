@@ -128,21 +128,30 @@ namespace Grease.Core
 			var hasPlayedRecently = true;
 			while (hasPlayedRecently)
 			{
-				var found = false;
-				for (var i = this.PlayedSongs.Count - min; i < this.PlayedSongs.Count; i++)
+				if (test != null)
 				{
-					if (test.FullPath == this.PlayedSongs[i].FullPath)
+					var found = false;
+					for (var i = this.PlayedSongs.Count - min; i < this.PlayedSongs.Count; i++)
 					{
-						found = true;
+						if (test.FullPath == this.PlayedSongs[i].FullPath)
+						{
+							found = true;
+						}
 					}
-				}
 
-				if (!found)
-				{
-					hasPlayedRecently = false;
+					if (!found)
+					{
+						hasPlayedRecently = false;
+					}
+					else
+					{
+						test = this.Songs[this.rand.Next(this.Songs.Count - 1)];
+					}
 				}
 				else
 				{
+					// somehow the file library is getting null tracks in it.  I don't know how this could be happening
+					// I'm just skipping it with this code. TODO: Find out how the file search is getting null files.
 					test = this.Songs[this.rand.Next(this.Songs.Count - 1)];
 				}
 			}
