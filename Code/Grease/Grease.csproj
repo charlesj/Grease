@@ -29,7 +29,7 @@
     <ProductName>Grease</ProductName>
     <PublisherName>Developing Enterprises</PublisherName>
     <SuiteName>Grease</SuiteName>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
